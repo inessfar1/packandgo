@@ -44,5 +44,9 @@ class ChauffeurController extends AbstractController
             "form_chauffeur" => $form->createView(),
         ]);
     }
+    public function editChauffeur(): Response
+    {
+        
+    }
 
 }
