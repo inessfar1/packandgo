@@ -1,0 +1,3 @@
+backend:
+    path: /back
+    controller: App\Controller\DefaultController::backend
