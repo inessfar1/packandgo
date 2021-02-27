@@ -4,49 +4,104 @@ namespace App\Controller\Transport;
 
 use App\Entity\Chauffeur;
 use App\Form\ChauffeurType;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 class ChauffeurController extends AbstractController
 {
-    /**
-     * @Route("/transport/chauffeur", name="transport_chauffeur")
-     */
-    public function index(): Response
-    {
-        return $this->render('transport/chauffeur/chauffeur.html.twig', [
-            'controller_name' => 'ChauffeurController',
-        ]);
-    }
 
+    /**
+     * @Route("/transport/add_chauffeur", name="add_chauffeur")
+     */
     public function addChauffeur(Request $request): Response
     {
         $Chauffeur = new Chauffeur();
         $form = $this->createForm(ChauffeurType::class,$Chauffeur);
         $form->handleRequest($request);
 
+
         if($form->isSubmitted()&& $form->isValid())
         {
+            $Chauffeur->setDisponibilite(1);
             $entityManager = $this->getDoctrine()->getManager();
 
             $entityManager->persist($Chauffeur);
 
             $entityManager->flush();
 
-            //return $this->redirectToRoute('showlivre');
+            return $this->redirectToRoute('list_chauffeur');
 
         }
 
         return $this->render("transport/chauffeur/addchauffeur.html.twig", [
             "form_title" => "Ajouter un chauffeur",
-            "form_chauffeur" => $form->createView(),
+            "form" => $form->createView(),
         ]);
     }
-    public function editChauffeur(): Response
+    /**
+     * @Route("/transport/edit_chauffeur/{idChauffeur}", name="edit_chauffeur")
+     */
+    public function editChauffeur(Request $request, int $idChauffeur): Response
     {
-        
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $chauffeur = $entityManager->getRepository(Chauffeur::class)->find($idChauffeur);
+        $form = $this->createForm(ChauffeurType::class, $chauffeur);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager->flush();
+            return $this->redirectToRoute('list_chauffeur');
+        }
+
+        return $this->render("transport/chauffeur/edit_chauffeur.html.twig", [
+            "form_title" => "Modifier un chauffeur",
+            "form" => $form->createView(),
+        ]);
+    }
+    /**
+     * @Route("/transport/delete_chauffeur/{idChauffeur}", name="delete_chauffeur")
+     */
+    public function deleteChauffeur(int $idChauffeur): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $chauffeur = $entityManager->getRepository(Chauffeur::class)->find($idChauffeur);
+        $entityManager->remove($chauffeur);
+        $entityManager->flush();
+        return $this->redirectToRoute('list_chauffeur');
+    }
+    /**
+     * @Route("/transport/listchauffeur", name="list_chauffeur")
+     */
+    public function listChauffeur(Request $request, PaginatorInterface $paginator)
+    {
+        $chauffeur = $this->getDoctrine()->getRepository(Chauffeur::class)->findAll();
+
+        $pagination = $paginator->paginate(
+            $chauffeur,
+            $request->query->getInt('page', 1), /*page number*/
+            2 /*limit per page*/
+        );
+        return $this->render('transport/chauffeur/chauffeur.html.twig', [
+            "chauffeur" => $pagination,
+        ]);
+    }
+    /**
+     * @Route("/transport/chauffeur/{idChauffeur}", name="detail_chauffeur")
+     */
+    public function detailchauffeur(int $idChauffeur): Response
+    {
+        $chauffeur = $this->getDoctrine()->getRepository(Chauffeur::class)->find($idChauffeur);
+
+        return $this->render("transport/chauffeur/detailchauffeur.html.twig", [
+            "ch" => $chauffeur,
+        ]);
     }
 
-}
+    }

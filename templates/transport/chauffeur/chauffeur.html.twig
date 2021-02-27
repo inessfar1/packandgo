@@ -3,5 +3,60 @@
 {% block title %}{% endblock %}
 
 {% block content %}
-test
+{% if chauffeur %}
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">LISTE DES CHAUFFEURS</h3>
+    </div>
+    <div class="card-body p-0">
+            <table id="chauffeur" class="table table-striped">
+                <thead>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th>nom chauffeur</th>
+                    <th>prenom chauffeur</th>
+                    <th>Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for ch in chauffeur %}
+                    <tr>
+                        <td>{{ ch.idChauffeur }}</td>
+                        <td>{{ ch.nom }}</td>
+                        <td>{{ ch.prenom }}</td>
+                        <td>
+                            <a class="btn btn-block btn-info" href="{{ path('detail_chauffeur',{'idChauffeur':ch.idChauffeur}) }}" > detail</a>
+
+                        </td>
+                        <td>
+                            <a class="btn btn-block btn-success" href="{{ path('edit_chauffeur',{'idChauffeur':ch.idChauffeur}) }}" > modifier</a>
+                        </td>
+                        <td>
+                                <a class="btn btn-block btn-danger" href="{{ path('delete_chauffeur',{'idChauffeur':ch.idChauffeur}) }}" >supprimer </a>
+                        </td>
+                    </div>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    <div class="navigation">
+        {{ knp_pagination_render(chauffeur) }}
+    </div>
+        {% else %}
+            <div class="container">
+                <table>
+                    <thead>
+                    <th>aucun chauffeur trouvée</th>
+                    <th><a class="example_b" href="{{ path('add_chauffeur') }}">Ajouter un chauffeur</a></th>
+                    </thead>
+                </table>
+
+            </div>
+
+        {% endif %}
 {% endblock content %}

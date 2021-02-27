@@ -1,0 +1,41 @@
+{% extends './backend/dashboard.html.twig' %}
+{% block content %}
+    <div class="card">
+    <div class="card-header">
+        <h3 class="card-title">LISTE DES CHAUFFEURS</h3>
+    </div>
+
+    <div class="card-body p-0">
+        <table id="chauffeur" class="table table-striped">
+            <thead>
+            <tr>
+                <th>id chauffeur</th>
+                <th>nom</th>
+                <th>prenom</th>
+                <th>date de naissance</th>
+                <th>disponibilite</th>
+
+            </tr>
+            </thead>
+            <tr>
+
+                <td>{{ ch.idChauffeur }}</td>
+                <td>{{ ch.nom }}</td>
+                <td>{{ ch.prenom }}</td>
+                <td>{{ ch.dateDN|date('Y-m-d') }}</td>
+                <td>{{ ch.disponibilite }}</td>
+
+
+
+            </tr>
+
+
+        </table>
+        <div align="center">
+            <a class="btn btn-block btn-info" href="{{ path('list_chauffeur') }}" >retour</a>
+        </div>
+    </div>
+
+
+
+{% endblock content %}
