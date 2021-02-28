@@ -1,0 +1,43 @@
+{% extends './backend/dashboard.html.twig' %}
+
+{% block body %}
+<div class="card-body">
+    <table id="example1" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Pays</th>
+            <th>Ville</th>
+            <th>Adresse</th>
+            <th>Email</th>
+            <th>Tel</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr {% for A in agence %}>
+            <td>{{ A.id }}</td>
+            <td>{{ A.nom }}</td>
+            <td>{{ A.pays }}</td>
+            <td>{{ A.ville }}</td>
+            <td>{{ A.adresse }}</td>
+            <td>{{ A.email }}</td>
+            <td>{{ A.tel }}</td>
+        </tr {% endfor %}>
+
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Pays</th>
+            <th>Ville</th>
+            <th>Adresse</th>
+            <th>Email</th>
+            <th>Tel</th>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+<!-- /.card-body -->
+{% endblock %}

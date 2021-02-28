@@ -202,6 +202,8 @@
             </div>
 
             <!-- Sidebar Menu -->
+
+
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
@@ -235,7 +237,41 @@
                                 </a>
                             </li>
 
+                        </ul>
+                </ul>
 
+            </nav>
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="fas fa-plane"></i></i>
+
+                            <p>
+                                Gestion des attractions
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ path('AgenceAff') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Gestion des agences</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Gestion des plan d'attractions</p>
+                                </a>
+                            </li>
+
+
+
+                        </ul>
+                </ul>
             </nav>
             <!-- /.sidebar-menu -->
         </div>
@@ -261,8 +297,8 @@
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-        {% block content %}
-        {% endblock content %}
+        {% block body %}
+        {% endblock body %}
 
 
         <!-- /.content -->
