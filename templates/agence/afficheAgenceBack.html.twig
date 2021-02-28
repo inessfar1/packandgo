@@ -12,6 +12,9 @@
             <th>Adresse</th>
             <th>Email</th>
             <th>Tel</th>
+            <th>Liste des plans</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
         </tr>
         </thead>
         <tbody>
@@ -23,6 +26,10 @@
             <td>{{ A.adresse }}</td>
             <td>{{ A.email }}</td>
             <td>{{ A.tel }}</td>
+            <td><a href="{{ path('AgenceDel',{'id':A.id}) }}"></a></td>
+            <td><a href="{{ path('AgenceDel',{'id':A.id}) }}">Supprimer</a> </td>
+            <td><a href="{{ path('AgenceDel',{'id':A.id}) }}">Supprimer</a> </td>
+
         </tr {% endfor %}>
 
         </tbody>
@@ -35,6 +42,9 @@
             <th>Adresse</th>
             <th>Email</th>
             <th>Tel</th>
+            <th>Liste des plans</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
         </tr>
         </tfoot>
     </table>

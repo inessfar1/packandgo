@@ -4,7 +4,7 @@
     <list default="true" id="ae0a24f0-8cc6-4da9-b098-1c88ed50cc71" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/AgenceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AgenceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/backend/dashboard.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/backend/dashboard.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/agence/afficheAgenceBack.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/agence/afficheAgenceBack.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

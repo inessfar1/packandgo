@@ -31,4 +31,18 @@ public function afficheAgence(AgenceRepository $repository){
     return $this->render('agence/afficheAgenceBack.html.twig', [
         'agence' => $agence
     ]);
-}}
+}
+
+    /**
+     * @Route("Back/AgenceSupp/{id}",name="AgenceDel")
+     */
+    public function supprimerAgence(AgenceRepository $repository, $id){
+        $agence=$repository->find($id);
+        $em=$this->getDoctrine()->getManager();
+        $em->remove($agence);
+        $em->flush();
+
+        return $this->redirectToRoute('AgenceAff');
+    }
+
+}
