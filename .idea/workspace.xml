@@ -6,7 +6,6 @@
       <change beforePath="$PROJECT_DIR$/src/Controller/AgenceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AgenceController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Form/AgenceType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/AgenceType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/agence/afficheAgenceBack.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/agence/afficheAgenceBack.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/backend/dashboard.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/backend/dashboard.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

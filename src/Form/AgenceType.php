@@ -60,10 +60,7 @@ class AgenceType extends AbstractType
                     'class'=>'form-control'
                 ]
             ])
-            ->add('Ajouter',SubmitType::class,[
-                'attr'=>[
-        'class'=>'btn btn-primary']]
-    )
+
         ;
     }
 

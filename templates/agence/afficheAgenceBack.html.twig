@@ -28,7 +28,7 @@
             <td>{{ A.email }}</td>
             <td>{{ A.tel }}</td>
             <td><a href="{{ path('AgenceDel',{'id':A.id}) }}"></a></td>
-            <td><a href="{{ path('AgenceDel',{'id':A.id}) }}">Supprimer</a> </td>
+            <td><a href="{{ path('AgenceEdit',{'id':A.id}) }}">Modifier</a> </td>
             <td><a href="{{ path('AgenceDel',{'id':A.id}) }}">Supprimer</a> </td>
 
         </tr {% endfor %}>

@@ -58,7 +58,10 @@ public function afficheAgence(AgenceRepository $repository){
         $agence=new Agence();
         $form=$this->createForm(AgenceType::class,$agence);
         $form->handleRequest($request);
-
+        $form->add('Ajouter',SubmitType::class,[
+                'attr'=>[
+                    'class'=>'btn btn-primary']]
+        );
         if($form->isSubmitted() && $form->isValid()){
             $em=$this->getDoctrine()->getManager();
             $em->persist($agence);
@@ -68,5 +71,32 @@ public function afficheAgence(AgenceRepository $repository){
         }
         return $this->render('agence/ajouterAgence.html.twig',['form'=>$form->createView()]);
     }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @Route("Back/AgenceEdit/{id}" ,name="AgenceEdit")
+
+     */
+    public function modifierAgence(AgenceRepository $repository,Request $request,$id){
+        $agence=$repository->find($id);
+        $form=$this->createForm(AgenceType::class,$agence);
+        $form->add('Modifier',SubmitType::class,[
+                'attr'=>[
+                    'class'=>'btn btn-primary']]
+        );
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $em=$this->getDoctrine()->getManager();
+
+            $em->flush();
+            return $this->redirectToRoute('AgenceAff');
+
+        }
+        return $this->render('agence/modifierAgence.html.twig',['form'=>$form->createView()]);
+    }
+
 
 }
