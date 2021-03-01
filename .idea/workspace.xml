@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="ae0a24f0-8cc6-4da9-b098-1c88ed50cc71" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AgenceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AgenceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/AgenceType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/AgenceType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/agence/afficheAgenceBack.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/agence/afficheAgenceBack.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PlanController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PlanController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/backend/dashboard.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/backend/dashboard.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,6 +157,9 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Programs\wamp64\www\PI\Web\packandgo\templates\plan" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\packandgo\public" />
     </key>
@@ -171,11 +191,23 @@
       <updated>1614358481859</updated>
       <workItem from="1614358494606" duration="3207000" />
       <workItem from="1614362340359" duration="9181000" />
+      <workItem from="1614604709665" duration="1941000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="WindowStateProjectService">
     <state x="115" y="170" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1614557994184">
