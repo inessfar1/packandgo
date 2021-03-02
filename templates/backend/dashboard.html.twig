@@ -23,6 +23,10 @@
         <link rel="stylesheet" href="{{ asset('backend/plugins/summernote/summernote-bs4.min.css') }}">
 
     {% endblock %}
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -237,14 +241,7 @@
                                 </a>
                             </li>
 
-                        </ul>
-                </ul>
-
-            </nav>
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
-                         with font-awesome or any other icon font library -->
+                        </ul></li>
                     <li class="nav-item menu-open">
                         <a href="#" class="nav-link active">
                             <i class="fas fa-plane"></i></i>
@@ -256,23 +253,29 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ path('AgenceAff') }}" class="nav-link active">
+                                <a href="{{ path('agence_index') }}" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Gestion des agences</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ path('PlanAff') }}" class="nav-link active">
+                                <a href="{{ path('plan_index') }}" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Gestion des plan d'attractions</p>
                                 </a>
                             </li>
 
-
-
                         </ul>
+                    </li>
                 </ul>
+
             </nav>
+
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+
+
+
             <!-- /.sidebar-menu -->
         </div>
         <!-- /.sidebar -->

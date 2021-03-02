@@ -22,6 +22,11 @@ class Agence
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $logo;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $nom;
 
     /**
@@ -45,7 +50,7 @@ class Agence
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
     private $tel;
 
@@ -62,6 +67,18 @@ class Agence
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(string $logo): self
+    {
+        $this->logo = $logo;
+
+        return $this;
     }
 
     public function getNom(): ?string
@@ -124,12 +141,12 @@ class Agence
         return $this;
     }
 
-    public function getTel(): ?string
+    public function getTel(): ?int
     {
         return $this->tel;
     }
 
-    public function setTel(string $tel): self
+    public function setTel(int $tel): self
     {
         $this->tel = $tel;
 

@@ -1,0 +1,16 @@
+{% extends './backend/dashboard.html.twig' %}
+
+{% block title %}Modifier Plan{% endblock %}
+
+{% block body %}
+    <h1>Edit Plan</h1>
+
+    {{ include('plan/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <br>
+
+    {{ include('plan/_delete_form.html.twig') }}
+    <br>
+    <a href="{{ path('plan_index') }}"><button class="btn btn-block btn-secondary">Retourner à la liste des plans</button></a>
+
+{% endblock %}

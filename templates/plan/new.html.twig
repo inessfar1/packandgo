@@ -1,0 +1,11 @@
+{% extends './backend/dashboard.html.twig' %}
+
+{% block title %}Ajouter Plan{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un Plan</h1>
+
+    {{ include('plan/_form.html.twig') }}
+    <br>
+    <a href="{{ path('plan_index') }}"><button class="btn btn-block btn-secondary">Retourner à la liste des plans</button></a>
+{% endblock %}

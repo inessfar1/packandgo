@@ -6,97 +6,87 @@ use App\Entity\Agence;
 use App\Form\AgenceType;
 use App\Repository\AgenceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 
 
 class AgenceController extends AbstractController
 {
     /**
-     * @Route("/agence", name="agence")
+     * @Route("/admin/agence/show", name="agence_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(AgenceRepository $agenceRepository): Response
     {
         return $this->render('agence/index.html.twig', [
-            'controller_name' => 'AgenceController',
+            'agences' => $agenceRepository->findAll(),
         ]);
     }
 
-
-/**
- * @param AgenceRepository $repository
- * @return mixed
- * @Route("Back/Agence",name="AgenceAff")
- */
-public function afficheAgence(AgenceRepository $repository){
-    $agence=$repository->findAll();
-    return $this->render('agence/afficheAgenceBack.html.twig', [
-        'agence' => $agence
-    ]);
-}
-
     /**
-     * @Route("Back/AgenceSupp/{id}",name="AgenceDel")
+     * @Route("/admin/agence/new", name="agence_new", methods={"GET","POST"})
      */
-    public function supprimerAgence(AgenceRepository $repository, $id){
-        $agence=$repository->find($id);
-        $em=$this->getDoctrine()->getManager();
-        $em->remove($agence);
-        $em->flush();
-
-        return $this->redirectToRoute('AgenceAff');
-    }
-
-    /**
-     * @param Request $request
-     * @return Response
-     * @Route("Back/AgenceAjout" ,name="AgenceAdd")
-     */
-    public function ajouterAgence(Request $request){
-        $agence=new Agence();
-        $form=$this->createForm(AgenceType::class,$agence);
-        $form->handleRequest($request);
-        $form->add('Ajouter',SubmitType::class,[
-                'attr'=>[
-                    'class'=>'btn btn-primary']]
-        );
-        if($form->isSubmitted() && $form->isValid()){
-            $em=$this->getDoctrine()->getManager();
-            $em->persist($agence);
-            $em->flush();
-            return $this->redirectToRoute('AgenceAff');
-
-        }
-        return $this->render('agence/ajouterAgence.html.twig',['form'=>$form->createView()]);
-    }
-
-    /**
-     * @param Request $request
-     * @param $id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     * @Route("Back/AgenceEdit/{id}" ,name="AgenceEdit")
-
-     */
-    public function modifierAgence(AgenceRepository $repository,Request $request,$id){
-        $agence=$repository->find($id);
-        $form=$this->createForm(AgenceType::class,$agence);
-        $form->add('Modifier',SubmitType::class,[
-                'attr'=>[
-                    'class'=>'btn btn-primary']]
-        );
+    public function new(Request $request): Response
+    {
+        $agence = new Agence();
+        $form = $this->createForm(AgenceType::class, $agence);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
-            $em=$this->getDoctrine()->getManager();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($agence);
+            $entityManager->flush();
 
-            $em->flush();
-            return $this->redirectToRoute('AgenceAff');
-
+            return $this->redirectToRoute('agence_index');
         }
-        return $this->render('agence/modifierAgence.html.twig',['form'=>$form->createView()]);
+
+        return $this->render('agence/new.html.twig', [
+            'agence' => $agence,
+            'form' => $form->createView(),
+        ]);
     }
 
+    /**
+     * @Route("/admin/agence/show/{id}", name="agence_show", methods={"GET"})
+     */
+    public function show(Agence $agence): Response
+    {
+        return $this->render('agence/show.html.twig', [
+            'agence' => $agence,
+        ]);
+    }
 
+    /**
+     * @Route("/admin/agence/edit/{id}", name="agence_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Agence $agence): Response
+    {
+        $form = $this->createForm(AgenceType::class, $agence);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('agence_index');
+        }
+
+        return $this->render('agence/edit.html.twig', [
+            'agence' => $agence,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/admin/agence/delsete/{id}", name="agence_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Agence $agence): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$agence->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($agence);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('agence_index');
+    }
 }
