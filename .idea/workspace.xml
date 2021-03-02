@@ -21,22 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ae0a24f0-8cc6-4da9-b098-1c88ed50cc71" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AgenceController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/PlanController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Agence.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Plan.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/AgenceType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/AgenceRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/PlanRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/agence/afficheAgenceBack.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/agence/ajouterAgence.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/agence/index.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/agence/modifierAgence.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/backend/dashboard.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/backend/dashboard.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/plan/affichePlanBack.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/plan/index.html.twig" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,7 +191,7 @@
       <workItem from="1614358494606" duration="3207000" />
       <workItem from="1614362340359" duration="9181000" />
       <workItem from="1614604709665" duration="11024000" />
-      <workItem from="1614680861899" duration="11505000" />
+      <workItem from="1614680861899" duration="11971000" />
     </task>
     <servers />
   </component>
