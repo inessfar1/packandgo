@@ -17,8 +17,9 @@ class AgenceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('logo',FileType::class,[
+            ->add('imageFile',FileType::class,[
                 'label'=>'Logo de cette agence:       ',
+                'required'=>false,
                 'attr'=>[
                     'placeholder'=>'Saisir un logo ici...',
 

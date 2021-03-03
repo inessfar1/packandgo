@@ -6,9 +6,13 @@ use App\Repository\AgenceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=AgenceRepository::class)
+ * @Vich\Uploadable
  */
 class Agence
 {
@@ -20,13 +24,42 @@ class Agence
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $logo;
+    /**
+     * @Vich\UploadableField(mapping="logo_image" ,fileNameProperty="logo")
+     */
+    private $imageFile;
+
+    /**
+     * @return mixed
+     */
+    /**
+     * @return mixed
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param mixed $imageFile
+     */
+    public function setImageFile(?File $imageFile=null): self
+    {
+        $this->imageFile = $imageFile;
+        if($this>$imageFile instanceof  UploadedFile){
+            $this->update_at=new \DateTime('now');
+        }
+        return $this;
+    }
+
 
     /**
      * @ORM\Column(type="string", length=255)
      */
+
     private $nom;
 
     /**
@@ -59,6 +92,11 @@ class Agence
      */
     private $plans;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $update_at;
+
     public function __construct()
     {
         $this->plans = new ArrayCollection();
@@ -74,7 +112,7 @@ class Agence
         return $this->logo;
     }
 
-    public function setLogo(string $logo): self
+    public function setLogo(?string $logo): self
     {
         $this->logo = $logo;
 
@@ -179,6 +217,18 @@ class Agence
                 $plan->setAgence(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUpdateAt(): ?\DateTimeInterface
+    {
+        return $this->update_at;
+    }
+
+    public function setUpdateAt(\DateTimeInterface $update_at): self
+    {
+        $this->update_at = $update_at;
 
         return $this;
     }

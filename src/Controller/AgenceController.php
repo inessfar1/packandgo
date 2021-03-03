@@ -77,7 +77,7 @@ class AgenceController extends AbstractController
     }
 
     /**
-     * @Route("/admin/agence/delsete/{id}", name="agence_delete", methods={"DELETE"})
+     * @Route("/admin/agence/delete/{id}", name="agence_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Agence $agence): Response
     {

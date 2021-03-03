@@ -26,7 +26,7 @@
         {% for agence in agences %}
             <tr>
                 <td>{{ agence.id }}</td>
-                <td>{{ agence.logo }}</td>
+                <td><img width="100" height="100" src="{{ asset('images/logos/' ~ agence.logo) }}"> </td>
                 <td>{{ agence.nom }}</td>
                 <td>{{ agence.pays }}</td>
                 <td>{{ agence.ville }}</td>

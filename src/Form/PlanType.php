@@ -40,7 +40,7 @@ class PlanType extends AbstractType
                 ]
             ])
             ->add('date')
-            ->add('prix',TextareaType::class,[
+            ->add('prix',TextType::class,[
                 'label'=>'Prix de ce plan',
                 'attr'=>[
                     'placeholder'=>'Entrer le prix ici...',
