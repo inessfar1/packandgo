@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Trajet
  *
  * @ORM\Table(name="trajet", indexes={@ORM\Index(name="FN_key", columns={"id_chauffeur"}), @ORM\Index(name="FN_keymoy", columns={"id_moy_trans"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\TrajetRepository")
  */
 class Trajet
 {
@@ -50,9 +50,12 @@ class Trajet
     private $ptArrive;
 
     /**
-     * @var int|null
+     * @var \Chauffeur
      *
-     * @ORM\Column(name="id_chauffeur", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Chauffeur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_chauffeur", referencedColumnName="id_chauffeur")
+     * })
      */
     private $idChauffeur;
 
@@ -62,6 +65,28 @@ class Trajet
      * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=true)
      */
     private $prix;
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="iduser", type="integer", precision=10, scale=0, nullable=true)
+     */
+    private $iduser;
+
+    /**
+     * @return int|null
+     */
+    public function getIduser(): ?int
+    {
+        return $this->iduser;
+    }
+
+    /**
+     * @param int|null $iduser
+     */
+    public function setIduser(?int $iduser): void
+    {
+        $this->iduser = $iduser;
+    }
 
     /**
      * @var \Moydetran
@@ -126,17 +151,7 @@ class Trajet
         return $this;
     }
 
-    public function getIdChauffeur(): ?int
-    {
-        return $this->idChauffeur;
-    }
 
-    public function setIdChauffeur(?int $idChauffeur): self
-    {
-        $this->idChauffeur = $idChauffeur;
-
-        return $this;
-    }
 
     public function getPrix(): ?float
     {
@@ -160,6 +175,16 @@ class Trajet
         $this->idMoyTrans = $idMoyTrans;
 
         return $this;
+    }
+
+    public function getIdChauffeur(): ?Chauffeur
+    {
+        return $this->idChauffeur;
+    }
+
+    public function setIdChauffeur(?Chauffeur $idChauffeur): void
+    {
+        $this->idChauffeur = $idChauffeur;
     }
 
 

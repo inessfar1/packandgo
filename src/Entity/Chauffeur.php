@@ -35,12 +35,7 @@ class Chauffeur
      */
     private $prenom;
 
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="date_d_n", type="date", nullable=true)
-     */
-    private $dateDN;
+
     /**
      * @var int|null
      *
@@ -77,17 +72,6 @@ class Chauffeur
         return $this;
     }
 
-    public function getDateDN(): ?\DateTimeInterface
-    {
-        return $this->dateDN;
-    }
-
-    public function setDateDN(?\DateTimeInterface $dateDN): self
-    {
-        $this->dateDN = $dateDN;
-
-        return $this;
-    }
     public function getDisponibilite(): ?int
     {
         return $this->disponibilite;

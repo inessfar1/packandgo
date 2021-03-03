@@ -14,7 +14,6 @@ class ChauffeurType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('dateDN')
         ;
     }
 

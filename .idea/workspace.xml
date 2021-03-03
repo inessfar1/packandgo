@@ -13,6 +13,9 @@
       <phar pharPath="C:\composer\composer.phar" interpreterId="5b04b243-db5d-424d-bc56-34719af320b8" />
     </execution>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/symfony/property-info" />
@@ -134,22 +137,24 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\packandgo\templates\transport\chauffeur" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\packandgo\public" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\packandgo\templates\transport\trajet" />
+      <recent name="C:\wamp64\www\packandgo\templates\transport\chauffeur" />
     </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
-      <command value="s server:run" />
       <command value="s generate:controller" />
-      <command value="s make:controller" />
       <command value="s make:migration" />
       <command value="s doctrine:migrations:migrate" />
-      <command value="s make:form" />
       <command value="c require knplabs/knp-paginator-bundle" />
+      <command value="s server:run" />
+      <command value="s make:controller" />
+      <command value="s make:form" />
+      <command value="s doctrine:schema:update --force" />
     </option>
   </component>
   <component name="RunManager">
@@ -167,7 +172,8 @@
       <option name="presentableId" value="Default" />
       <updated>1614358481859</updated>
       <workItem from="1614358494606" duration="3207000" />
-      <workItem from="1614362340359" duration="21991000" />
+      <workItem from="1614362340359" duration="33657000" />
+      <workItem from="1614774061603" duration="10648000" />
     </task>
     <servers />
   </component>
@@ -175,10 +181,18 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1614449707102">
+    <state x="442" y="166" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1614783225231">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1614449707102" />
+    <state x="442" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1614783225231" />
+    <state x="476" y="73" key="#com.intellij.ide.util.MemberChooser" timestamp="1614778575360">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="476" y="73" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1614778575360" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1614782536065">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1614782536065" />
     <state x="407" y="241" key="ComposerCompositePathDialog" timestamp="1614363730015">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -187,22 +201,30 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="462" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1614363750423" />
-    <state width="1323" height="6" key="GridCell.Tab.0.bottom" timestamp="1614445247479">
+    <state width="1323" height="164" key="GridCell.Tab.0.bottom" timestamp="1614784702581">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="6" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1614445247479" />
-    <state width="1323" height="6" key="GridCell.Tab.0.center" timestamp="1614445247479">
+    <state width="1323" height="164" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1614784702581" />
+    <state width="1323" height="164" key="GridCell.Tab.0.center" timestamp="1614784702581">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="6" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1614445247479" />
-    <state width="1323" height="6" key="GridCell.Tab.0.left" timestamp="1614445247479">
+    <state width="1323" height="164" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1614784702581" />
+    <state width="1323" height="164" key="GridCell.Tab.0.left" timestamp="1614784702581">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="6" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1614445247479" />
-    <state width="1323" height="6" key="GridCell.Tab.0.right" timestamp="1614445247479">
+    <state width="1323" height="164" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1614784702581" />
+    <state width="1323" height="164" key="GridCell.Tab.0.right" timestamp="1614784702581">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="6" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1614445247479" />
+    <state width="1323" height="164" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1614784702581" />
+    <state x="480" y="87" key="NewPhpClassDialog" timestamp="1614779755647">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="480" y="87" key="NewPhpClassDialog/0.0.1366.728@0.0.1366.728" timestamp="1614779755647" />
+    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1614779744336">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1614779744336" />
     <state x="184" y="9" key="SettingsEditor" timestamp="1614363762053">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -211,13 +233,28 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="487" y="266" key="SymfonyPathDialog/0.0.1366.728@0.0.1366.728" timestamp="1614363754959" />
-    <state x="390" y="0" width="585" height="728" key="find.popup" timestamp="1614445632524">
+    <state x="390" y="0" width="585" height="728" key="find.popup" timestamp="1614470567770">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="390" y="0" width="585" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1614445632524" />
-    <state x="339" y="162" width="672" height="677" key="run.anything.popup" timestamp="1614445247276">
+    <state x="390" y="0" width="585" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1614470567770" />
+    <state x="339" y="162" width="672" height="677" key="run.anything.popup" timestamp="1614784702332">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1614445247276" />
+    <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1614784702332" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1614473050814">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1614473050814" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/templates/transport/moyentrans/moyentrans.html.twig</url>
+          <line>34</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

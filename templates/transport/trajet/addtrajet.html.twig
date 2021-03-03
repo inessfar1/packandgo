@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    {{ form_start(form,{attr:{'id':'form_chauffeur'}}) }}
+    <div class="container">
+        <div class="form-group">
+            <div class="form-group">
+                {{ form_label(form.dateDepart,"Date de depart:") }}
+                <div class="input-group date" id="dateDepart" data-target-input="nearest">
+                    {{ form_widget(form.dateDepart,{attr: {class:'form-control datetimepicker-input'} }) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                    {{ form_label(form.dateArrive,"Date d' arrivée:") }}
+                    <div class="input-group date" id="dateDN" data-target-input="nearest">
+                        {{ form_widget(form.dateArrive,{attr: {class:'form-control datetimepicker-input'} }) }}
+                    </div>
+                </div>
+        <div class="form-group">
+            {{ form_label(form.ptDepart,"Point de depart:") }}
+
+            {{ form_widget(form.ptDepart, {attr: {class:'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.ptArrive,"point D'arrive:" ) }}
+
+            {{ form_widget(form.ptArrive,{attr: {class:'form-control'}}) }}
+        </div>
+                <div class="form-group">
+                    {{ form_label(form.prix,"Prix:" ) }}
+
+                    {{ form_widget(form.prix,{attr: {class:'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.idChauffeur,"Chauffeur:" ) }}
+
+                    {{ form_widget(form.idChauffeur,{attr: {class:'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.idMoyTrans,"Matricule:" ) }}
+
+                    {{ form_widget(form.idMoyTrans,{attr: {class:'form-control'}}) }}
+                </div>
+
+
+
+
+
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" href="{{ path('add_trajet') }}" class="btn btn-primary">Submit</button>
+    </div>
+
+
+
+
+    {{ form_end(form) }}
+
+{% endblock %}

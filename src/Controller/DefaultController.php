@@ -26,4 +26,13 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+    /**
+     * @Route("/frontend", name="front")
+     */
+    public function frontend(): Response
+    {
+        return $this->render('base.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
 }

@@ -3,5 +3,64 @@
 {% block title %}{% endblock %}
 
 {% block content %}
+    {% if moyentrans %}
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">LISTE DES MOYENS DE TRANSPORT</h3>
+            </div>
+            <div class="card-body p-0">
+                <table id="moyentrans" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Type du moyen de transport</th>
+                        <th>Matricule</th>
+                        <th>Action</th>
 
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for moy in moyentrans %}
+                    <tr>
+                        <td>{{ moy.idMoyTrans }}</td>
+                        <td>{{ moy.type }}</td>
+                        <td>{{ moy.matricule }}</td>
+                        <td>
+                            <a class="btn btn-block btn-info" href="{{ path('detail_moyen',{'idMoyTrans':moy.idMoyTrans}) }}" > detail</a>
+
+                        </td>
+
+                        <td>
+                            <a class="btn btn-block btn-success" href="{{ path('edit_moyentran',{'idMoyTrans':moy.idMoyTrans}) }}" > modifier</a>
+                        </td>
+
+                        <td>
+                            <a class="btn btn-block btn-danger" href="{{ path('delete_moyen',{'idMoyTrans':moy.idMoyTrans}) }}" >supprimer </a>
+                        </td>
+
+
+            </td>
+            </tr>
+
+            {% endfor %}
+            </tbody>
+
+            </table>
+        </div>
+        <div class="navigation">
+            {{ knp_pagination_render(moyentrans) }}
+        </div>
+    {% else %}
+        <div class="container">
+            <table>
+                <thead>
+                <th>aucun moyen trouvée</th>
+                <th><a class="example_b" href="{{ path('add_moyentran') }}">Ajouter un moyen de transport</a></th>
+                </thead>
+            </table>
+
+        </div>
+
+    {% endif %}
 {% endblock content %}
+

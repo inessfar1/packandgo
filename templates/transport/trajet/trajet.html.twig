@@ -1,20 +1,70 @@
-{% extends './backend/dashboard.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block title %}Hello TrajetController!{% endblock %}
+{% block title %}{% endblock %}
 
-{% block content %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block body %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">MES TRAJETS</h3>
+    </div>
+    <div class="card-body p-0">
+        <table id="chauffeur" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Date depart</th>
+                <th>Date d'arrivée</th>
+                <th>point de depart</th>
+                <th>point d'arrivée</th>
+                <th>prix</th>
+                <th>Action</th>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/packandgo/src/Controller/Transport/TrajetController.php'|file_link(0) }}">src/Controller/Transport/TrajetController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/packandgo/templates/transport/trajet/chauffeur.html.twig'|file_link(0) }}">templates/transport/trajet/index.html.twig</a></code></li>
-    </ul>
-</div>
-{% endblock content %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for tr in trajet %}
+                <tr>
+                    <td>{{ tr.dateDepart|date('Y-m-d') }}</td>
+                    <td>{{ tr.dateArrive|date('Y-m-d') }}</td>
+                    <td>{{ tr.ptDepart }}</td>
+                    <td>{{ tr.ptArrive }}</td>
+                    <td>{{ tr.prix }}</td>
+                   {#  <td>
+                        <a class="btn btn-block btn-info" href="{{ path('detail_chauffeur',{'idChauffeur':ch.idChauffeur}) }}" > detail</a>
+
+                    </td>#}
+                    <td>
+                        <a class="btn btn-block btn-success" href="{{ path('edit_trajet',{'idTrajet':tr.idTrajet}) }}" > modifier</a>
+                    </td>
+
+                    <td>
+                        <a class="btn btn-block btn-danger" href="{{ path('delete_trajet',{'idTrajet':tr.idTrajet}) }}" >supprimer </a>
+                    </td>
+
+                    </td>
+                </tr>
+
+
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+    <div class="navigation">
+        {{ knp_pagination_render(trajet) }}
+    </div>
+    {#
+    {% else %}
+        <div class="container">
+            <table>
+                <thead>
+                <th>aucun chauffeur trouvée</th>
+                <th><a class="example_b" href="{{ path('add_trajet') }}">mes Trajet</a></th>
+                </thead>
+            </table>
+
+        </div>
+
+#}
+    </div>
+    {% endblock body %}
