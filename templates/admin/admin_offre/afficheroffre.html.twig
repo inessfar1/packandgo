@@ -1,0 +1,102 @@
+{% extends 'baseadmin.html.twig' %}
+
+{% block title %}les offres{% endblock %}
+{% block body %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Dashboard</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Les Offres</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <table id="example2" class="table table-bordered table-hover">
+                                            {% for message in app.flashes('success') %}
+                                                <div class="alert alert-success">
+                                                    {{ message }}
+                                                </div>
+                                            {% endfor %}
+                                            <a class="btn btn-success" href="{{ path('AjoutOffre') }}" >Ajouter</a>
+                                            <thead class="text-center">
+                                            <tr>
+                                                <th>name</th>
+                                                <th>Description</th>
+                                                <th>price</th>
+                                                <th>date debut de l'offre</th>
+                                                <th>date fin de l'offre</th>
+                                                <th>image</th>
+                                                <th>actions</th>
+                                            </tr>
+                                            </thead>
+                                            {%  for offres in offres %}
+                                                <tbody class="text-center">
+                                                <tr>
+                                                    <td>{{ offres.name }}</td>
+                                                    <td>{{ offres.description }}</td>
+                                                    <td>{{ offres.price }} $ </td>
+                                                    <td>{{ offres.dateDebut|date('Y-m-d')}}</td>
+                                                    <td>{{ offres.dateFin|date('Y-m-d')}}</td>
+                                                    <td><img width="200" class="img-responsive" src="{{ asset('assets/images/packages/' ~ offres.image) }}"></td>
+                                                    <td>
+                                                        <div class="row">
+                                                            <a class="btn btn-primary col-6" href="{{path('modifOffre',{'id': offres.id})}}" >modifier</a>
+                                                            <form method="post" class="col-6" action="{{ path('supOffre',{'id': offres.id})}}" onsubmit="return confirm('Voulez vous supprimer ?')">
+                                                                <input type="hidden" name="_method" value="SUP">
+                                                                <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ offres.id)}}">
+                                                                <input type="submit" class="btn btn-danger w-100 " value="supprimer">
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            {% endfor %}
+                                        </table>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
+            </div>
+        </section>
+    </div>
+
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+
+{% endblock %}
+
