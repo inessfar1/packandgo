@@ -20,18 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae0a24f0-8cc6-4da9-b098-1c88ed50cc71" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/packandgo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/packandgo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AgenceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AgenceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/logos/80425529-3149966775030684-3939387799672717312-o-603ed133bf19a340250018.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PlanController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PlanController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Agence.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Agence.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/AgenceType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/AgenceType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Plan.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Plan.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Form/PlanType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PlanType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/agence/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/agence/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/plan/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/plan/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -208,7 +204,8 @@
       <workItem from="1614362340359" duration="9181000" />
       <workItem from="1614604709665" duration="11024000" />
       <workItem from="1614680861899" duration="11971000" />
-      <workItem from="1614714097854" duration="12265000" />
+      <workItem from="1614714097854" duration="12763000" />
+      <workItem from="1614789500852" duration="9594000" />
     </task>
     <servers />
   </component>
@@ -228,10 +225,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="115" y="170" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1614629307849">
+    <state x="115" y="170" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1614789691097">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="115" y="170" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1614629307849" />
+    <state x="115" y="170" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1614789691097" />
     <state x="407" y="241" key="ComposerCompositePathDialog" timestamp="1614363730015">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

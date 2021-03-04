@@ -89,4 +89,17 @@ class PlanController extends AbstractController
 
         return $this->redirectToRoute('plan_index');
     }
+
+
+    /**
+     * @Route("/plan/show", name="plan_front", methods={"GET"})
+     */
+    public function indexFront(PlanRepository $planRepository): Response
+    {
+        return $this->render('plan/indexFront.html.twig', [
+            'plans' => $planRepository->findAll(),
+        ]);
+    }
+
+
 }

@@ -26,7 +26,7 @@
         {% for plan in plans %}
             <tr>
                 <td>{{ plan.id }}</td>
-                <td>{{ plan.image }}</td>
+                <td><img width="150" height="150" src="{{ asset('images/logos/' ~ plan.image) }}"> </td>
                 <td>{{ plan.sujet }}</td>
                 <td>{{ plan.description }}</td>
                 <td>{{ plan.date ? plan.date|date('Y-m-d') : '' }}</td>

@@ -4,9 +4,15 @@ namespace App\Entity;
 
 use App\Repository\PlanRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 /**
  * @ORM\Entity(repositoryClass=PlanRepository::class)
+ * @Vich\Uploadable
  */
 class Plan
 {
@@ -18,9 +24,32 @@ class Plan
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255 , nullable=true)
      */
     private $image;
+    /**
+     * @Vich\UploadableField(mapping="logo_image" ,fileNameProperty="image")
+     */
+    private $imageFile;
+    /**
+    *@return mixed
+    */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param mixed $imageFile
+     */
+    public function setImageFile(?File $imageFile=null): self
+    {
+        $this->imageFile = $imageFile;
+        if($this>$imageFile instanceof  UploadedFile){
+            $this->update_at=new \DateTime('now');
+        }
+        return $this;
+    }
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -48,6 +77,11 @@ class Plan
      */
     private $agence;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $update_at;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -58,7 +92,7 @@ class Plan
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
 
@@ -121,6 +155,18 @@ class Plan
     public function setAgence(?Agence $agence): self
     {
         $this->agence = $agence;
+
+        return $this;
+    }
+
+    public function getUpdateAt(): ?\DateTimeInterface
+    {
+        return $this->update_at;
+    }
+
+    public function setUpdateAt(\DateTimeInterface $update_at): self
+    {
+        $this->update_at = $update_at;
 
         return $this;
     }

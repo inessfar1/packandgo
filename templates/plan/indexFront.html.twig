@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+{% block title %} Plans d'attractions {% endblock %}
+{% block body %}
+
+    <section id="pack" class="packages">
+        <div class="container">
+            <div class="gallary-header text-center">
+                <h2>
+                    Plans d'attractions
+                </h2>
+
+            </div><!--/.gallery-header-->
+            <div class="packages-content">
+
+
+                {% for plan in plans %}
+
+                    <div class="col-md-4 col-sm-6">
+                        <div class="single-package-item">
+                            <img src="{{ asset('images/logos/' ~ plan.image) }}" alt="package-place">
+                            <div class="single-package-item-txt">
+                                <h3>{{ plan.sujet}} <span class="pull-right">${{ plan.prix }}</span></h3>
+                                <div class="packages-para">
+                                    <p>
+											<span>
+												<i class="fa fa-angle-right"></i> Agence responsable
+											</span>
+                                        <i class="fa fa-angle-right"></i> {{ plan.agence.nom }}
+                                    </p>
+                                    <p>
+											<span>
+												<i class="fa fa-angle-right"></i>  Date
+											</span>
+                                        <i class="fa fa-angle-right"></i> {{ plan.date ? plan.date|date('Y-m-d') : '' }}
+                                    </p>
+                                    <p>
+											<span>
+												<i class="fa fa-angle-right"></i>  Description
+											</span>
+                                        <i class="fa fa-angle-right"></i> {{ plan.description }}
+                                    </p>
+
+                                </div><!--/.packages-para-->
+                                <div class="about-btn">
+                                    <button  class="about-view packages-btn">
+                                        Réserver
+                                    </button>
+                                </div><!--/.about-btn-->
+                            </div><!--/.single-package-item-txt-->
+                        </div><!--/.single-package-item-->
+
+                    </div>
+
+                {% endfor %}
+
+            </div><!--/.packages-content-->
+        </div><!--/.container-->
+
+    </section>
+{% endblock %}

@@ -18,12 +18,14 @@ class PlanType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('image',FileType::class,[
-                'label'=>'Image de ce plan',
+            ->add('imageFile',FileType::class,[
+                'label'=>'Image de ce plan:       ',
+                'required'=>false,
                 'attr'=>[
                     'placeholder'=>'Saisir une image ici...',
 
                 ]
+
             ])
             ->add('sujet',TextType::class,[
                 'label'=>'Sujet de ce plan',

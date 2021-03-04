@@ -32,9 +32,7 @@ class Agence
      */
     private $imageFile;
 
-    /**
-     * @return mixed
-     */
+
     /**
      * @return mixed
      */
