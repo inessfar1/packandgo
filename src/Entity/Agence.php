@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=AgenceRepository::class)
@@ -56,17 +57,50 @@ class Agence
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex(
+     *     pattern     = "/^[a-z]+$/i",
+     *     htmlPattern = "^[a-zA-Z]+$",
+     *      message= "Il faut que le nom soit alphabetique"
+     * )
+     *   @Assert\Length(
+     *      min = 4,
+     *      max = 20,
+     *      minMessage = "Minimum {{ limit }} caractères",
+     *      maxMessage = "Maximum {{ limit }} charactèrs"
+     * )
      */
 
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *   @Assert\Regex(
+     *     pattern     = "/^[a-z]+$/i",
+     *     htmlPattern = "^[a-zA-Z]+$",
+     *      message= "Il faut que ce champ soit alphabetique"
+     * )
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 20,
+     *      minMessage = "Minimum {{ limit }} caractères",
+     *      maxMessage = "Maximum {{ limit }} charactèrs"
+     * )
      */
     private $pays;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *  @Assert\Regex(
+     *     pattern     = "/^[a-z]+$/i",
+     *     htmlPattern = "^[a-zA-Z]+$",
+     *      message= "Il faut que ce champ soit alphabetique"
+     * )
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 20,
+     *      minMessage = "Minimum {{ limit }} caractères",
+     *      maxMessage = "Maximum {{ limit }} charactèrs"
+     * )
      */
     private $ville;
 
@@ -77,6 +111,12 @@ class Agence
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 100,
+     *      minMessage = "Minimum {{ limit }} caractères",
+     *      maxMessage = "Maximum {{ limit }} charactèrs"
+     * )
      */
     private $email;
 

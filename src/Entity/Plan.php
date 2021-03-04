@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 
 /**
@@ -53,16 +55,34 @@ class Plan
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex(
+     *     pattern     = "/^[a-z]+$/i",
+     *     htmlPattern = "^[a-zA-Z]+$",
+     *      message= "Il faut que ce champ soit alphabetique"
+     * )
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 20,
+     *      minMessage = "Minimum {{ limit }} caractères",
+     *      maxMessage = "Maximum {{ limit }} charactèrs"
+     * )
      */
     private $sujet;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 300,
+     *      minMessage = "Minimum {{ limit }} caractères",
+     *      maxMessage = "Maximum {{ limit }} charactèrs"
+     * )
      */
     private $description;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\GreaterThan("today")
      */
     private $date;
 
