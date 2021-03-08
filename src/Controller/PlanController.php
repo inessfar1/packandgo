@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 
 class PlanController extends AbstractController
@@ -16,10 +17,16 @@ class PlanController extends AbstractController
     /**
      * @Route("/admin/plan/show", name="plan_index", methods={"GET"})
      */
-    public function index(PlanRepository $planRepository): Response
+    public function index(PlanRepository $planRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $plans=$planRepository->findAll();
+        $pagination = $paginator->paginate(
+            $plans, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            5 /*limit per page*/
+        );
         return $this->render('plan/index.html.twig', [
-            'plans' => $planRepository->findAll(),
+            'plans' => $pagination,
         ]);
     }
 

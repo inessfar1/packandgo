@@ -3,19 +3,41 @@
 {% block title %}Liste des plans{% endblock %}
 
 {% block body %}
-    <h1>Liste des plans</h1>
-    <a href="{{ path('plan_new') }}"><button class="btn btn-block btn-primary">Ajouter un nouveau Plan</button></a>
 
-    <table class="table table-bordered table-striped">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('backend/plugins/fontawesome-free/css/all.min.css') }}">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('backend/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('backend/dist/css/adminlte.min.css') }}">
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+<div class="card">
+    <a href="{{ path('plan_new') }}"><button class="btn btn-block btn-primary">Ajouter un nouveau Plan</button></a>
+    <div class="card-header">
+        <h3 class="card-title">Liste des plans</h3>
+    </div>
+    <div class="card-body">
+        <div class="count">
+            <h4>Nombre total des plans: {{ plans.getTotalItemCount }}</h4>
+        </div>
+
+    <table id="example1" class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Image</th>
-                <th>Sujet</th>
-                <th>Description</th>
-                <th>Date</th>
-                <th>Prix</th>
-                <th>Agence</th>
+                <th>{{ knp_pagination_sortable(plans, 'Id', 'id') }}</th>
+                <th{% if plans.isSorted('image') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(plans, 'Image', 'image') }}</th>
+                <th{% if plans.isSorted('sujet') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(plans, 'Sujet', 'sujet') }}</th>
+                <th{% if plans.isSorted('description') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(plans, 'Description', 'description') }}</th>
+                <th{% if plans.isSorted('date') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(plans, 'Date', 'date') }}</th>
+                <th{% if plans.isSorted('prix') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(plans, 'Prix', 'prix') }}</th>
+                <th{% if plans.isSorted('agence.nom') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(plans, 'Agence', 'agence.nom') }}</th>
 
                 <th>Afficher</th>
                 <th>Modifier</th>
@@ -24,7 +46,7 @@
         </thead>
         <tbody>
         {% for plan in plans %}
-            <tr>
+            <tr{% if loop.index is odd %}class="color"{% endif %}>
                 <td>{{ plan.id }}</td>
                 <td><img width="150" height="150" src="{{ asset('images/logos/' ~ plan.image) }}"> </td>
                 <td>{{ plan.sujet }}</td>
@@ -60,5 +82,15 @@
         <th>Modifier</th>
         </tfoot>
     </table>
+        <div class="row">
+            <div class="col-sm-12 col-md-5">
+                <div class="dataTables_info" id="example1_info" role="status" aria-live="polite"></div>
+            </div><div class="col-sm-12 col-md-7">
+                <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                    {{ knp_pagination_render(plans) }}
+                </div></div></div>
+    </div></div></div>
+    </div>
+    </div></section>
 
 {% endblock %}

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Agence;
 use App\Form\AgenceType;
 use App\Repository\AgenceRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,11 +16,19 @@ class AgenceController extends AbstractController
 {
     /**
      * @Route("/admin/agence/show", name="agence_index", methods={"GET"})
+     * @param AgenceRepository $agenceRepository
+     * @return Response
      */
-    public function index(AgenceRepository $agenceRepository): Response
+    public function index(AgenceRepository $agenceRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $agences=$agenceRepository->findAll();
+        $pagination = $paginator->paginate(
+            $agences, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            5 /*limit per page*/
+        );
         return $this->render('agence/index.html.twig', [
-            'agences' => $agenceRepository->findAll(),
+            'agences' => $pagination,
         ]);
     }
 

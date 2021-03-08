@@ -2,21 +2,41 @@
 {% block title %}Liste des agences{% endblock %}
 
 {% block body %}
-    <h1>Liste des agences</h1>
-    <a href="{{ path('agence_new') }}"> <button class="btn btn-block btn-primary">Ajouter une nouvelle agence</button> </a>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('backend/plugins/fontawesome-free/css/all.min.css') }}">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('backend/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('backend/dist/css/adminlte.min.css') }}">
 
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <a href="{{ path('agence_new') }}"><button class="btn btn-block btn-primary">Ajouter une nouvelle agence</button></a>
+                    <div class="card-header">
+                        <h2 class="card-title">Liste des agences</h2>
+                    </div>
+                    <div class="card-body">
 
+                        <div class="count">
+                           <h4>Nombre total des agences: {{ agences.getTotalItemCount }}</h4>
+                        </div>
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Logo</th>
-                <th>Nom</th>
-                <th>Pays</th>
-                <th>Ville</th>
-                <th>Adresse</th>
-                <th>Email</th>
-                <th>Tel</th>
+                <th>{{ knp_pagination_sortable(agences, 'Id', 'id') }}</th>
+                <th{% if agences.isSorted('logo') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(agences, 'Logo', 'logo') }}</th>
+                <th{% if agences.isSorted('nom') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(agences, 'Nom', 'nom') }}</th>
+                <th{% if agences.isSorted('pays') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(agences, 'Pays', 'pays') }}</th>
+                <th{% if agences.isSorted('ville') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(agences, 'Ville', '.ville') }}</th>
+                <th{% if agences.isSorted('adresse') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(agences, 'Addresse', 'adresse') }}</th>
+                <th{% if agences.isSorted('email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(agences, 'Email', 'email') }}</th>
+                <th{% if agences.isSorted('tel') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(agences, 'Tel', 'tel') }}</th>
                 <th>Afficher</th>
                 <th>Modifier</th>
 
@@ -24,7 +44,7 @@
         </thead>
         <tbody>
         {% for agence in agences %}
-            <tr>
+            <tr {% if loop.index is odd %}class="color"{% endif %}>
                 <td>{{ agence.id }}</td>
                 <td><img width="150" height="150" src="{{ asset('images/logos/' ~ agence.logo) }}"> </td>
                 <td>{{ agence.nom }}</td>
@@ -48,7 +68,7 @@
         </tbody>
         <tfoot>
         <tr>
-            <th>Id</th>
+            <th></th>
             <th>Logo</th>
             <th>Nom</th>
             <th>Pays</th>
@@ -61,6 +81,21 @@
 
         </tr>
         </tfoot>
+
     </table>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="example1_info" role="status" aria-live="polite"></div>
+                            </div><div class="col-sm-12 col-md-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                                    {{ knp_pagination_render(agences) }}
+                                </div></div></div>
+
+                    </div></div>
+
+
+            </div>
+        </div>
+    </div></section>
 
 {% endblock %}
