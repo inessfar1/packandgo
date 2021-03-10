@@ -131,19 +131,22 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/backend/Javascript" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/JS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.zend.framework.tool" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\packandgo\templates\transport\trajet" />
-      <recent name="C:\wamp64\www\packandgo\templates\transport\chauffeur" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\packandgo\public\JS" />
+      <recent name="C:\wamp64\www\packandgo\templates\transport\trajet" />
       <recent name="C:\wamp64\www\packandgo\public\backend\Javascript" />
       <recent name="C:\wamp64\www\packandgo\public" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\packandgo\templates\transport" />
+      <recent name="C:\wamp64\www\packandgo\templates\transport\trajet" />
+      <recent name="C:\wamp64\www\packandgo\templates\transport\chauffeur" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -152,11 +155,12 @@
       <command value="s make:migration" />
       <command value="s doctrine:migrations:migrate" />
       <command value="c require knplabs/knp-paginator-bundle" />
-      <command value="s make:controller" />
       <command value="s make:form" />
-      <command value="s doctrine:schema:update --force" />
-      <command value="s server:run" />
       <command value="s cache:clear" />
+      <command value="s server:run" />
+      <command value="s make:entity" />
+      <command value="s doctrine:schema:update --force" />
+      <command value="s make:controller" />
     </option>
   </component>
   <component name="RunManager">
@@ -176,7 +180,8 @@
       <workItem from="1614358494606" duration="3207000" />
       <workItem from="1614362340359" duration="33657000" />
       <workItem from="1614774061603" duration="10648000" />
-      <workItem from="1614887011837" duration="6621000" />
+      <workItem from="1614887011837" duration="7462000" />
+      <workItem from="1615388840471" duration="11746000" />
     </task>
     <servers />
   </component>
@@ -188,14 +193,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="442" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1614783225231" />
-    <state x="476" y="73" key="#com.intellij.ide.util.MemberChooser" timestamp="1614778575360">
+    <state x="476" y="73" key="#com.intellij.ide.util.MemberChooser" timestamp="1615391404178">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="476" y="73" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1614778575360" />
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1614782536065">
+    <state x="476" y="73" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1615391404178" />
+    <state x="340" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1615391648227">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1614782536065" />
+    <state x="340" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1615391648227" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1615400400698">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1615400400698" />
     <state x="407" y="241" key="ComposerCompositePathDialog" timestamp="1614363730015">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -204,22 +213,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="462" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1614363750423" />
-    <state width="1323" height="192" key="GridCell.Tab.0.bottom" timestamp="1614899703740">
+    <state width="1323" height="113" key="GridCell.Tab.0.bottom" timestamp="1615392027297">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="192" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1614899703740" />
-    <state width="1323" height="192" key="GridCell.Tab.0.center" timestamp="1614899703740">
+    <state width="1323" height="113" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1615392027297" />
+    <state width="1323" height="113" key="GridCell.Tab.0.center" timestamp="1615392027297">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="192" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1614899703740" />
-    <state width="1323" height="192" key="GridCell.Tab.0.left" timestamp="1614899703739">
+    <state width="1323" height="113" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1615392027297" />
+    <state width="1323" height="113" key="GridCell.Tab.0.left" timestamp="1615392027297">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="192" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1614899703739" />
-    <state width="1323" height="192" key="GridCell.Tab.0.right" timestamp="1614899703740">
+    <state width="1323" height="113" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1615392027297" />
+    <state width="1323" height="113" key="GridCell.Tab.0.right" timestamp="1615392027297">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="192" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1614899703740" />
+    <state width="1323" height="113" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1615392027297" />
     <state x="480" y="87" key="NewPhpClassDialog" timestamp="1614779755647">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -240,10 +249,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="390" y="0" width="585" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1614470567770" />
-    <state x="339" y="162" width="672" height="677" key="run.anything.popup" timestamp="1614899700518">
+    <state x="339" y="162" width="672" height="677" key="run.anything.popup" timestamp="1615391974913">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1614899700518" />
+    <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1615391974913" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1614473050814">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

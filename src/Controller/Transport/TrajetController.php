@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\TrajetRepository;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TrajetController extends AbstractController
 {
@@ -28,7 +29,6 @@ class TrajetController extends AbstractController
 
         if($form->isSubmitted()&& $form->isValid())
         {
-            $trajet->setIduser('1');
 
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -41,7 +41,7 @@ class TrajetController extends AbstractController
             //flush màj de la bd
             $entityManager->flush();
 
-            return $this->redirectToRoute('my_trajet');
+            return $this->redirectToRoute('list_trajet');
 
         }
 
@@ -50,22 +50,7 @@ class TrajetController extends AbstractController
             "form" => $form->createView(),
         ]);
     }
-    /**
-     * @Route("/transport/trajet", name="my_trajet")
-     */
-    public function listTrajet(Request $request, PaginatorInterface $paginator)
-    {
-        $trajet = $this->getDoctrine()->getRepository(Trajet::class)->findByUser();
 
-        $pagination = $paginator->paginate(
-            $trajet,
-            $request->query->getInt('page', 1), /*page number*/
-            2 /*limit per page*/
-        );
-        return $this->render('transport/trajet/trajet.html.twig', [
-            "trajet" => $pagination,
-        ]);
-    }
     /**
      * @Route("/transport/delete_trajet/{idTrajet}", name="delete_trajet")
      */
@@ -121,6 +106,22 @@ class TrajetController extends AbstractController
         ]);
     }
     /**
+     * @Route("/transport/list_trajet_front", name="list_trajet_front")
+     */
+    public function listfrontTrajet(Request $request, PaginatorInterface $paginator)
+    {
+        $trajet = $this->getDoctrine()->getRepository(Trajet::class)->findAll();
+
+        $pagination = $paginator->paginate(
+            $trajet,
+            $request->query->getInt('page', 1), /*page number*/
+            2 /*limit per page*/
+        );
+        return $this->render('transport/trajet/liste_des_trajetfront.html.twig', [
+            "trajet" => $pagination,
+        ]);
+    }
+    /**
      * @Route("/transport/deleteback_trajet/{idTrajet}", name="deleteback_trajet")
      */
     public function deletebackTrajet(int $idTrajet): Response
@@ -131,4 +132,39 @@ class TrajetController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('list_trajet');
     }
+    /**
+     * @Route("/transport/list_trajetAsc", name="list_trajetAsc")
+     */
+    public function SortAscTrajet(Request $request, PaginatorInterface $paginator)
+    {
+        $trajet = $this->getDoctrine()->getRepository(Trajet::class)->findby( array(),
+            array('prix' => 'ASC'));
+
+        $pagination = $paginator->paginate(
+            $trajet,
+            $request->query->getInt('page', 1), /*page number*/
+            2 /*limit per page*/
+        );
+        return $this->render('transport/trajet/liste_des_trajetfrontAsc.html.twig', [
+            "trajet" => $pagination,
+        ]);
+    }
+    /**
+     * @Route("/transport/list_trajetDesc", name="list_trajetDesc")
+     */
+    public function SortDescTrajet(Request $request, PaginatorInterface $paginator)
+    {
+        $trajet = $this->getDoctrine()->getRepository(Trajet::class)->findby( array(),
+            array('prix' => 'DESC'));
+
+        $pagination = $paginator->paginate(
+            $trajet,
+            $request->query->getInt('page', 1), /*page number*/
+            2 /*limit per page*/
+        );
+        return $this->render('transport/trajet/liste_des_trajetfrontDesc.html.twig', [
+            "trajet" => $pagination,
+        ]);
+    }
+
 }

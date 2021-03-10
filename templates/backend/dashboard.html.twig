@@ -120,7 +120,7 @@
                         <a href="#" class="nav-link active">
                             <i class="fas fa-plane"></i></i>
                             <p>
-                                Gestion de moyen de transport
+                                Gestion des vehicules
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -154,6 +154,15 @@
                                 <a href="{{ path('list_trajet') }}" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>liste de trajet</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ path('add_trajet') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>ajouter un trajet</p>
                                 </a>
                             </li>
 
@@ -255,5 +264,6 @@
     <script src="{{ asset('backend/dist/js/demo.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('backend/dist/js/pages/dashboard.js') }}"></script>
+
 {% endblock %}
 </html>

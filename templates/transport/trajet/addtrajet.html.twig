@@ -1,5 +1,6 @@
-{% extends 'base.html.twig' %}
-{% block body %}
+
+{% extends './backend/dashboard.html.twig' %}
+{% block content %}
 
     {{ form_start(form,{attr:{'id':'form_chauffeur'}}) }}
     <div class="container">
@@ -38,7 +39,7 @@
                     {{ form_widget(form.idChauffeur,{attr: {class:'form-control'}}) }}
                 </div>
                 <div class="form-group">
-                    {{ form_label(form.idMoyTrans,"Matricule:" ) }}
+                    {{ form_label(form.idMoyTrans,"Type:" ) }}
 
                     {{ form_widget(form.idMoyTrans,{attr: {class:'form-control'}}) }}
                 </div>

@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Trajet
  *
@@ -30,28 +30,45 @@ class Trajet
 
     /**
      * @var \DateTime|null
-     *
+     * @Assert\NotBlank
      * @ORM\Column(name="date_arrive", type="date", nullable=true)
      */
     private $dateArrive;
 
     /**
      * @var string|null
+     * @Assert\NotBlank
+     * @Assert\Regex(
+     *     pattern     = "/^[a-z]+$/i",
+     *     htmlPattern = "^[a-zA-Z]+$",
+     *      message= "verifier votre nom"
+     * )
      *
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 50,
+     *      minMessage = "Minimum {{ limit }} caractères",
+     *      maxMessage = "Maximum {{ limit }} charactèrs"
+     * )
      * @ORM\Column(name="pt_depart", type="string", length=255, nullable=true)
      */
     private $ptDepart;
 
     /**
      * @var string|null
-     *
+     * @Assert\Regex(
+     *     pattern     = "/^[a-z]+$/i",
+     *     htmlPattern = "^[a-zA-Z]+$",
+     *      message= "verifier votre nom"
+     * )
+     * @Assert\NotBlank
      * @ORM\Column(name="pt_arrive", type="string", length=255, nullable=true)
      */
     private $ptArrive;
 
     /**
      * @var \Chauffeur
-     *
+     * @Assert\NotBlank
      * @ORM\ManyToOne(targetEntity="Chauffeur")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_chauffeur", referencedColumnName="id_chauffeur")
@@ -61,36 +78,16 @@ class Trajet
 
     /**
      * @var float|null
-     *
+     * @Assert\NotBlank
      * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=true)
      */
     private $prix;
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="iduser", type="integer", precision=10, scale=0, nullable=true)
-     */
-    private $iduser;
 
-    /**
-     * @return int|null
-     */
-    public function getIduser(): ?int
-    {
-        return $this->iduser;
-    }
 
-    /**
-     * @param int|null $iduser
-     */
-    public function setIduser(?int $iduser): void
-    {
-        $this->iduser = $iduser;
-    }
 
     /**
      * @var \Moydetran
-     *
+     * @Assert\NotBlank
      * @ORM\ManyToOne(targetEntity="Moydetran")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_moy_trans", referencedColumnName="id_moy_trans")

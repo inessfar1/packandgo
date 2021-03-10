@@ -103,5 +103,28 @@ class ChauffeurController extends AbstractController
             "ch" => $chauffeur,
         ]);
     }
+    /**
+     * @Route("/transport/recherche_trajet", name="ajaxsearch")
+     */
+    public function searchAction(Request $request)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $requestString = $request->get('q');
+        $Chauffeur = $em->getRepository(Chauffeur::class)->findEntitiesByString($requestString);
+        if(!$Chauffeur)
+        {
+            $result['Chauffeur']['error']="Chauffeur introuvable :( ";
 
+        }else{
+            $result['Chauffeur']=$this->getRealEntities($Chauffeur);
+        }
+        return new Response(json_encode($result));
+
+    }
+    public function getRealEntities($Chauffeur){
+        foreach ($Chauffeur as $Chauffeur){
+            $realEntities[$Chauffeur->getIdChauffeur()] = [$Chauffeur->getNom(), $Chauffeur->getPrenom()];
+        }
+        return $realEntities;
+    }
     }

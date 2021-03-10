@@ -23,13 +23,21 @@ class TrajetRepository extends ServiceEntityRepository
     // /**
     //  * @return Trajet[] Returns an array of Trajet objects
     //  */
+   /* public function findEntitiesByString($str)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT p 
+        FROM Livre p
+        WHERE p.nom LIKE :str'
 
-    public function findByUser()
+            )->setParameter('str', '%'.$str.'%')->getResult();
+    }*/
+
+    public function findEntitiesByString($str)
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.iduser = :val')
-            ->setParameter('val', 1)
-            ->setMaxResults(10)
+            ->andWhere('t.ptDepart = :str')
+            ->setParameter('str', '%'.$str.'%')
             ->getQuery()
             ->getResult()
         ;
