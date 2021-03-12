@@ -19,6 +19,35 @@ class PlanRepository extends ServiceEntityRepository
         parent::__construct($registry, Plan::class);
     }
 
+    /**
+     * @return Plan[]
+     */
+    public function findPlanBySujet($sujet){
+        return $this->createQueryBuilder('plan')
+            ->andWhere('plan.sujet LIKE :sujet')
+            ->setParameter('sujet', '%'.$sujet.'%')
+            ->getQuery()
+            ->getResult();
+    }
+    /**
+     * @return Plan[]
+     */
+    public function triSujetASC(){
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.sujet','ASC')
+            ->getQuery()
+            ->getResult();
+    }
+    /**
+     * @return Plan[]
+     */
+    public function triSujetDESC(){
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.sujet','DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Plan[] Returns an array of Plan objects
     //  */

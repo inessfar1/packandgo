@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
-
 /**
  * @ORM\Entity(repositoryClass=AgenceRepository::class)
  * @Vich\Uploadable
@@ -25,9 +24,10 @@ class Agence
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255 , nullable=true)
      */
     private $logo;
+
     /**
      * @Vich\UploadableField(mapping="logo_image" ,fileNameProperty="logo")
      */
@@ -53,56 +53,10 @@ class Agence
         }
         return $this;
     }
-
-
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Regex(
-     *     pattern     = "/^[a-z]+$/i",
-     *     htmlPattern = "^[a-zA-Z]+$",
-     *      message= "Il faut que le nom soit alphabetique"
-     * )
-     *   @Assert\Length(
-     *      min = 4,
-     *      max = 20,
-     *      minMessage = "Minimum {{ limit }} caractères",
-     *      maxMessage = "Maximum {{ limit }} charactèrs"
-     * )
      */
-
     private $nom;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     *   @Assert\Regex(
-     *     pattern     = "/^[a-z]+$/i",
-     *     htmlPattern = "^[a-zA-Z]+$",
-     *      message= "Il faut que ce champ soit alphabetique"
-     * )
-     * @Assert\Length(
-     *      min = 4,
-     *      max = 20,
-     *      minMessage = "Minimum {{ limit }} caractères",
-     *      maxMessage = "Maximum {{ limit }} charactèrs"
-     * )
-     */
-    private $pays;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     *  @Assert\Regex(
-     *     pattern     = "/^[a-z]+$/i",
-     *     htmlPattern = "^[a-zA-Z]+$",
-     *      message= "Il faut que ce champ soit alphabetique"
-     * )
-     * @Assert\Length(
-     *      min = 4,
-     *      max = 20,
-     *      minMessage = "Minimum {{ limit }} caractères",
-     *      maxMessage = "Maximum {{ limit }} charactèrs"
-     * )
-     */
-    private $ville;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -111,12 +65,6 @@ class Agence
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(
-     *      min = 4,
-     *      max = 100,
-     *      minMessage = "Minimum {{ limit }} caractères",
-     *      maxMessage = "Maximum {{ limit }} charactèrs"
-     * )
      */
     private $email;
 
@@ -126,14 +74,19 @@ class Agence
     private $tel;
 
     /**
-     * @ORM\OneToMany(targetEntity=Plan::class, mappedBy="agence", orphanRemoval=true)
-     */
-    private $plans;
-
-    /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $update_at;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Pays::class, inversedBy="agences")
+     */
+    private $pays;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Plan::class, mappedBy="agence")
+     */
+    private $plans;
 
     public function __construct()
     {
@@ -165,30 +118,6 @@ class Agence
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getPays(): ?string
-    {
-        return $this->pays;
-    }
-
-    public function setPays(string $pays): self
-    {
-        $this->pays = $pays;
-
-        return $this;
-    }
-
-    public function getVille(): ?string
-    {
-        return $this->ville;
-    }
-
-    public function setVille(string $ville): self
-    {
-        $this->ville = $ville;
 
         return $this;
     }
@@ -229,6 +158,30 @@ class Agence
         return $this;
     }
 
+    public function getUpdateAt(): ?\DateTimeInterface
+    {
+        return $this->update_at;
+    }
+
+    public function setUpdateAt(?\DateTimeInterface $update_at): self
+    {
+        $this->update_at = $update_at;
+
+        return $this;
+    }
+
+    public function getPays(): ?Pays
+    {
+        return $this->pays;
+    }
+
+    public function setPays(?Pays $pays): self
+    {
+        $this->pays = $pays;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Plan[]
      */
@@ -258,15 +211,14 @@ class Agence
 
         return $this;
     }
-
-    public function getUpdateAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->update_at;
+        return $this->updated_at;
     }
 
-    public function setUpdateAt(\DateTimeInterface $update_at): self
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
     {
-        $this->update_at = $update_at;
+        $this->updated_at = $updated_at;
 
         return $this;
     }

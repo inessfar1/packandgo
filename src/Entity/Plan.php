@@ -10,8 +10,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
-
 /**
  * @ORM\Entity(repositoryClass=PlanRepository::class)
  * @Vich\Uploadable
@@ -26,16 +24,20 @@ class Plan
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255 , nullable=true)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $image;
+
+
     /**
      * @Vich\UploadableField(mapping="logo_image" ,fileNameProperty="image")
      */
     private $imageFile;
+
+
     /**
-    *@return mixed
-    */
+     * @return mixed
+     */
     public function getImageFile(): ?File
     {
         return $this->imageFile;
@@ -52,37 +54,18 @@ class Plan
         }
         return $this;
     }
-
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Regex(
-     *     pattern     = "/^[a-z]+$/i",
-     *     htmlPattern = "^[a-zA-Z]+$",
-     *      message= "Il faut que ce champ soit alphabetique"
-     * )
-     * @Assert\Length(
-     *      min = 4,
-     *      max = 20,
-     *      minMessage = "Minimum {{ limit }} caractères",
-     *      maxMessage = "Maximum {{ limit }} charactèrs"
-     * )
      */
     private $sujet;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(
-     *      min = 4,
-     *      max = 300,
-     *      minMessage = "Minimum {{ limit }} caractères",
-     *      maxMessage = "Maximum {{ limit }} charactèrs"
-     * )
      */
     private $description;
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\GreaterThan("today")
      */
     private $date;
 
@@ -92,15 +75,24 @@ class Plan
     private $prix;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $update_at;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Pays::class, inversedBy="plans")
+     */
+    private $pays;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Agence::class, inversedBy="plans")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $agence;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\OneToOne(targetEntity=PlanRes::class, mappedBy="plan", cascade={"persist", "remove"})
      */
-    private $update_at;
+    private $planRes;
 
     public function getId(): ?int
     {
@@ -167,6 +159,30 @@ class Plan
         return $this;
     }
 
+    public function getUpdateAt(): ?\DateTimeInterface
+    {
+        return $this->update_at;
+    }
+
+    public function setUpdateAt(?\DateTimeInterface $update_at): self
+    {
+        $this->update_at = $update_at;
+
+        return $this;
+    }
+
+    public function getPays(): ?Pays
+    {
+        return $this->pays;
+    }
+
+    public function setPays(?Pays $pays): self
+    {
+        $this->pays = $pays;
+
+        return $this;
+    }
+
     public function getAgence(): ?Agence
     {
         return $this->agence;
@@ -178,15 +194,36 @@ class Plan
 
         return $this;
     }
-
-    public function getUpdateAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->update_at;
+        return $this->updated_at;
     }
 
-    public function setUpdateAt(\DateTimeInterface $update_at): self
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
     {
-        $this->update_at = $update_at;
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getPlanRes(): ?PlanRes
+    {
+        return $this->planRes;
+    }
+
+    public function setPlanRes(?PlanRes $planRes): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($planRes === null && $this->planRes !== null) {
+            $this->planRes->setPlan(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($planRes !== null && $planRes->getPlan() !== $this) {
+            $planRes->setPlan($this);
+        }
+
+        $this->planRes = $planRes;
 
         return $this;
     }

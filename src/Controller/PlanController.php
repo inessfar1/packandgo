@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 
 class PlanController extends AbstractController
@@ -18,7 +20,7 @@ class PlanController extends AbstractController
      * @Route("/admin/plan/show", name="plan_index", methods={"GET"})
      */
     public function index(PlanRepository $planRepository, PaginatorInterface $paginator, Request $request): Response
-    {
+    {   $order=1;
         $plans=$planRepository->findAll();
         $pagination = $paginator->paginate(
             $plans, /* query NOT result */
@@ -27,6 +29,7 @@ class PlanController extends AbstractController
         );
         return $this->render('plan/index.html.twig', [
             'plans' => $pagination,
+            'order' => $order
         ]);
     }
 
@@ -105,6 +108,81 @@ class PlanController extends AbstractController
     {
         return $this->render('plan/indexFront.html.twig', [
             'plans' => $planRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/admin/plan/search", name="plansearch")
+     */
+    public function searchPlanajax(Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository(Plan::class);
+        $requestString=$request->get('searchValue');
+
+        $plan = $repository->findPlanBySujet($requestString);
+
+
+        return $this->render('plan/planajax.html.twig', [
+            'plans' => $plan,
+        ]);
+
+    }
+    /**
+     * @Route("/admin/plan/pdf ", name="plan_pdf")
+     */
+    public function pdf(PlanRepository $Repository)
+    {
+        $plan = $Repository->findall();
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('plan/pdf.html.twig', [
+            'title' => "Liste des plans",
+            'plans' => $plan
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("Plans.pdf", [
+            "Attachment" => true
+        ]);
+        return $this->redirectToRoute('plan_index');
+    }
+
+    /**
+     * @Route("admin/plan/cro", name="cro")
+     */
+    public function orderSujetASC(PlanRepository $repository){
+        $order=2;
+        $plans=$repository->triSujetASC();
+        return $this->render('plan/index.html.twig', [
+            'plans' => $plans,
+            'order' => $order
+        ]);
+    }
+
+    /**
+     * @Route("admin/plan/dec", name="dec")
+     */
+   public function orderSujetDESC(PlanRepository $repository){
+        $order=1;
+        $plans=$repository->triSujetDESC();
+        return $this->render('plan/index.html.twig', [
+            'plans' => $plans,
+            'order' => $order
         ]);
     }
 

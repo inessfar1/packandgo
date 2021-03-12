@@ -3,10 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Agence;
+use App\Entity\Pays;
 use App\Entity\Plan;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -48,6 +48,10 @@ class PlanType extends AbstractType
                     'placeholder'=>'Entrer le prix ici...',
 
                 ]
+            ])
+            ->add('pays',EntityType::class,[
+                'class'=>Pays::class,
+                'choice_label'=>'name'
             ])
             ->add('agence',EntityType::class,[
                 'class'=>Agence::class,

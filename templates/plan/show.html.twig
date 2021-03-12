@@ -1,4 +1,4 @@
-{% extends './backend/dashboard.html.twig' %}
+{% extends 'dashboard.html.twig' %}
 
 {% block title %}Plan{% endblock %}
 
@@ -7,30 +7,30 @@
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ plan.id }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ plan.image }}</td>
-            </tr>
-            <tr>
-                <th>Sujet</th>
-                <td>{{ plan.sujet }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ plan.description }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ plan.date ? plan.date|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{ plan.prix }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ plan.id }}</td>
+        </tr>
+        <tr>
+            <th>Image</th>
+            <td>{{ plan.image }}</td>
+        </tr>
+        <tr>
+            <th>Sujet</th>
+            <td>{{ plan.sujet }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ plan.description }}</td>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <td>{{ plan.date ? plan.date|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Prix</th>
+            <td>{{ plan.prix }}</td>
+        </tr>
         </tbody>
     </table>
     <a href="{{ path('plan_edit', {'id': plan.id}) }}"><button class="btn btn-block btn-warning">Modifier l'agence</button>  </a>

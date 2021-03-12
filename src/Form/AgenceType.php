@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Agence;
+use App\Entity\Pays;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -33,22 +35,6 @@ class AgenceType extends AbstractType
 
                 ]
             ])
-            ->add('pays',TextType::class,[
-                'label'=>'Pays de cette agence',
-                'attr'=>[
-                    'placeholder'=>'Entrer le pays ici...',
-
-                    'class'=>'form-control'
-                ]
-            ])
-            ->add('ville',TextType::class,[
-        'label'=>'Ville de cette agence',
-        'attr'=>[
-            'placeholder'=>'Entrer la ville ici...',
-
-            'class'=>'form-control'
-        ]
-    ])
             ->add('adresse',TextareaType::class,[
                 'label'=>'Addresse de cette agence',
                 'attr'=>[
@@ -72,6 +58,10 @@ class AgenceType extends AbstractType
 
                     'class'=>'form-control'
                 ]
+            ])
+            ->add('pays',EntityType::class,[
+                'class'=>Pays::class,
+                'choice_label'=>'name'
             ])
         ;
     }
