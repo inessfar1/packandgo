@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Offre;
+use App\Entity\RechercheOffre;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +19,47 @@ class OffreRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Offre::class);
+    }
+
+    public function findAllWithPagination(RechercheOffre $rechercheOffre) : Query
+    {
+        $req = $this->createQueryBuilder('o');
+        if($rechercheOffre->getMinAnnee())
+        {
+            $req = $req->andWhere('o.date_debut > :min')
+            ->setParameter(':min', $rechercheOffre->getMinAnnee());
+        }
+        if($rechercheOffre->getMaxAnnee())
+        {
+            $req = $req->andWhere('o.date_fin < :max')
+                ->setParameter(':max', $rechercheOffre->getMaxAnnee());
+        }
+        return $req->getQuery();
+    }
+
+    public function findOffrebyname($name){
+        return $this->createQueryBuilder('offre')
+            ->where('offre.name LIKE :name')
+            ->setParameter('name', '%'.$name.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function triecroissant()
+    {
+        return $this->createQueryBuilder('o')
+                    ->orderBy('o.price', 'ASC')
+                    ->getQuery()
+                    ->getResult();
+
+    }
+
+    public  function  triedecroissant()
+    {
+        return $this->createQueryBuilder('o')
+                    ->orderBy('o.price','DESC')
+                    ->getQuery()
+                    ->getResult();
     }
 
     // /**

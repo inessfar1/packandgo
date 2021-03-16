@@ -1,0 +1,83 @@
+{% extends 'baseadmin.html.twig' %}
+
+{% block title %}Calendrier!{% endblock %}
+
+{%  block stylesheet %}
+<style>
+ #calendrier
+ {
+     width: 80%;
+     margin: auto;
+ }
+</style>
+{% endblock %}
+
+{% block body %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Dashboard</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div id="calendrier">
+
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
+            </div>
+        </section>
+    </div>
+
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js" integrity="sha256-rPPF6R+AH/Gilj2aC00ZAuB2EKmnEjXlEWx5MkAp7bw=" crossorigin="anonymous"></script>
+    <script>
+        window.onload = () => {
+            let calendarelt = document.querySelector("#calendrier")
+            let calendar = new FullCalendar.Calendar(calendarelt, {
+                initialView : 'dayGridMonth',
+                locale : 'fr',
+                timeZone : 'Afrique/Tunis',
+                headerToolbar : {
+                    start : 'prev,next today',
+                    center : 'title',
+                    end : 'dayGridMonth,'
+                },
+                events : {{ data | raw }},
+                {#eventContent : { html: '{% for o in offres %}<i>{{ o.name }}</i>{% endfor %}' },#}
+                editable : true
+            })
+            calendar.render()
+        }
+    </script>
+{% endblock %}
+

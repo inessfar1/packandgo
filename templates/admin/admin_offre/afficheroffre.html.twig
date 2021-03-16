@@ -41,40 +41,54 @@
                                                 </div>
                                             {% endfor %}
                                             <a class="btn btn-success" href="{{ path('AjoutOffre') }}" >Ajouter</a>
+                                            <br>
+                                            <form class="w-search">
+                                                <div class="sidebar-search">
+                                                    <div class="input-group custom-search-form">
+                                                        <input type="text" id="search" class="form-control" placeholder="Search">
+                                                    </div>
+                                                    <!-- /input-group -->
+                                                </div>
+                                                <ul class="nav" id="side-menu">
+                                                    <li>
+                                                        <a href="#"><span class="fa arrow"></span></a>
+                                                        <ul style="background-color: #0b0b0b" class="nav " id="entitiesNav">
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </form>
                                             <thead class="text-center">
                                             <tr>
                                                 <th>name</th>
                                                 <th>Description</th>
-                                                <th>price</th>
+                                                <th>
+                                                    <div class="row no-gutters align-items-center">
+                                                        <div class="col">
+                                                            price
+                                                        </div>
+                                                        <div class="col">
+                                                            <form action="{{ path('trie_croissant') }}" method="get" >
+                                                                <button class="btn btn-light" type="submit" ><i class="fas fa-arrow-circle-up"></i></button>
+                                                            </form>
+                                                        </div>
+                                                        <div class="col">
+                                                            <form action="{{ path('trie_decroissant') }}" method="get" >
+                                                                <button class="btn btn-light" type="submit" ><i class="fas fa-arrow-circle-down"></i></button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </th>
                                                 <th>date debut de l'offre</th>
                                                 <th>date fin de l'offre</th>
                                                 <th>image</th>
                                                 <th>actions</th>
                                             </tr>
                                             </thead>
-                                            {%  for offres in offres %}
-                                                <tbody class="text-center">
-                                                <tr>
-                                                    <td>{{ offres.name }}</td>
-                                                    <td>{{ offres.description }}</td>
-                                                    <td>{{ offres.price }} $ </td>
-                                                    <td>{{ offres.dateDebut|date('Y-m-d')}}</td>
-                                                    <td>{{ offres.dateFin|date('Y-m-d')}}</td>
-                                                    <td><img width="200" class="img-responsive" src="{{ asset('assets/images/packages/' ~ offres.image) }}"></td>
-                                                    <td>
-                                                        <div class="row">
-                                                            <a class="btn btn-primary col-6" href="{{path('modifOffre',{'id': offres.id})}}" >modifier</a>
-                                                            <form method="post" class="col-6" action="{{ path('supOffre',{'id': offres.id})}}" onsubmit="return confirm('Voulez vous supprimer ?')">
-                                                                <input type="hidden" name="_method" value="SUP">
-                                                                <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ offres.id)}}">
-                                                                <input type="submit" class="btn btn-danger w-100 " value="supprimer">
-                                                            </form>
-                                                        </div>
-                                                    </td>
-                                                    </td>
-                                                </tr>
+                                                <tbody class="text-center" id="all">
+                                                {% include 'admin/admin_offre/Offreajax.html.twig' %}
                                                 </tbody>
-                                            {% endfor %}
+                                            <tbody id="search">
+                                            </tbody>
                                         </table>
                                     </div>
                                     <!-- /.card-body -->
@@ -97,6 +111,40 @@
     <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <script
+            src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')}}">
+    </script>
+    <script>
+        $( document ).ready(function() {
+            var currentRequest = null;
+            $("#search").keyup(function(e){
+                /* La variable value va prendre la valeur insérer dans le champ de texte
+                afin d’effectuer la recherche */
+                var value = $(this).val();
+                if(currentRequest != null) {
+                    currentRequest.abort();
+                }
 
+                /* Ajax est lancé lors du remplissage du champ texte dont l’id est
+                « search » pour faire la recherche */
+                currentRequest = $.ajax({
+
+                    url : "{{ path('ajaxsearch') }}",
+                    type : 'GET',
+                    data: {
+                        'searchValue' : value
+                    },
+
+                    success : function(retour)
+                    {
+                        $('#all').html(retour);
+
+                    },
+                });
+                return false;
+            });
+        });
+    </script>
 {% endblock %}
 

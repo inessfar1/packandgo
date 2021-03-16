@@ -28,6 +28,8 @@
         <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css')}}">
         <!-- summernote -->
         <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css')}}">
+
+        <link rel="stylesheet" href="{{ asset('https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.css')}}" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
     {% endblock %}
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -231,6 +233,18 @@
                                     <p>Gestion des Pays</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{path('admin_stat_gest_offre')}}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Statistiques</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{path('calendrier')}}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Calendrier</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -240,6 +254,7 @@
         <!-- /.sidebar -->
     </aside>
     {% block body %}
+
     {% endblock %}
 
     <!-- Control Sidebar -->

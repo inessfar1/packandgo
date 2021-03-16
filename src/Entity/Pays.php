@@ -78,6 +78,8 @@ class Pays
      */
     private $updated_at;
 
+
+
     public function __construct()
     {
         $this->offres = new ArrayCollection();
@@ -177,4 +179,6 @@ class Pays
 
         return $this;
     }
+
+
 }
