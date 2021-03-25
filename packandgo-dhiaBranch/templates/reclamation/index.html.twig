@@ -1,0 +1,44 @@
+{% extends 'dashboard.html.twig' %}
+
+{% block title %}Reclamation index{% endblock %}
+
+{% block body %}
+    <h1>Reclamation index</h1>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Object</th>
+                <th>Description</th>
+                <th>Statut</th>
+                <th>actions</th>
+                <th>utilisateurs</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ reclamation.id }}</td>
+                <td>{{ reclamation.object }}</td>
+                <td>{{ reclamation.description }}</td>
+                <td>{{ reclamation.statut }}</td>
+                <td>{{ reclamation.utilisateurs.email }}</td>
+                <td>
+                    <a href="{{ path('reclamation_show', {'id': reclamation.id}) }}">show</a>
+                    <a href="{{ path('reclamation_edit', {'id': reclamation.id}) }}">confirme</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
