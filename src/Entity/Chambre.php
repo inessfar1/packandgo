@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotationh\UploadableField;
-    use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ChambreRepository::class)
@@ -147,6 +147,13 @@ class Chambre
 
     private $imageFile;
 
+    /**
+     * @ORM\OneToOne(targetEntity=ChambreRes::class, mappedBy="chambre", cascade={"persist", "remove"})
+     */
+    private $chambreRes;
+
+
+
     public function getImageFile(): ?File
     {
         return $this->imageFile;
@@ -164,4 +171,28 @@ class Chambre
         return $this;
 
     }
+
+    public function getChambreRes(): ?ChambreRes
+    {
+        return $this->chambreRes;
+    }
+
+    public function setChambreRes(?ChambreRes $chambreRes): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($chambreRes === null && $this->chambreRes !== null) {
+            $this->chambreRes->setChambre(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($chambreRes !== null && $chambreRes->getChambre() !== $this) {
+            $chambreRes->setChambre($this);
+        }
+
+        $this->chambreRes = $chambreRes;
+
+        return $this;
+    }
+
+
 }

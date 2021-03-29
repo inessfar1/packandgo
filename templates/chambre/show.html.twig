@@ -1,4 +1,4 @@
-{% extends 'Dashboard.html.twig' %}
+{% extends 'dashboard.html.twig' %}
 
 {% block title %}Chambre{% endblock %}
 
@@ -7,30 +7,30 @@
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ chambre.id }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ chambre.type }}</td>
-            </tr>
-            <tr>
-                <th>Vue</th>
-                <td>{{ chambre.vue }}</td>
-            </tr>
-            <tr>
-                <th>Duree</th>
-                <td>{{ chambre.duree }}</td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{ chambre.prix }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ chambre.imageFile }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ chambre.id }}</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{{ chambre.type }}</td>
+        </tr>
+        <tr>
+            <th>Vue</th>
+            <td>{{ chambre.vue }}</td>
+        </tr>
+        <tr>
+            <th>nb de chambres :</th>
+            <td>{{ chambre.duree }}</td>
+        </tr>
+        <tr>
+            <th>Prix</th>
+            <td>{{ chambre.prix }}</td>
+        </tr>
+        <tr>
+            <th>Image</th>
+            <td>{{ chambre.imageFile }}</td>
+        </tr>
         </tbody>
     </table>
 

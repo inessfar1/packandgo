@@ -47,4 +47,25 @@ class ChambreRepository extends ServiceEntityRepository
         ;
     }
     */
+
+  /*  public function findEntitiesByString($str)
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.type = :str')
+            ->setParameter('str', '%'.$str.'%')
+            ->getQuery()
+            ->getResult()
+            ;
+    }*/
+    public function findEntitiesByString($str)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT p 
+        FROM App:Chambre p
+        WHERE p.type LIKE :str'
+
+            )->setParameter('str', '%'.$str.'%')->getResult();
+    }
+
+
 }

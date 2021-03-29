@@ -47,4 +47,14 @@ class HotelRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findEntitiesByString($str)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT p 
+        FROM App:Hotel p
+        WHERE p.nom LIKE :str'
+
+            )->setParameter('str', '%'.$str.'%')->getResult();
+    }
+
 }

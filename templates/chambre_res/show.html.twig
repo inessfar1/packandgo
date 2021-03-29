@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chambre Res{% endblock %}
+
+{% block body %}
+    <h1>ChambreRes</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ chambre_re.id }}</td>
+            </tr>
+            <tr>
+                <th>DateDeb</th>
+                <td>{{ chambre_re.dateDeb ? chambre_re.dateDeb|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateFin</th>
+                <td>{{ chambre_re.dateFin ? chambre_re.dateFin|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('chambre_res_index') }}">back to list</a>
+
+    <a href="{{ path('chambre_res_edit', {'id': chambre_re.id}) }}">edit</a>
+
+    {{ include('chambre_res/_delete_form.html.twig') }}
+
+{% endblock %}

@@ -62,7 +62,7 @@ class Hotel
     private $image;
 
     /**
-     * @ORM\OneToMany(targetEntity=Chambre::class, mappedBy="hotel")
+     * @ORM\OneToMany(targetEntity=Chambre::class, mappedBy="hotel" , orphanRemoval=true)
      */
     private $chambres;
 
