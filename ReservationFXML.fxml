@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="787.0" prefWidth="1367.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Hebergement.View.Chambre.ReservationFXMLController">
+    <children>
+      <VBox fx:id="sousMenuTaches" alignment="TOP_CENTER" layoutX="-1.0" layoutY="80.0" prefHeight="812.0" prefWidth="230.0" spacing="10.0" style="-fx-background-color: #2262C6; -fx-background-radius: 0 60 0 0;">
+         <children>
+            <Pane prefHeight="36.0" prefWidth="230.0">
+               <children>
+                  
+               </children>
+            </Pane>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#programmerReunion" prefHeight="50.0" prefWidth="170.0" styleClass="button3" stylesheets="@../css/fullpackstyling.css" text="Programmer une reunion">
+               <font>
+                  <Font name="Gill Sans MT" size="13.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" layoutX="40.0" layoutY="46.0" mnemonicParsing="false" onAction="#afficherReunions" prefHeight="50.0" prefWidth="170.0" styleClass="button3" stylesheets="@../css/fullpackstyling.css" text="Afficher les réunions">
+               <font>
+                  <Font name="Gill Sans MT" size="13.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" layoutX="40.0" layoutY="56.0" mnemonicParsing="false" onAction="#programmerEvent" prefHeight="50.0" prefWidth="170.0" styleClass="button3" stylesheets="@../css/fullpackstyling.css" text="Programmer un Evénement">
+               <font>
+                  <Font name="Gill Sans MT" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <VBox fx:id="sousMenuActivites" alignment="TOP_CENTER" layoutY="70.0" prefHeight="743.0" prefWidth="230.0" spacing="10.0" style="-fx-background-color: #2262C6; -fx-background-radius: 0 60 0 0;" visible="false">
+         <children>
+            <Pane prefHeight="36.0" prefWidth="230.0">
+               <children>
+                  
+               </children>
+            </Pane>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#programmerReunion" prefHeight="50.0" prefWidth="170.0" styleClass="button3" stylesheets="@../css/fullpackstyling.css" text="Programmer une reunion">
+               <font>
+                  <Font name="Gill Sans MT" size="13.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" layoutX="40.0" layoutY="46.0" mnemonicParsing="false" onAction="#afficherReunions" prefHeight="50.0" prefWidth="170.0" styleClass="button3" stylesheets="@../css/fullpackstyling.css" text="Afficher les réunions">
+               <font>
+                  <Font name="Gill Sans MT" size="13.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" layoutX="40.0" layoutY="56.0" mnemonicParsing="false" onAction="#programmerEvent" prefHeight="50.0" prefWidth="170.0" styleClass="button3" stylesheets="@../css/fullpackstyling.css" text="Programmer un Evénement">
+               <font>
+                  <Font name="Gill Sans MT" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <BorderPane prefHeight="900.0" prefWidth="1500.0" style="-fx-border-color: #2262C6; -fx-background-color: #fff;">
+         <left>
+            <VBox fx:id="menu" alignment="TOP_CENTER" prefHeight="780.0" prefWidth="230.0" spacing="10.0" style="-fx-background-color: #2262C6; -fx-background-radius: 0 60 0 0;" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="155.0" prefWidth="230.0" />
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#afficherProjet" prefHeight="50.0" prefWidth="170.0" styleClass="button3" stylesheets="@../css/fullpackstyling.css" text="Hebergement">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/icons8_location_off_18px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Gill Sans MT" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#afficherReclamation" prefHeight="50.0" prefWidth="170.0" styleClass="button3" stylesheets="@../css/fullpackstyling.css" text="Transport">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/icons8_monitor_18px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Gill Sans MT" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" styleClass="button3" stylesheets="@../css/fullpackstyling.css" text="Attraction">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/icons8_conference_call_18px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Gill Sans MT" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#gestionTache" prefHeight="50.0" prefWidth="170.0" styleClass="button3" stylesheets="@../css/fullpackstyling.css" text="Offre">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/icons8_time_18px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Gill Sans MT" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#gestionDesSprints" prefHeight="50.0" prefWidth="170.0" styleClass="button3" stylesheets="@../css/fullpackstyling.css" text="Forum">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/icons8_star_18px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Gill Sans MT" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#gestionActivitesOnClick" prefHeight="50.0" prefWidth="170.0" styleClass="button3" stylesheets="@../css/fullpackstyling.css" text="Réclamation">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/icons8_past_18px_1.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Gill Sans MT" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <BorderPane prefHeight="523.0" prefWidth="704.0">
+                     <top>
+                        <Pane prefHeight="0.0" prefWidth="1268.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label layoutX="29.0" layoutY="13.0" text="Reservation" textFill="#2262c6">
+                                 <font>
+                                    <Font size="49.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </top>
+                     <center>
+                        <Pane prefHeight="671.0" prefWidth="1268.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <AnchorPane fx:id="body" layoutX="14.0" layoutY="439.0" prefHeight="274.0" prefWidth="0.0" style="-fx-background-color: white;">
+                                 <children>
+                                     
+                                    <Button layoutX="84.0" layoutY="235.0" mnemonicParsing="false" onAction="#reserver" prefHeight="36.0" prefWidth="129.0" text="reserver" />
+                                    <DatePicker fx:id="datedeb" layoutX="84.0" layoutY="114.0" promptText="jour de reservation" />
+                                    <DatePicker fx:id="datefin" layoutX="84.0" layoutY="178.0" promptText="fin de reservation" />
+                                    <ComboBox fx:id="type" layoutX="84.0" layoutY="53.0" prefHeight="31.0" prefWidth="221.0" />
+                                 </children></AnchorPane>
+                              <Pane layoutX="29.0" layoutY="77.0" prefHeight="294.0" prefWidth="828.0">
+                                 <children>
+                                    <TableView fx:id="hotelTab" layoutX="52.0" layoutY="28.0" onMouseClicked="#selectHotel" prefHeight="238.0" prefWidth="690.0">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="41.0" text="Id" />
+          <TableColumn fx:id="colNom" prefWidth="88.0" text="Nom" />
+            <TableColumn fx:id="colAdresse" prefWidth="146.0" text="Adresse" />
+            <TableColumn fx:id="colEtoile" prefWidth="90.0" text="Etoile" />
+            <TableColumn fx:id="colNum" prefWidth="122.0" text="Num" />
+            <TableColumn fx:id="colImage" prefWidth="187.0" text="Image" />
+        </columns>
+      </TableView>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="353.0" layoutY="414.0" prefHeight="393.0" prefWidth="628.0">
+                                 <children>
+                                    <TableView fx:id="tableReserv" layoutX="55.0" layoutY="34.0" prefHeight="200.0" prefWidth="594.0">
+                                      <columns>
+                                        <TableColumn fx:id="hotelName" prefWidth="104.0" text="Nom Hotel" />
+                                        <TableColumn fx:id="typechamb" prefWidth="148.0" text="Type de chambre" />
+                                          <TableColumn fx:id="daterev" prefWidth="149.0" text="Date de reservation" />
+                                          <TableColumn fx:id="datefinres" prefWidth="192.0" text="Date fin de reservation" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </Pane>
+                              <Text fill="#2262c6" layoutX="29.0" layoutY="426.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vos Réservations">
+                                 <font>
+                                    <Font size="40.0" />
+                                 </font>
+                              </Text>
+                           </children></Pane>
+                     </center>
+                  </BorderPane>
+               </children>
+            </StackPane>
+         </center>
+         <top>
+            <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="1084.0" style="-fx-background-color: #fff; -fx-border-color: #718093; -fx-border-width: 0 0 0.5 0;" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="71.0" prefWidth="16.0" />
+                  <ImageView fitHeight="37.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0">
+                     <image>
+                        <Image url="@../icons/logo%20finalll-01.jpg" />
+                     </image>
+                  </ImageView>
+                  <Pane prefHeight="60.0" prefWidth="59.0" />
+                  <TextField prefHeight="31.0" prefWidth="251.0" promptText="Rechercher" style="-fx-background-color: #ffffff;" styleClass="text" stylesheets="@../css/fullpackstyling.css" />
+                  <Pane prefHeight="70.0" prefWidth="163.0">
+                     <children>
+
+                     </children></Pane>
+                  <Pane onMouseClicked="#afficherNotification" prefHeight="70.0" prefWidth="62.0">
+                     <children>
+                        <ImageView fx:id="imageNotificaction" fitHeight="20.0" fitWidth="20.0" layoutX="14.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/icons8_bell_20px.png" />
+                           </image>
+                        </ImageView>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="12.0" prefHeight="25.0" prefWidth="29.0" style="-fx-background-color: #2262C6; -fx-background-radius: 50;" textFill="#ecf0f8">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Text fx:id="nombreNotification" fill="WHITE" layoutX="43.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" textAlignment="CENTER" wrappingWidth="16.625">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="70.0" prefWidth="17.0" />
+                  <Text fx:id="labelNom" fill="#2262c6" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="256.13671875">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Text>
+                  <Pane prefHeight="70.0" prefWidth="28.0" style="-fx-border-radius: 50;" styleClass="pp" stylesheets="@../css/fullpackstyling.css" />
+                  <Pane fx:id="buttonMenuLogOut" onDragDetected="#buttonMenuLogOut" prefHeight="70.0" prefWidth="45.0" style="-fx-background-color: #dfe4ea;">
+                     <children>
+                        <ImageView fitHeight="20.0" fitWidth="31.0" layoutX="13.0" layoutY="25.0" onMouseClicked="#buttonMenuLogOut" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/icons8_bulleted_list_20px.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+         </top>
+      </BorderPane>
+      <VBox fx:id="menuLogOut" focusTraversable="true" layoutX="1250.0" layoutY="70.0" prefHeight="108.0" prefWidth="135.0" spacing="10.0" visible="false">
+         <children>
+            <Pane focusTraversable="true" prefHeight="4.0" prefWidth="100.0" />
+            
+            
+            <Pane prefHeight="797.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
