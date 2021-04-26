@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="ap" prefHeight="700.0" prefWidth="1054.0" stylesheets="@../../styles/styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CategorieController">
+   <children>
+      <JFXTabPane prefHeight="710.0" prefWidth="1094.0">
+         <tabs>
+            <Tab text="Annonce">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="674.0" prefWidth="442.0" style="-fx-background-color: #4682B4;">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Gérer forum" textFill="WHITE">
+                                       <font>
+                                          <Font size="33.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="titre" prefHeight="54.0" prefWidth="255.0" promptText="Titre">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label fx:id="erreurtitre" prefHeight="34.0" prefWidth="317.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="136.0" prefWidth="380.0">
+                                 <children>
+                                    <TextField fx:id="contenu" alignment="TOP_LEFT" prefHeight="106.0" prefWidth="263.0" promptText="Description">
+                                       <font>
+                                          <Font size="26.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label fx:id="erreurcontenu" prefHeight="35.0" prefWidth="311.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <ChoiceBox fx:id="combo" onDragDetected="#selct" prefHeight="51.0" prefWidth="272.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="76.0" prefWidth="30.0" />
+                                    <Button mnemonicParsing="false" onAction="#ajouter" prefHeight="40.0" prefWidth="83.0" style="-fx-background-color: #B0C4DE;" text="ajouter" textFill="WHITE" />
+                                    <VBox prefHeight="76.0" prefWidth="44.0" />
+                                    <Button mnemonicParsing="false" onAction="#modifier" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #B0C4DE;" text="modifier" textFill="WHITE" />
+                                    <VBox prefHeight="76.0" prefWidth="55.0" />
+                                    <Button mnemonicParsing="false" onAction="#supprimer" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #B0C4DE;" text="supprimer" textFill="WHITE" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <TableView fx:id="table1" layoutX="443.0" layoutY="37.0" prefHeight="532.0" prefWidth="651.0">
+                          <columns>
+                            <TableColumn fx:id="tabletitre" prefWidth="197.0" text="titre" />
+                            <TableColumn fx:id="tablecontenu" prefWidth="257.0" text="Description" />
+                              <TableColumn fx:id="tablecategorie" prefWidth="202.0" text="categorie" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="924.0" layoutY="597.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="96.0" style="-fx-background-color: #B0C4DE;" text="retourner" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="sattistique">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <PieChart fx:id="piechart" layoutX="160.0" layoutY="117.0" prefHeight="513.0" prefWidth="804.0" />
+                        <Label fx:id="caption" layoutX="419.0" layoutY="51.0" prefHeight="21.0" prefWidth="346.0" text="Nombre Like forum">
+                           <font>
+                              <Font size="31.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
+</AnchorPane>

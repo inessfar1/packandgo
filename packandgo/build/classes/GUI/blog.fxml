@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="686.0" prefWidth="1078.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.BlogController">
+   <children>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="624.0" prefWidth="268.0" styleClass="sidebar" stylesheets="@stylesheet.css">
+         <children>
+            <Label prefHeight="125.0" prefWidth="367.0" style="-fx-background-color: #00A2D3;" stylesheets="@stylesheet.css" text="Admin Panel" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Demi" size="37.0" />
+               </font>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </Label>
+            <HBox prefHeight="22.0" prefWidth="300.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <children>
+             
+                  <Label text="Gestion des utilisateurs" textFill="#7c8184">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+               </children>
+            </HBox>
+            <VBox prefHeight="48.0" prefWidth="300.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" styleClass="btns" stylesheets="@stylesheet.css" text="Utilisateurs" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label styleClass="btns" stylesheets="@stylesheet.css" text="Réclamations" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <HBox layoutX="10.0" layoutY="135.0" prefHeight="0.0" prefWidth="300.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <children>
+              
+                  <Label text="Gestion des hébérgements" textFill="#7c8184">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox layoutX="10.0" layoutY="179.0" prefHeight="48.0" prefWidth="300.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" styleClass="btns" stylesheets="@stylesheet.css" text="Hotel" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label styleClass="btns" stylesheets="@stylesheet.css" text="Chambres" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <HBox layoutX="10.0" layoutY="233.0" prefHeight="0.0" prefWidth="300.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <children>
+         
+                  <Label text="Gestion des plans d'attraction" textFill="#7c8184">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox layoutX="10.0" layoutY="277.0" prefHeight="48.0" prefWidth="300.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" styleClass="btns" stylesheets="@stylesheet.css" text="Agences" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label styleClass="btns" stylesheets="@stylesheet.css" text="Attractions" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <HBox layoutX="10.0" layoutY="331.0" prefHeight="12.0" prefWidth="300.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <children>
+            
+                  <Label text="Gestion des offres" textFill="#7c8184">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox layoutX="10.0" layoutY="375.0" prefHeight="48.0" prefWidth="300.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" styleClass="btns" stylesheets="@stylesheet.css" text="Offres" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label styleClass="btns" stylesheets="@stylesheet.css" text="Pays" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <HBox layoutX="10.0" layoutY="429.0" prefHeight="5.0" prefWidth="300.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <children>
+              
+                  <Label text="Gestion de transport" textFill="#7c8184">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox layoutX="10.0" layoutY="473.0" prefHeight="48.0" prefWidth="300.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" styleClass="btns" stylesheets="@stylesheet.css" text="Chauffeurs" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label styleClass="btns" stylesheets="@stylesheet.css" text="Moyens de transport" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="37.0" styleClass="btns" stylesheets="@stylesheet.css" text="Trajets" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <HBox layoutX="10.0" layoutY="527.0" prefHeight="0.0" prefWidth="300.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <children>
+          
+                  <Label text="Gestion des blogs et forums" textFill="#7c8184">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox layoutX="10.0" layoutY="571.0" prefHeight="48.0" prefWidth="300.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" styleClass="btns" stylesheets="@stylesheet.css" text="Catégories" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label styleClass="btns" stylesheets="@stylesheet.css" text="Blogs" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <Pane layoutX="263.0" prefHeight="114.0" prefWidth="799.0" style="-fx-background-color: #e8e4e4;">
+         <children>
+            <Label layoutX="24.0" layoutY="36.0" style="-fx-background-color: transparent;" text="Dashboard">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+         
+         </children>
+      </Pane>
+      <VBox layoutX="265.0" layoutY="107.0" prefHeight="572.0" prefWidth="358.0" style="-fx-background-color: #4682B4;">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Gérer Blog" textFill="WHITE">
+                     <font>
+                        <Font size="33.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="titre" prefHeight="54.0" prefWidth="255.0" promptText="Titre">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="erreurtitre" prefHeight="34.0" prefWidth="317.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="136.0" prefWidth="380.0">
+               <children>
+                  <TextField fx:id="contenu" alignment="TOP_LEFT" prefHeight="106.0" prefWidth="263.0" promptText="Description">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="erreurcontenu" prefHeight="35.0" prefWidth="311.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="133.0" prefWidth="380.0">
+               <children>
+                  <Button fx:id="imagee" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#importimage" prefHeight="37.0" prefWidth="117.0" style="-fx-background-color: #B0C4DE;" text="import image" textFill="WHITE" />
+                  <ImageView fx:id="importeimage" fitHeight="105.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="erreurimg" prefHeight="33.0" prefWidth="291.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="62.0" prefWidth="0.0" />
+                  <Button mnemonicParsing="false" onAction="#ajouter" prefHeight="40.0" prefWidth="83.0" style="-fx-background-color: #B0C4DE;" text="ajouter" textFill="WHITE" />
+                  <VBox prefHeight="62.0" prefWidth="21.0" />
+                  <Button mnemonicParsing="false" onAction="#modifier" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #B0C4DE;" text="modifier" textFill="WHITE" />
+                  <VBox prefHeight="62.0" prefWidth="27.0" />
+                  <Button mnemonicParsing="false" onAction="#supprimer" prefHeight="40.0" prefWidth="92.0" style="-fx-background-color: #B0C4DE;" text="supprimer" textFill="WHITE" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <TableView fx:id="table1" layoutX="621.0" layoutY="113.0" prefHeight="475.0" prefWidth="442.0">
+        <columns>
+          <TableColumn fx:id="tabletitre" prefWidth="132.33331298828125" text="Titre" />
+          <TableColumn fx:id="tablecontenu" prefWidth="136.66668701171875" text="Contenu" />
+            <TableColumn fx:id="tableimage" prefWidth="208.0" text="Image" />
+        </columns>
+      </TableView>
+     
+   </children>
+</AnchorPane>
