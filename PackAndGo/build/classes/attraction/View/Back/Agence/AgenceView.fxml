@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="668.0" prefWidth="1251.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Attraction.View.Back.Agence.AgenceViewController">
+   <children>
+      <Button fx:id="TFAjouter" alignment="CENTER" layoutX="340.0" layoutY="583.0" mnemonicParsing="false" onAction="#ajouterAgence" prefHeight="31.0" prefWidth="138.0" styleClass="blue-btn" stylesheets="@styles.css" text="Ajouter" />
+      <TableView fx:id="tabAgence" layoutX="621.0" layoutY="280.0" onMouseClicked="#selectAgence" prefHeight="316.0" prefWidth="594.0">
+        <columns>
+          <TableColumn fx:id="colID" prefWidth="33.0" text="ID" />
+            <TableColumn fx:id="colLogo" prefWidth="74.0" text="Logo" />
+          <TableColumn fx:id="colNom" prefWidth="88.0" text="Nom" />
+            <TableColumn fx:id="colTel" prefWidth="127.0" text="Tel" />
+            <TableColumn fx:id="colAddresse" minWidth="0.0" prefWidth="115.0" text="Addresse" />
+            <TableColumn fx:id="colEmail" prefWidth="157.0" text="Email" />
+        </columns>
+      </TableView>
+      <VBox layoutX="340.0" layoutY="251.0" prefHeight="316.0" prefWidth="77.0" spacing="50.0">
+         <children>
+            <Label prefHeight="17.0" prefWidth="56.0" text="Logo :" />
+            <Label text="Nom :" />
+            <Label text="Email :" />
+            <Label text="Addresse :" />
+            <Label text="Tel :" />
+         </children>
+      </VBox>
+      <VBox layoutX="419.0" layoutY="245.0" prefHeight="316.0" prefWidth="193.0" spacing="40.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="TFlogo" editable="false" prefHeight="25.0" prefWidth="132.0" />
+                  <Button fx:id="browse" mnemonicParsing="false" onAction="#browse" prefHeight="25.0" prefWidth="63.0" text="Browse" />
+               </children>
+            </HBox>
+            <TextField fx:id="TFnom" prefHeight="25.0" prefWidth="217.0" />
+            <TextField fx:id="TFemail" prefHeight="25.0" prefWidth="198.0" />
+            <TextField fx:id="TFaddresse" />
+            <TextField fx:id="TFtel" prefHeight="25.0" prefWidth="198.0" />
+         </children>
+      </VBox>
+      <Button fx:id="Aupdate" layoutX="478.0" layoutY="583.0" mnemonicParsing="false" onAction="#modifierAgence" prefHeight="31.0" prefWidth="138.0" styleClass="orange-btn" stylesheets="@styles.css" text="Modifier" />
+      <Button fx:id="Adelete" layoutX="1061.0" layoutY="615.0" mnemonicParsing="false" onAction="#supprimerAgence" prefHeight="25.0" prefWidth="135.0" styleClass="red-btn" stylesheets="@styles.css" text="Supprimer" />
+      <TextField fx:id="TFrecherche" layoutX="894.0" layoutY="226.0" prefHeight="31.0" prefWidth="264.0" />
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="687.0" prefWidth="300.0" styleClass="sidebar" stylesheets="@stylesheet.css">
+         <children>
+            <Label prefHeight="125.0" prefWidth="367.0" style="-fx-background-color: #00A2D3;" stylesheets="@stylesheet.css" text="Admin Panel" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Demi" size="37.0" />
+               </font>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </Label>
+            <HBox prefHeight="22.0" prefWidth="300.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <children>
+                  <FontAwesomeIcon iconName="USERS" size="30">
+                     <HBox.margin>
+                        <Insets top="6.0" />
+                     </HBox.margin></FontAwesomeIcon>
+                  <Label text="Gestion des utilisateurs" textFill="#7c8184">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+               </children>
+            </HBox>
+            <VBox prefHeight="48.0" prefWidth="300.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" styleClass="btns" stylesheets="@stylesheet.css" text="Utilisateurs" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label styleClass="btns" stylesheets="@stylesheet.css" text="Réclamations" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <HBox layoutX="10.0" layoutY="135.0" prefHeight="0.0" prefWidth="300.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <children>
+                  <FontAwesomeIcon iconName="FOLDER" size="30">
+                     <HBox.margin>
+                        <Insets top="6.0" />
+                     </HBox.margin>
+                  </FontAwesomeIcon>
+                  <Label text="Gestion des hébérgements" textFill="#7c8184">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox layoutX="10.0" layoutY="179.0" prefHeight="48.0" prefWidth="300.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" styleClass="btns" stylesheets="@stylesheet.css" text="Hotel" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label styleClass="btns" stylesheets="@stylesheet.css" text="Chambres" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <HBox layoutX="10.0" layoutY="233.0" prefHeight="0.0" prefWidth="300.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <children>
+                  <FontAwesomeIcon iconName="FOLDER" size="30">
+                     <HBox.margin>
+                        <Insets top="6.0" />
+                     </HBox.margin>
+                  </FontAwesomeIcon>
+                  <Label text="Gestion des plans d'attraction" textFill="#7c8184">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox layoutX="10.0" layoutY="277.0" prefHeight="48.0" prefWidth="300.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" styleClass="btns" stylesheets="@stylesheet.css" text="Agences" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label onMouseClicked="#goToPlan" styleClass="btns" stylesheets="@stylesheet.css" text="Attractions" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <HBox layoutX="10.0" layoutY="331.0" prefHeight="12.0" prefWidth="300.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <children>
+                  <FontAwesomeIcon iconName="FOLDER" size="30">
+                     <HBox.margin>
+                        <Insets top="6.0" />
+                     </HBox.margin>
+                  </FontAwesomeIcon>
+                  <Label text="Gestion des offres" textFill="#7c8184">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox layoutX="10.0" layoutY="375.0" prefHeight="48.0" prefWidth="300.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" styleClass="btns" stylesheets="@stylesheet.css" text="Offres" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label styleClass="btns" stylesheets="@stylesheet.css" text="Pays" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <HBox layoutX="10.0" layoutY="429.0" prefHeight="5.0" prefWidth="300.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <children>
+                  <FontAwesomeIcon iconName="FOLDER" size="30">
+                     <HBox.margin>
+                        <Insets top="6.0" />
+                     </HBox.margin>
+                  </FontAwesomeIcon>
+                  <Label text="Gestion de transport" textFill="#7c8184">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox layoutX="10.0" layoutY="473.0" prefHeight="48.0" prefWidth="300.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" styleClass="btns" stylesheets="@stylesheet.css" text="Chauffeurs" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label styleClass="btns" stylesheets="@stylesheet.css" text="Moyens de transport" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="37.0" styleClass="btns" stylesheets="@stylesheet.css" text="Trajets" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <HBox layoutX="10.0" layoutY="527.0" prefHeight="0.0" prefWidth="300.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <children>
+                  <FontAwesomeIcon iconName="FOLDER" size="30">
+                     <HBox.margin>
+                        <Insets top="6.0" />
+                     </HBox.margin>
+                  </FontAwesomeIcon>
+                  <Label text="Gestion des blogs et forums" textFill="#7c8184">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox layoutX="10.0" layoutY="571.0" prefHeight="48.0" prefWidth="300.0">
+               <children>
+                  <Label layoutX="10.0" layoutY="10.0" styleClass="btns" stylesheets="@stylesheet.css" text="Catégories" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label styleClass="btns" stylesheets="@stylesheet.css" text="Blogs" textFill="#7c8184">
+                     <padding>
+                        <Insets left="70.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <Pane layoutX="300.0" prefHeight="114.0" prefWidth="951.0" style="-fx-background-color: #e8e4e4;">
+         <children>
+            <Label layoutX="24.0" layoutY="36.0" style="-fx-background-color: transparent;" text="Dashboard">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+            <FontAwesomeIcon iconName="BELL" layoutX="820.0" layoutY="73.0" size="30" />
+            <FontAwesomeIcon iconName="GEAR" layoutX="890.0" layoutY="73.0" size="30" />
+         </children>
+      </Pane>
+      <Label layoutX="330.0" layoutY="153.0" text="Gestion des agences :">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Label>
+      <FontAwesomeIcon iconName="SEARCH" layoutX="1169.0" layoutY="250.0" onMouseClicked="#rechercherAgence" size="25" />
+   </children>
+</AnchorPane>
