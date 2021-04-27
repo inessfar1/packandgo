@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="623.0" prefWidth="1302.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.packandgo.controller.TrajetController">
+   <children>
+      <Pane layoutX="-2.0" prefHeight="145.0" prefWidth="1062.0" styleClass="head-background" stylesheets="@style.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="224.0" layoutY="70.0" text="Pack&amp;Go" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <VBox layoutX="-1.0" layoutY="145.0" prefHeight="438.0" prefWidth="252.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="146.0">
+         <children>
+            <Label prefHeight="40.0" prefWidth="242.0" text="GESTION DE TRANSPORT" textFill="#171717">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <padding>
+                  <Insets left="40.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets left="-20.0" top="60.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="31.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/avion.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <JFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" onAction="#gerer_ch_btn" prefHeight="40.0" prefWidth="252.0" ripplerFill="#bfadf8" text="Gérer les chauffeurs" textFill="#5b5858">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <graphic>
+                  <ImageView accessibleText="Project List" fitHeight="36.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/chauffeur.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </JFXButton>
+            <JFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" onAction="#gerer_ve_btn" prefHeight="43.0" prefWidth="252.0" ripplerFill="#bfadf8" text="Gérer les vehicules" textFill="#5b5858">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/chauffeur%20(1).png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </JFXButton>
+            <JFXButton alignment="BASELINE_LEFT" graphicTextGap="10.0" onAction="#gerer_trajet_btn" prefHeight="43.0" prefWidth="252.0" ripplerFill="#bfadf8" text="Gérer les tarjets" textFill="#5b5858">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/avion-en-papier.png" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </JFXButton>
+         </children>
+      </VBox>
+      <Pane layoutX="71.0" layoutY="44.0" prefHeight="131.0" prefWidth="142.0" style="-fx-background-color: #fff;">
+         <children>
+            <ImageView fitHeight="120.0" fitWidth="139.0" layoutX="11.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logo.png" />
+               </image>
+            </ImageView>
+         </children>
+         <effect>
+            <DropShadow blurType="GAUSSIAN" height="10.0" radius="4.5" width="10.0" />
+         </effect>
+      </Pane>
+      <AnchorPane fx:id="list_pane" layoutX="242.0" layoutY="166.0" prefHeight="445.0" prefWidth="1000.0" style="-fx-background-color: pink;" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="242.0" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="166.0">
+         <children>
+            <TableView fx:id="ListeCh" layoutX="291.0" layoutY="127.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="293.0" prefWidth="670.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="291.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="127.0">
+              <columns>
+                <TableColumn fx:id="Date_depart" onEditCommit="#Changerdd" prefWidth="108.0" text="Date de depart" />
+                  <TableColumn fx:id="Date_arrive" onEditCommit="#Changerda" prefWidth="160.0" text="Date d'arrive" />
+                  <TableColumn fx:id="Pt_depart" onEditCommit="#Changerpd" prefWidth="158.0" text="Point de depart" />
+                  <TableColumn fx:id="Pt_arrive" onEditCommit="#Changerpa" prefWidth="145.0" text="Point d'arrive" />
+                  <TableColumn fx:id="Prix" onEditCommit="#Changerp" prefWidth="98.0" text="Prix" />
+              </columns>
+            </TableView>
+            <JFXButton layoutX="32.0" layoutY="222.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#ajouter_btn" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: blue;" text="Ajouter un Trajet" textFill="WHITE" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="222.0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <Label layoutX="376.0" layoutY="39.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="41.0" prefWidth="341.0" text="Liste  des Trajets" AnchorPane.leftAnchor="376.0" AnchorPane.rightAnchor="291.0">
+               <font>
+                  <Font name="Ebrima Bold" size="32.0" />
+               </font>
+            </Label>
+            <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="63.0" layoutY="259.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#supprimer" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: red;" text="Supprimer " textAlignment="RIGHT" textFill="WHITE" AnchorPane.bottomAnchor="156.0" AnchorPane.leftAnchor="63.0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="add_chpane" layoutX="252.0" layoutY="176.0" prefHeight="445.0" prefWidth="918.0" style="-fx-background-color: pink;" visible="false" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="252.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="176.0">
+         <children>
+            <JFXButton layoutX="501.0" layoutY="356.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#ajouterch" style="-fx-background-color: green;" text="Valider" textFill="WHITE" AnchorPane.rightAnchor="386.0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <Label layoutX="347.0" layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Ajouter Un Trajet" AnchorPane.leftAnchor="347.0" AnchorPane.rightAnchor="346.0">
+               <font>
+                  <Font name="Ebrima Bold" size="32.0" />
+               </font>
+            </Label>
+            <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="391.0" layoutY="356.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#ann" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: red;" text="Annuler" textAlignment="RIGHT" textFill="WHITE" AnchorPane.leftAnchor="391.0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXTextField fx:id="pd" layoutX="345.0" layoutY="219.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="286.0" promptText="Point de depart" AnchorPane.leftAnchor="345.0" AnchorPane.rightAnchor="323.0" />
+            <JFXTextField fx:id="pa" layoutX="345.0" layoutY="259.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="286.0" promptText="Point d'arrive" AnchorPane.leftAnchor="345.0" AnchorPane.rightAnchor="323.0" />
+            <JFXTextField fx:id="p" layoutX="346.0" layoutY="304.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="286.0" promptText="Prix" AnchorPane.leftAnchor="345.0" AnchorPane.rightAnchor="323.0" />
+            <JFXDatePicker fx:id="dd" layoutX="353.0" layoutY="129.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="28.0" prefWidth="271.0" promptText="Date de depart" AnchorPane.leftAnchor="353.0" AnchorPane.rightAnchor="330.0" />
+            <JFXDatePicker fx:id="da" layoutX="353.0" layoutY="170.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="28.0" prefWidth="271.0" promptText="Date d'arrivé" AnchorPane.leftAnchor="353.0" AnchorPane.rightAnchor="330.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

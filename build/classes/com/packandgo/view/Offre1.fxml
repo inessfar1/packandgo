@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.Pane?>
+<AnchorPane fx:id="pane1" maxHeight="600.0" maxWidth="900.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" styleClass="background" stylesheets="@JMetroDarkTheme.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Offre1Controller">
+   <children>
+      <ImageView fitHeight="625.0" fitWidth="1210.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banner.jpg" />
+         </image>
+      </ImageView>
+      <Pane layoutY="89.0" prefHeight="626.0" prefWidth="1210.0" style="-fx-background-color: rgba(0,122,207,.4);">
+      </Pane>
+    
+      <JFXTreeTableView fx:id="treeview" cache="true" cacheHint="SPEED" layoutX="162.0" layoutY="65.0" onContextMenuRequested="#makeContextMenu" prefHeight="532.0" prefWidth="551.0" showRoot="false" sortMode="ONLY_FIRST_LEVEL" style="-fx-background-color: transparent; -fx-tree-table-color: transparent; -fx-tree-table-row-color: transparent;" stylesheets="@../Content/style_1.css" />
+     
+      <JFXTextField fx:id="search" cache="true" cacheHint="SPEED" focusColor="WHITE" labelFloat="true" layoutX="634.0" layoutY="16.0" maxWidth="232.0" minWidth="100.0" prefHeight="33.0" prefWidth="143.0" promptText="🔎  Search" style="-jfx-label-float: white; -fx-text-fill: white; -fx-prompt-text-fill: white;" unFocusColor="WHITE">
+         <effect>
+            <DropShadow />
+         </effect>
+      </JFXTextField>
+      <HBox cache="true" cacheHint="SPEED" layoutX="248.0" layoutY="4.0" prefHeight="60.0" prefWidth="383.0">
+         <children>
+     
+         <Label cache="true" cacheHint="SPEED" layoutX="360.0" layoutY="100.0" prefHeight="43.0" prefWidth="190.0" text="Liste des offres" textFill="#e0d500">
+         <font>
+            <Font name="Roboto Bold" size="24.0" />
+         </font>
+         <effect>
+            <Glow />
+         </effect>
+      </Label>
+     
+         </children>
+      </HBox>
+      <ImageView cache="true" cacheHint="SPEED" fitHeight="126.0" fitWidth="168.0" layoutX="722.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Content/city.png" />
+         </image>
+         <effect>
+            <DropShadow />
+         </effect>
+      </ImageView>
+     
+
+   </children>
+</AnchorPane>
