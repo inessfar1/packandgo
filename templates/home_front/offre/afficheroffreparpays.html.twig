@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}les offres{% endblock %}
+
+{% block body %}
+
+    <section id="pack" class="packages">
+        <div class="container">
+            <div class="gallary-header text-center">
+                <h2>
+                    Les Offres du pays : {{ pays.name }}
+                </h2>
+                <p>
+                    Voici les Offres, J espere que les offres vous plaisent
+                </p>
+            </div><!--/.gallery-header-->
+
+            <div class="packages-content">
+                <div class="row">
+                    {% for pays in pays.offres %}
+                        <div class="col-md-6 col-sm-4">
+                            <div class="single-package-item">
+                                <img width="150" height="150" src="{{asset('assets/images/packages/' ~ pays.image)}}" alt="package-place">
+                                <div class="single-package-item-txt">
+                                    <h3>{{ pays.name}} <span class="pull-right">{{ pays.price }} $ </span></h3>
+                                    <div class="packages-para">
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-4">
+                                                <p>
+                                                    <span>
+                                                         Description
+                                                    </span>
+                                                    <i class="fa fa-angle-right"></i> {{pays.description }}
+                                                </p>
+                                                <p>
+                                                    <span>
+                                                         Date Debut
+                                                    </span>
+                                                    <i class="fa fa-angle-right"></i> {{ pays.dateDebut|date('Y-m-d') }}
+                                                </p>
+                                                <p>
+                                                    <span>
+                                                         Date Fin
+                                                    </span>
+                                                    <i class="fa fa-angle-right"></i> {{ pays.dateFin|date('Y-m-d') }}
+                                                </p>
+                                                <p>
+                                                <span>
+                                                    Flag :
+                                                </span>
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6">
+                                                {%  if pays.description=="tunisian city" %}
+                                                    <img src="{{ asset('assets/images/gallary/tunis.png') }}">
+                                                {% elseif  pays.description=="English city"%}
+                                                    <img src="{{ asset('assets/images/gallary/eng.png') }}">
+                                                {% elseif  pays.description=="spanish city"%}
+                                                    <img src="{{ asset('assets/images/gallary/sp.png') }}">
+                                                {% elseif  pays.description=="chinese city"%}
+                                                    <img src="{{ asset('assets/images/gallary/ch.png') }}">
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div><!--/.packages-para-->
+                                </div><!--/.single-package-item-txt-->
+                            </div><!--/.single-package-item-->
+                        </div><!--/.col-->
+                    {% endfor %}
+                </div><!--/.row-->
+            </div><!--/.packages-content-->
+
+        </div><!--/.container-->
+    </section>
+{% endblock %}

@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=AgenceRepository::class)
  * @Vich\Uploadable
@@ -20,11 +21,13 @@ class Agence
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("agences")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255 , nullable=true)
+     * @Groups("agences")
      */
     private $logo;
 
@@ -49,42 +52,44 @@ class Agence
     {
         $this->imageFile = $imageFile;
         if($this>$imageFile instanceof  UploadedFile){
-            $this->update_at=new \DateTime('now');
         }
         return $this;
     }
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=6,max=30,minMessage="Ce champ doit contenir au moins 6 caractères",maxMessage="Ce champ doit contenir au plus 30 caractères")
+     * @Groups("agences")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=10,max=254,minMessage="Ce champ doit contenir au moins 10 caractères",maxMessage="Ce champ doit contenir au plus 254 caractères")
+     * @Groups("agences")
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email()
+     * @Groups("agences")
      */
     private $email;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Length(min=6,max=30,minMessage="Ce champ doit contenir au moins 6 caractères",maxMessage="Ce champ doit contenir au plus 30 caractères")
+     * @Groups("agences")
      */
     private $tel;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $update_at;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Pays::class, inversedBy="agences")
-     */
-    private $pays;
+
+
 
     /**
      * @ORM\OneToMany(targetEntity=Plan::class, mappedBy="agence")
+     * @Groups("agences")
      */
     private $plans;
 
@@ -158,29 +163,9 @@ class Agence
         return $this;
     }
 
-    public function getUpdateAt(): ?\DateTimeInterface
-    {
-        return $this->update_at;
-    }
 
-    public function setUpdateAt(?\DateTimeInterface $update_at): self
-    {
-        $this->update_at = $update_at;
 
-        return $this;
-    }
 
-    public function getPays(): ?Pays
-    {
-        return $this->pays;
-    }
-
-    public function setPays(?Pays $pays): self
-    {
-        $this->pays = $pays;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Plan[]
@@ -211,15 +196,5 @@ class Agence
 
         return $this;
     }
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updated_at;
-    }
 
-    public function setUpdatedAt(\DateTimeInterface $updated_at): self
-    {
-        $this->updated_at = $updated_at;
-
-        return $this;
-    }
 }

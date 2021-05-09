@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}map:{{ offres.name }}{% endblock %}</title>
+  <meta charset="UTF-8">
+  <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.6.0/maps/maps.css'/>
+  <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.6.0/maps/maps-web.min.js'></script>
+  <style>
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+
+<body>
+<div id='map'></div>
+<script>
+  var {{ offres.name }} = [{{ offres.lng }},{{ offres.lat }}];
+
+  var map = tt.map({
+    container: 'map',
+    key: 'AGth7MSGhkbRuhW0p8BF6zBejFdOJx7P',
+    center: {{ offres.name }},
+    zoom: 6
+  });
+
+  var marker = new tt.Marker().setLngLat({{ offres.name }}).addTo(map);
+  var popupOffsets = {
+    top: [0, 0],
+    bottom: [0, -70],
+    'bottom-right': [0, -70],
+    'bottom-left': [0, -70],
+    left: [25, -35],
+    right: [-25, -35]
+  }
+  var customPopup = '<p style="display:inline">' +
+          '<img src="{{ asset('assets/images/packages/' ~ offres.image) }}"  style="width:50%;float:right;padding-top:10px">' +
+          '<div style="width:50%; height:100%; padding-top:10px"><span style="font:14px Gotham">{{ offres.name }}</span></br>' +
+          '<div style="width:50%; height:100%; padding-top:10px"><span style="font:14px Gotham">{{ offres.description }}</span></br>' +
+          '<span style="font:10px Gotham">date de debut : {{ offres.dateDebut|date("Y-M-D")}}<br/>date de fin : {{ offres.dateFin|date("Y-M-D")}}</span></br>' +
+          '</div></p>';
+
+  var popup = new tt.Popup({offset: popupOffsets}).setHTML(customPopup);
+  marker.setPopup(popup).togglePopup();
+</script>
+</body>
+</html>

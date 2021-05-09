@@ -1,0 +1,22 @@
+{% extends 'dashboard.html.twig' %}
+{% block body %}
+
+    {{ form_start(form,{attr:{'id':'form'}}) }}
+<div class="container">
+    <div class="form-group">
+        {{ form_label(form.type,"Type du moyen:") }}
+
+        {{ form_widget(form.type, {attr: {class:'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.matricule,"Matricule du moyen:" ) }}
+
+        {{ form_widget(form.matricule,{attr: {class:'form-control'}}) }}
+    </div>
+
+</div>
+<div class="card-footer">
+    <button type="submit" href="{{ path('add_moyentran') }}" class="btn btn-primary">Submit</button>
+</div>
+    {{ form_end(form) }}
+{% endblock %}

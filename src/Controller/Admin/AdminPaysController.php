@@ -51,7 +51,7 @@ class AdminPaysController extends AbstractController
     }
 
     /**
-     * @Route("/admin/{id}",name="supPays")
+     * @Route("/admin/supp/{id}",name="supPays")
      */
     public function supprimerPays(Pays $pays,Request $request,ManagerRegistry $objectManager)
     {

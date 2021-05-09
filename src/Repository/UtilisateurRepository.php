@@ -19,6 +19,19 @@ class UtilisateurRepository extends ServiceEntityRepository
         parent::__construct($registry, Utilisateur::class);
     }
 
+    /**
+     * @return Utilisateur[]
+     */
+    public function findPlanBySujet($sujet){
+        return $this->createQueryBuilder('utilisateur')
+            ->andWhere('utilisateur.nom LIKE :sujet')
+            ->setParameter('sujet', '%'.$sujet.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
     // /**
     //  * @return Utilisateur[] Returns an array of Utilisateur objects
     //  */

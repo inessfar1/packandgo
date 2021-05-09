@@ -3,6 +3,66 @@
 {% block title %}
 home
 {% endblock %}
+{% block templaite %}
+    {% if isActivation %}
+    <div class="collapse navbar-collapse">
+    <ul class="nav navbar-nav navbar-right">
+    <li><a href="{{path('global')}}">Home</a></li>
+    <li><a href="#gallery">Hébérgements</a></li>
+    <li><a href="#pack">Attractions </a></li>
+    <li><a href="#spo">Transport</a></li>
+    <li><a href="#spo">Special Offers</a></li>
+
+
+    {%if not app.user%}
+
+        <li>
+            <button class="book-btn"><a href="{{ path ('login') }}">Login
+                </a></button>
+        </li>
+
+    {% else %}
+        <li><a href="{{ path('profil') }}">profil</a></li>
+        {% if is_granted("ROLE_ADMIN") %}
+            <li>
+                <button ><a href="{{ path ('back') }}">Dashborad
+                    </a></button>
+            </li>
+        {% endif %}
+
+        <li>
+            <button ><a href="{{ path ('reclamation_new') }}">Reclamation
+                </a></button>
+        </li>
+        <li>
+            <button class="book-btn"><a href="{{ path ('logout') }}">Logout
+                </a></button>
+        </li>
+
+        </ul>
+        </div><!-- /.navbar-collapse -->
+
+        </div><!-- /.main-menu-->
+        </div><!-- /.col-->
+        </div><!-- /.row -->
+        <div class="home-border"></div><!-- /.home-border-->
+        </div><!-- /.container-->
+        </div><!-- /.header-area -->
+    {% endif %}
+        {% else %}
+
+            <li>
+                <button ><a href="{{ path('activation2') }}">Activer
+                    </a></button>
+            </li>
+            <li>
+                <button class="book-btn"><a href="{{ path ('logout') }}">Logout
+                    </a></button>
+            </li>
+
+{% endif %}
+{% endblock %}
 {% block body %}
+
 
 {% endblock %}

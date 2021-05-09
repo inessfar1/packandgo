@@ -1,4 +1,6 @@
 {% extends 'base.html.twig' %}
+
+
 {% block title %} Plans d'attractions {% endblock %}
 {% block body %}
 
@@ -13,7 +15,7 @@
             <div class="packages-content">
 
 
-                {% for p in pays.plans %}
+                {% for p in plans %}
 
                     <div class="col-md-4 col-sm-6">
                         <div class="single-package-item">
@@ -27,12 +29,7 @@
 											</span>
                                         <i class="fa fa-angle-right"></i> {{ p.agence.nom }}
                                     </p>
-                                    <p>
-											<span>
-												<i class="fa fa-angle-right"></i>  Date
-											</span>
-                                        <i class="fa fa-angle-right"></i> {{ p.date ? p.date|date('Y-m-d') : '' }}
-                                    </p>
+
                                     <p>
 											<span>
 												<i class="fa fa-angle-right"></i>  Description
@@ -42,9 +39,26 @@
 
                                 </div><!--/.packages-para-->
                                 <div class="about-btn">
+
+
+
+
                                     <form action="{{ path('plan_res',{'id': p.id}) }}" onsubmit="return confirm('Vous êtes sur que vous voulez réserver ce plan?');"><button id="checkout-button" type="submit" class="about-view packages-btn">
-                                        Réserver
-                                    </button></form>
+                                            Réserver
+                                        </button></form>
+
+
+
+
+
+
+
+
+
+
+
+
+
                                 </div><!--/.about-btn-->
                             </div><!--/.single-package-item-txt-->
                         </div><!--/.single-package-item-->
@@ -57,4 +71,8 @@
         </div><!--/.container-->
 
     </section>
+
 {% endblock %}
+
+
+

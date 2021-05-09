@@ -1,0 +1,54 @@
+{% extends 'dashboard.html.twig' %}
+{% block title %}Ajouter categorie{% endblock %}
+
+{% block body %}
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- jquery validation -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Ajout Categorie</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            {{ form_start(f, { 'attr' : { 'class' : 'sample-sample' } }) }}
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Titre</label>
+                                    {{ form_widget(f.Title, { 'attr' : { 'class' : 'form-control' } } ) }}
+                                </div>
+
+                                <div class="form-group ">
+                                    <label for="cemail" class="control-label col-lg-2">Description</label>
+
+                                    {{ form_widget(f.description, { 'attr' : { 'class' : 'form-control' } } ) }}
+
+                                </div>
+
+
+                                <!-- /.card-body -->
+                                <div class="card-footer">
+
+                                    {{ form_widget(f.save, { 'attr' : { 'class' : 'btn btn-primary' } } ) }}
+                                </div>
+                                {{ form_end(f) }}
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!--/.col (left) -->
+                        <!-- right column -->
+                        <div class="col-md-6">
+
+                        </div>
+                        <!--/.col (right) -->
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+        </section>
+
+    </div>
+{% endblock %}

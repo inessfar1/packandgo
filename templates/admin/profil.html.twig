@@ -37,19 +37,12 @@
                                         <i class="fa fa-angle-right"></i> {{ app.user.username }}
                                     </p>
                                 </div><!--/.packages-para-->
-                                <div class="packages-review">
-                                    <p>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <span>254 reviews</span>
-                                    </p>
-                                </div><!--/.packages-review-->
+
                                 <div class="about-btn">
-                                    <button class="about-view packages-btn">
-                                        book now
+                                    <button class="about-view packages-btn"><a href="{{ path('profil_modification',{'id' : app.user.id}) }}">Modifier profil
+                                        </a>
+
+
                                     </button>
                                 </div><!--/.about-btn-->
                             </div><!--/.single-package-item-txt-->

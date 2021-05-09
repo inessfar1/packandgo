@@ -1,0 +1,118 @@
+{% extends 'dashboard.html.twig' %}
+{% block title %}Blog{% endblock %}
+
+{% block body %}
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- jquery validation -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title"> Blog</h3>
+                        </div>
+                        <br>
+                        <!-- /.card-header -->
+                        <input  name="q" type="text" id="search" size="30" maxlength="128" class="txt" placeholder="Type your answer here" >
+                        <div class="card">
+
+                            <!-- /.card-header -->
+                            <div class="card-body">
+
+
+                                <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="table_id">
+                                    <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Image</th>
+                                        <th>Modifier/Supprimer</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody id="allTTT">
+                                    {% for e in blog %}
+                                        <tr >
+                                            <th >{{ e.id }}</th>
+                                            <td>{{ e.title }}</td>
+                                            <td>{{ e.description }}</td>
+
+
+                                            <td><img height="70px" width="100px" src="{{ asset('uploads/images/') }}{{e.image}}"></td>
+                                            <td><a class="btn btn-round btn-info" href="{{ path("modifierB",{"id":e.id}) }}">Modifier </a>
+                                                <a class="btn btn-round btn-danger" href="{{ path("supprimerB",{"id":e.id}) }}">Supprimer</a></td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                    <tbody id="search11">
+                                    </tbody>
+
+                                </table>
+                        <!-- /.card -->
+                    </div>
+                    <!--/.col (left) -->
+                    <!-- right column -->
+                    <div class="col-md-12">
+                        <a href={{ path("ajouterB") }} type="button" class="btn btn-primary btn-lg btn-block">Ajouter Blog</a>
+                        <a href={{ path("pdfBlog") }} type="button" class="btn btn-primary btn-lg btn-block">PDF Blog</a>
+                    </div>
+                    <!--/.col (right) -->
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+    </section>
+
+    </div>
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script>
+        $( document ).ready(function() {
+            $("#search").keyup(function(e){
+                /* La variable value va prendre la valeur insérer dans le champ de texte
+                afin d’effectuer la recherche */
+                var value = $(this).val();
+                /* Ajax est lancé lors du remplissage du champ texte dont l’id est
+                « search » pour faire la recherche */
+                $.ajax({
+                    /* l’url est une chaine de caractères contenant l’adresse où la requête est
+                    envoyée */
+                    url : "{{ path('demande') }}",
+                    /* La méthode utilisée pour transférer les données est GET */
+                    type : 'GET',
+                    /*Ici search value va prendre la chaine entrée par un utilisateur dans la
+                    zone de recherche et sera placée après l’url */
+                    data: {
+                        'id' : value
+                    },
+                    /*Cette fonction permet de vider le contenu du tableau pour recevoir le
+                    nouveau contenu*/
+                    success : function(retour){
+                        if(retour){
+                            $("#search11").empty();
+
+                            $.each(JSON.parse(retour), function(i, obj) {
+                                $("#allTTT").hide();
+                                $("#search11").append('<tr><td> '+obj.id+' </td><td> '+obj.title+' </td>' +
+                                    '<td>'+obj.description+'</td><td><img height="70px" width="100px" src="/uploads/images/'+obj.image+'"></td>' +
+                                    '<td><a class="btn btn-round btn-info" href="ModifierBlog/'+obj.id+'">Modifer</a>' +
+                                    '<a class="btn btn-round btn-danger" href="SupprimerBlog/'+obj.id+'">Supprimer</a></td></tr>');
+                            });
+                        }
+                        else
+                        {
+                            $("#allTTT").show();
+                            $("#search11").empty();
+                            $("#search11").fadeIn('fast');
+                        }
+                    },
+                });
+                return false;
+            });
+        });
+    </script>
+{% endblock %}

@@ -2,16 +2,23 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Plan;
 use App\Form\PlanType;
+use App\Repository\AgenceRepository;
 use App\Repository\PlanRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Knp\Component\Pager\PaginatorInterface;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 
 class PlanController extends AbstractController
@@ -19,16 +26,12 @@ class PlanController extends AbstractController
     /**
      * @Route("/admin/plan/show", name="plan_index", methods={"GET"})
      */
-    public function index(PlanRepository $planRepository, PaginatorInterface $paginator, Request $request): Response
+    public function index(PlanRepository $planRepository ): Response
     {   $order=1;
         $plans=$planRepository->findAll();
-        $pagination = $paginator->paginate(
-            $plans, /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            5 /*limit per page*/
-        );
+
         return $this->render('plan/index.html.twig', [
-            'plans' => $pagination,
+            'plans' => $plans,
             'order' => $order
         ]);
     }
@@ -184,6 +187,86 @@ class PlanController extends AbstractController
             'plans' => $plans,
             'order' => $order
         ]);
+    }
+
+    /**
+     * @Route("/admin/plan/showJSON", name="plan_indexJSON", methods={"GET"})
+     */
+    public function indexJSON(PlanRepository $planRepository, SerializerInterface $serializer ): Response
+    {
+        $plans = $planRepository->findAll();
+        $json= $serializer->serialize($plans,'json',['groups'=>'plans']);
+        return new Response($json);
+    }
+
+    /**
+     * @Route("/admin/plan/newJSON", name="plan_newJSON" )
+     */
+    public function newJSON(Request $request, NormalizerInterface $normalizer,AgenceRepository $repository): Response
+    {
+        $ag= $repository->find($request->get('agence'));
+        $plan= new Plan();
+        $plan->setImage($request->get('image'));
+        $plan->setSujet($request->get('sujet'));
+        $plan->setDescription($request->get('desc'));
+        $plan->setAgence($ag);
+
+        $plan->setPrix($request->get('prix'));
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($plan);
+        $entityManager->flush();
+        $jsonContent =$normalizer->normalize($plan,'json',['groups'=>'plans']);
+        return new Response(json_encode($jsonContent));
+
+
+
+    }
+
+
+    /**
+     * @Route("/admin/plan/delJSON", name="plan_delJSON")
+     * @Method("DELETE")
+     */
+
+    public function delJSON(Request $request) {
+        $id = $request->get("id");
+
+        $em = $this->getDoctrine()->getManager();
+        $plan = $em->getRepository(Plan::class)->find($id);
+        if($plan!=null ) {
+            $em->remove($plan);
+            $em->flush();
+
+            $serialize = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serialize->normalize("Plan a ete supprimee avec success.");
+            return new JsonResponse($formatted);
+
+        }else{
+            return new JsonResponse("id Plan invalide.");}
+
+
+    }
+
+    /**
+     * @Route("/admin/plan/updateJSON", name="plan_updateJSON")
+     * @Method("PUT")
+     */
+    public function updateJSON(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $plan = $this->getDoctrine()->getManager()
+            ->getRepository(Plan::class)
+            ->find($request->get("id"));
+
+        $plan->setSujet($request->get("sujet"));
+        $plan->setDescription($request->get("desc"));
+        $plan->setPrix($request->get("prix"));
+
+
+        $em->persist($plan);
+        $em->flush();
+       
+        return new JsonResponse("Plan a ete modifiee avec success.");
+
     }
 
 

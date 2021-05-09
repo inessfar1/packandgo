@@ -59,10 +59,7 @@ class AgenceType extends AbstractType
                     'class'=>'form-control'
                 ]
             ])
-            ->add('pays',EntityType::class,[
-                'class'=>Pays::class,
-                'choice_label'=>'name'
-            ])
+
         ;
     }
 

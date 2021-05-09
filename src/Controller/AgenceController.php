@@ -5,11 +5,16 @@ namespace App\Controller;
 use App\Entity\Agence;
 use App\Form\AgenceType;
 use App\Repository\AgenceRepository;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 
 class AgenceController extends AbstractController
@@ -19,16 +24,12 @@ class AgenceController extends AbstractController
      * @param AgenceRepository $agenceRepository
      * @return Response
      */
-    public function index(AgenceRepository $agenceRepository, PaginatorInterface $paginator, Request $request): Response
+    public function index(AgenceRepository $agenceRepository): Response
     {
         $agences=$agenceRepository->findAll();
-        $pagination = $paginator->paginate(
-            $agences, /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            5 /*limit per page*/
-        );
+
         return $this->render('agence/index.html.twig', [
-            'agences' => $pagination,
+            'agences' => $agences,
         ]);
     }
 
@@ -98,4 +99,94 @@ class AgenceController extends AbstractController
 
         return $this->redirectToRoute('agence_index');
     }
+
+    /**
+     * @Route("/admin/agence/showJSON", name="agence_indexJSON", methods={"GET"})
+     * @param AgenceRepository $agenceRepository
+     * @return Response
+     */
+    public function indexJSON(AgenceRepository $agenceRepository, SerializerInterface $serializer): Response
+    {
+        $agences=$agenceRepository->findAll();
+
+        $json= $serializer->serialize($agences,'json',['groups'=>'agences']);
+        return new Response($json);
+    }
+
+
+
+    /**
+     * @Route("/admin/agence/newJSON", name="agence_newJSON" )
+     */
+    public function newJSON(Request $request, NormalizerInterface $normalizer): Response
+    {
+
+        $agence= new Agence();
+        $agence->setNom($request->get('nom'));
+
+        $agence->setEmail($request->get('email'));
+        $agence->setTel($request->get('tel'));
+        $agence->setAdresse($request->get('adresse'));
+        $agence->setLogo($request->get('logo'));
+        $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($agence);
+            $entityManager->flush();
+        $jsonContent =$normalizer->normalize($agence,'json',['groups'=>'agences']);
+        return new Response(json_encode($jsonContent));
+
+
+
+    }
+
+    /**
+     * @Route("/admin/agence/delJSON", name="agence_delJSON")
+     * @Method("DELETE")
+     */
+
+    public function delJSON(Request $request) {
+        $id = $request->get("id");
+
+        $em = $this->getDoctrine()->getManager();
+        $agence = $em->getRepository(Agence::class)->find($id);
+        if($agence!=null ) {
+            $em->remove($agence);
+            $em->flush();
+
+            $serialize = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serialize->normalize("Agence a ete supprimee avec success.");
+            return new JsonResponse($formatted);
+
+        }else{
+        return new JsonResponse("id agence invalide.");}
+
+
+    }
+
+
+    /**
+     * @Route("/admin/agence/updateJSON", name="agence_updateJSON")
+     * @Method("PUT")
+     */
+    public function updateJSON(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $agence = $this->getDoctrine()->getManager()
+            ->getRepository(Agence::class)
+            ->find($request->get("id"));
+
+        $agence->setNom($request->get("nom"));
+        $agence->setAdresse($request->get("adresse"));
+        $agence->setEmail($request->get("email"));
+        $agence->setTel($request->get("tel"));
+
+        $em->persist($agence);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($agence);
+        return new JsonResponse("Agence a ete modifiee avec success.");
+
+    }
+
+
+
+
 }

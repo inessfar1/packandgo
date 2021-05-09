@@ -19,7 +19,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity ;
  * @Vich\Uploadable
  * @UniqueEntity(
  *     fields = {"username"},
- *     message="le username existe deja"
+ *     message="le username existe déjà"
+ * )
+ * @UniqueEntity(
+ *     fields = {"email"},
+ *     message="Cet email existe déjà"
  * )
  */
 class Utilisateur implements UserInterface
@@ -81,18 +85,40 @@ class Utilisateur implements UserInterface
     private $roles;
 
     /**
-     * @ORM\OneToMany(targetEntity=Reclamation::class, mappedBy="utilisateurs")
+     * @ORM\OneToMany(targetEntity=Reclamation::class, mappedBy="utilisateurs" , orphanRemoval=true)
      */
     private $reclamations;
 
     /**
-     * @ORM\OneToOne(targetEntity=PlanRes::class, mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $planRes;
+    private $activation_token;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $reset_token;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="sender", orphanRemoval=true)
+     */
+    private $sent;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="recipient", orphanRemoval=true)
+     */
+    private $received;
+
+    /**
+     * @ORM\OneToOne(targetEntity=ChambreRes::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $chambreRes;
 
     public function __construct()
     {
         $this->reclamations = new ArrayCollection();
+        $this->sent = new ArrayCollection();
+        $this->received = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -256,24 +282,107 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
-    public function getPlanRes(): ?PlanRes
+    public function getActivationToken(): ?string
     {
-        return $this->planRes;
+        return $this->activation_token;
     }
 
-    public function setPlanRes(?PlanRes $planRes): self
+    public function setActivationToken(?string $activation_token): self
+    {
+        $this->activation_token = $activation_token;
+
+        return $this;
+    }
+
+    public function getResetToken(): ?string
+    {
+        return $this->reset_token;
+    }
+
+    public function setResetToken(?string $reset_token): self
+    {
+        $this->reset_token = $reset_token;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getSent(): Collection
+    {
+        return $this->sent;
+    }
+
+    public function addSent(Message $sent): self
+    {
+        if (!$this->sent->contains($sent)) {
+            $this->sent[] = $sent;
+            $sent->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSent(Message $sent): self
+    {
+        if ($this->sent->removeElement($sent)) {
+            // set the owning side to null (unless already changed)
+            if ($sent->getSender() === $this) {
+                $sent->setSender(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getReceived(): Collection
+    {
+        return $this->received;
+    }
+
+    public function addReceived(Message $received): self
+    {
+        if (!$this->received->contains($received)) {
+            $this->received[] = $received;
+            $received->setRecipient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReceived(Message $received): self
+    {
+        if ($this->received->removeElement($received)) {
+            // set the owning side to null (unless already changed)
+            if ($received->getRecipient() === $this) {
+                $received->setRecipient(null);
+            }
+        }
+
+        return $this;
+    }
+    public function getChambreRes(): ?ChambreRes
+    {
+        return $this->chambreRes;
+    }
+
+    public function setChambreRes(?ChambreRes $chambreRes): self
     {
         // unset the owning side of the relation if necessary
-        if ($planRes === null && $this->planRes !== null) {
-            $this->planRes->setUser(null);
+        if ($chambreRes === null && $this->chambreRes !== null) {
+            $this->chambreRes->setUser(null);
         }
 
         // set the owning side of the relation if necessary
-        if ($planRes !== null && $planRes->getUser() !== $this) {
-            $planRes->setUser($this);
+        if ($chambreRes !== null && $chambreRes->getUser() !== $this) {
+            $chambreRes->setUser($this);
         }
 
-        $this->planRes = $planRes;
+        $this->chambreRes = $chambreRes;
 
         return $this;
     }

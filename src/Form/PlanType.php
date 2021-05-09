@@ -49,10 +49,7 @@ class PlanType extends AbstractType
 
                 ]
             ])
-            ->add('pays',EntityType::class,[
-                'class'=>Pays::class,
-                'choice_label'=>'name'
-            ])
+
             ->add('agence',EntityType::class,[
                 'class'=>Agence::class,
                 'choice_label'=>'nom'

@@ -1,0 +1,59 @@
+{% extends 'dashboard.html.twig' %}
+{% block body %}
+
+    {{ form_start(form,{attr:{'id':'form_chauffeur'}}) }}
+    <div class="container">
+<div class="form-group">
+                {{ form_label(form.nom,"Nom du Chauffeur:") }}
+
+                {{ form_widget(form.nom, {attr: {class:'form-control','id':'nom'}}) }}
+</div>
+    <div class="form-group">
+                {{ form_label(form.prenom,"prenom du Chauffeur:" ) }}
+
+                {{ form_widget(form.prenom,{attr: {class:'form-control','id':'prenom'}}) }}
+    </div>
+
+</div>
+        <div class="card-footer">
+            <button  type="submit" href="{{ path('add_chauffeur') }}" class="btn btn-primary">Submit</button>
+        </div>
+
+
+
+
+    {{ form_end(form) }}
+    {% block javascripts %}
+        <script src="{{ asset('backend/Javascript/sweetalert.js') }}"></script>
+        <script>
+           function ajouterchauffeur(event) {
+                event.preventDefault();
+                var nom = $("#nom").val();
+                var prenom=$("#prenom").val();
+                swal({
+                    title: "Are you sure?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            if(nom === null || prenom === null )
+                            {
+
+                                swal("verifiez vos champs", {
+                                    icon: "warning",
+                                });
+                            }
+                            else{
+                                document.forms["form_chauffeur"].submit();
+                            }
+
+                        }
+                    });
+            }
+
+        </script>
+
+    {% endblock %}
+{% endblock %}

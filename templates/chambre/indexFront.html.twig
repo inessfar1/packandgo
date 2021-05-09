@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+{% block title %} Chambres {% endblock %}
+{% block body %}
+
+    <section id="pack" class="packages">
+        <div class="container">
+            <div class="gallary-header text-center">
+                <h2>
+                    Les Chambres de {{ hotel.nom}}
+                </h2>
+
+            </div><!--/.gallery-header-->
+            <div class="packages-content">
+
+                {% for c in  hotel.chambres %}
+                    {% if c.duree>0 %}
+                    <div class="col-md-4 col-sm-6">
+                        <div class="single-package-item">
+                            <img src="{{ asset('images/chambres/' ~ c.image) }}" alt="package-place">
+                            <div class="single-package-item-txt">
+                                <h3>{{c.type}} </h3>
+                                <div class="packages-para">
+                                    <p>
+											<span>
+												<i class="fa fa-angle-right"></i> {{ c.type }}
+											</span>
+                                        <i class="fa fa-angle-right"></i>  {{ c.prix }}</i>
+                                    </p>
+                                    <p>
+											<span>
+												<i class="fa fa-angle-right"></i> Vue
+											</span>
+                                        <i class="fa fa-angle-right"></i>  {{  c.vue }}
+                                    </p>
+
+
+
+                                </div><!--/.packages-para-->
+                                <!--/.packages-review-->
+                                <div class="about-btn"><form action="{{ path('chambre_res_new',{'id':c.id}) }}">
+                                        <button type="submit" class="about-view packages-btn">
+                                            Book now
+                                        </button> </form>
+                                </div><!--/.about-btn-->
+                            </div><!--/.single-package-item-txt-->
+                        </div><!--/.single-package-item-->
+
+                    </div>
+{% endif %}
+                {% endfor %}
+
+
+            </div><!--/.packages-content-->
+        </div><!--/.container-->
+
+    </section>
+
+
+{% endblock %}

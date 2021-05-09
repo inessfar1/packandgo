@@ -21,7 +21,11 @@
         <link rel="stylesheet" href="{{ asset('backend/plugins/daterangepicker/daterangepicker.css') }}">
         <!-- summernote -->
         <link rel="stylesheet" href="{{ asset('backend/plugins/summernote/summernote-bs4.min.css') }}">
-
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src={{asset ('assets/js/blog.js')}}></script>
+        <script src={{asset ('assets/js/categorie.js')}}></script>
     {% endblock %}
 
 </head>
@@ -206,6 +210,43 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
+                    <!--------mohsen--------->
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Gestion des offres
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{path('afficherOffre')}}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Gestion des Offres</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{path('afficher_pays')}}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Gestion des Pays</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{path('admin_stat_gest_offre')}}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Statistiques</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{path('calendrier')}}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Calendrier</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!------heddi------->
                     <li class="nav-item menu-open">
                         <a href="#" class="nav-link active">
                             <i class="fas fa-plane"></i></i>
@@ -215,7 +256,6 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-
                             <li class="nav-item">
                                 <a href="{{ path('util') }}" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
@@ -228,52 +268,215 @@
                                     <p>Gestion des reclamations</p>
                                 </a>
                             </li>
-                            <li class="nav-item menu-open">
-                                <a href="#" class="nav-link active">
-                                    <i class="fas fa-plane"></i></i>
-
-                                    <p>
-                                        Gestion des attractions
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
+                            <li class="nav-item">
+                                <a href="{{ path('stat') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Statistique</p>
                                 </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="{{ path('agence_index') }}" class="nav-link active">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Gestion des agences</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ path('plan_index') }}" class="nav-link active">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Gestion des plan d'attractions</p>
-                                        </a>
-                                    </li>
-
-                                </ul>
-                            </li>
-                            <li class="nav-item menu-open">
-                                <a href="#" class="nav-link active">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>
-                                        Gestion des Pays
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-
-                                    <li class="nav-item">
-                                        <a href="{{path('afficher_pays')}}" class="nav-link active">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Gestion des Pays</p>
-                                        </a>
-                                    </li>
-
-                                </ul>
                             </li>
                         </ul>
+                    </li>
 
+
+                    <li class="nav-item menu-open">
+                        <a href="{{ ('templates/chambre/index.html.twig') }}" class="nav-link active">
+                            <i class="fas fa-plane"></i>
+                            <p>
+                                Gestion des chmabres
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ path('chambre_new') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>ajouter une chambre</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('calendar_index') }}"  class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Calendar</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{  path('chambre_index') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>liste des chambres</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="fas fa-plane"></i>
+                            <p>
+                                Gestion des hotels
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ path('hotel_new') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>ajouter un hotel</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{  path('hotel_index') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>liste des hotels</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="fas fa-plane"></i>
+                            <p>
+                                Gestion des réservations
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{  path('chambre_res_index') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>liste des réservations</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!------soukalie----->
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="fas fa-plane"></i></i>
+
+                            <p>
+                                Gestion des attractions
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ path('agence_index') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Gestion des agences</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('plan_index') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Gestion des plan d'attractions</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="fas fa-plane"></i></i>
+                            <p>
+                                Gestion de Chauffeur
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ path('add_chauffeur') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>ajouter un chauffeur</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('list_chauffeur') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>liste de chauffeur</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="fas fa-plane"></i></i>
+                            <p>
+                                Gestion des vehicules
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ path('add_moyentran') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>ajouter un moyen de transport</p>
+                                </a>
+
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('list_moyentran') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>liste moyen de transport</p>
+                                </a>
+
+                            </li>
+
+                        </ul>
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="fas fa-plane"></i></i>
+                            <p>
+                                liste trajet
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ path('list_trajet') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>liste de trajet</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ path('add_trajet') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>ajouter un trajet</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="fas fa-address-book"></i></i>
+                            <p>
+                                Gestion de Blog et Categories
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a href="{{ path('afficherB') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Gestion de Blog</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('afficherC') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Gestion de categorie</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </nav>
             <!-- /.sidebar-menu -->
         </div>

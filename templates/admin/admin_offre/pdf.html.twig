@@ -1,0 +1,21 @@
+
+{% block body %}
+<table border="2">
+    <tr>
+        <th>name</th>
+        <th>Description</th>
+        <th>price</th>
+        <th>date debut de l'offre</th>
+        <th>date fin de l'offre</th>
+    </tr>
+    {%  for offres in offres %}
+        <tr>
+            <td>{{ offres.name }}</td>
+            <td>{{ offres.description }}</td>
+            <td>{{ offres.price }} $ </td>
+            <td>{{ offres.dateDebut|date('Y-m-d')}}</td>
+            <td>{{ offres.dateFin|date('Y-m-d')}}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

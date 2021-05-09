@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Chauffeur
  *
  * @ORM\Table(name="chauffeur")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ChauffeurRepository")
  */
 class Chauffeur
 {
@@ -23,6 +24,12 @@ class Chauffeur
 
     /**
      * @var string|null
+     * @Assert\NotBlank
+     * @Assert\Regex(
+     *     pattern     = "/^[a-z]+$/i",
+     *     htmlPattern = "^[a-zA-Z]+$",
+     *      message= "verifier votre nom"
+     * )
      *
      * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      */
@@ -30,17 +37,22 @@ class Chauffeur
 
     /**
      * @var string|null
-     *
+     * @Assert\NotBlank
+     * @Assert\Regex(
+     *     pattern     = "/^[a-z]+$/i",
+     *     htmlPattern = "^[a-zA-Z]+$",
+     *      message= "verifier votre prenom"
+     * )
      * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
      */
     private $prenom;
 
+
     /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(name="date_d_n", type="date", nullable=true)
+     * @var int|null
+     * @ORM\Column(name="disponibilite", type="integer", nullable=true)
      */
-    private $dateDN;
+    private $disponibilite;
 
     public function getIdChauffeur(): ?int
     {
@@ -71,14 +83,14 @@ class Chauffeur
         return $this;
     }
 
-    public function getDateDN(): ?\DateTimeInterface
+    public function getDisponibilite(): ?int
     {
-        return $this->dateDN;
+        return $this->disponibilite;
     }
 
-    public function setDateDN(?\DateTimeInterface $dateDN): self
+    public function setDisponibilite(?int $disponibilite): self
     {
-        $this->dateDN = $dateDN;
+        $this->disponibilite = $disponibilite;
 
         return $this;
     }

@@ -32,17 +32,9 @@ class PaysController extends AbstractController
             "pays"=>$pays
         ]);
     }
-    /**
-     * @Route("/plan/show/{id}", name="afficherplan")
-     */
 
-    public function afficherplanparpays(PaysRepository $repository,$id): Response
-    {
-        $pays=$repository->find($id);
-        return $this->render('plan/indexFront.html.twig',[
-            "pays"=>$pays
-        ]);
-    }
+
+
 
 
 }

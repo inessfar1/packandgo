@@ -1,0 +1,66 @@
+{% extends 'dashboard.html.twig' %}
+{% block title %}{% endblock %}
+
+{% block body %}
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">MES TRAJETS</h3>
+        </div>
+        <div class="card-body p-0">
+            <table id="chauffeur" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Date depart</th>
+                    <th>Date d'arrivée</th>
+                    <th>point de depart</th>
+                    <th>point d'arrivée</th>
+                    <th>prix</th>
+                    <th>Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for tr in trajet %}
+                    <tr>
+                        <td>{{ tr.dateDepart|date('Y-m-d') }}</td>
+                        <td>{{ tr.dateArrive|date('Y-m-d') }}</td>
+                        <td>{{ tr.ptDepart }}</td>
+                        <td>{{ tr.ptArrive }}</td>
+                        <td>{{ tr.prix }}</td>
+                        {#  <td>
+                        <a class="btn btn-block btn-info" href="{{ path('detail_chauffeur',{'idChauffeur':ch.idChauffeur}) }}" > detail</a>
+
+                    </td>#}
+
+                        <td>
+                            <a class="btn btn-block btn-danger" href="{{ path('deleteback_trajet',{'idTrajet':tr.idTrajet}) }}" >supprimer </a>
+                        </td>
+
+                        </td>
+                    </tr>
+
+
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+        <div class="navigation">
+            {{ knp_pagination_render(trajet) }}
+        </div>
+        {#
+        {% else %}
+            <div class="container">
+                <table>
+                    <thead>
+                    <th>aucun chauffeur trouvée</th>
+                    <th><a class="example_b" href="{{ path('add_trajet') }}">mes Trajet</a></th>
+                    </thead>
+                </table>
+
+            </div>
+
+        #}
+    </div>
+{% endblock %}

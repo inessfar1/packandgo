@@ -5,11 +5,11 @@ namespace App\Entity;
 use App\Repository\PaysRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=PaysRepository::class)
@@ -26,11 +26,13 @@ class Pays
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=3,max=15,minMessage="la description doit faire 3 caractere minimum",maxMessage="la description doit faire 15 caractere")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=3,max=15,minMessage="la description doit faire 3 caractere minimum",maxMessage="la description doit faire 15 caractere")
      */
     private $description;
 
@@ -40,57 +42,49 @@ class Pays
     private $continent;
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $image;
 
     /**
-     * @Vich\UploadableField(mapping="pays_image" ,fileNameProperty="image")
+     *@Vich\UploadableField(mapping="pays_image", fileNameProperty="image")
      */
     private $imageFile;
 
-
-    /**
-     * @return mixed
-     */
     public function getImageFile(): ?File
     {
         return $this->imageFile;
     }
 
-    /**
-     * @param mixed $imageFile
-     */
-    public function setImageFile(?File $imageFile=null): self
+    public function setImageFile(?File $imageFile = null): self
     {
         $this->imageFile = $imageFile;
-        if($this>$imageFile instanceof  UploadedFile){
-            $this->update_at=new \DateTime('now');
+
+        if ($this->imageFile instanceof UploadedFile)
+        {
+            $this->updated_at = new \DateTime('now');
         }
         return $this;
+
+
     }
+    /**
+     * @ORM\OneToMany(targetEntity=Offre::class, mappedBy="pays")
+     */
+    private $offres;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      */
     private $updated_at;
 
 
 
-    /**
-     * @ORM\OneToMany(targetEntity=Agence::class, mappedBy="pays")
-     */
-    private $agences;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Plan::class, mappedBy="pays")
-     */
-    private $plans;
 
     public function __construct()
     {
-        $this->agences = new ArrayCollection();
-        $this->plans = new ArrayCollection();
+        $this->offres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -146,65 +140,38 @@ class Pays
         return $this;
     }
 
+
+
     /**
-     * @return Collection|Agence[]
+     * @return Collection|Offre[]
      */
-    public function getAgences(): Collection
+    public function getOffres(): Collection
     {
-        return $this->agences;
+        return $this->offres;
     }
 
-    public function addAgence(Agence $agence): self
+    public function addOffre(Offre $offre): self
     {
-        if (!$this->agences->contains($agence)) {
-            $this->agences[] = $agence;
-            $agence->setPays($this);
+        if (!$this->offres->contains($offre)) {
+            $this->offres[] = $offre;
+            $offre->setPays($this);
         }
 
         return $this;
     }
 
-    public function removeAgence(Agence $agence): self
+    public function removeOffre(Offre $offre): self
     {
-        if ($this->agences->removeElement($agence)) {
+        if ($this->offres->removeElement($offre)) {
             // set the owning side to null (unless already changed)
-            if ($agence->getPays() === $this) {
-                $agence->setPays(null);
+            if ($offre->getPays() === $this) {
+                $offre->setPays(null);
             }
         }
 
         return $this;
     }
 
-    /**
-     * @return Collection|Plan[]
-     */
-    public function getPlans(): Collection
-    {
-        return $this->plans;
-    }
-
-    public function addPlan(Plan $plan): self
-    {
-        if (!$this->plans->contains($plan)) {
-            $this->plans[] = $plan;
-            $plan->setPays($this);
-        }
-
-        return $this;
-    }
-
-    public function removePlan(Plan $plan): self
-    {
-        if ($this->plans->removeElement($plan)) {
-            // set the owning side to null (unless already changed)
-            if ($plan->getPays() === $this) {
-                $plan->setPays(null);
-            }
-        }
-
-        return $this;
-    }
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updated_at;
@@ -216,4 +183,6 @@ class Pays
 
         return $this;
     }
+
+
 }

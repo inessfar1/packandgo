@@ -1,0 +1,38 @@
+{% extends 'dashboard.html.twig' %}
+
+{% block title %}ChambreRes {% endblock %}
+
+{% block body %}
+    <h1>ChambreRes index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateDeb</th>
+                <th>DateFin</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for chambre_re in chambre_res %}
+            <tr>
+                <td>{{ chambre_re.id }}</td>
+                <td>{{ chambre_re.dateDeb ? chambre_re.dateDeb|date('Y-m-d') : '' }}</td>
+                <td>{{ chambre_re.dateFin ? chambre_re.dateFin|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('chambre_res_show', {'id': chambre_re.id}) }}">show</a>
+                    <a href="{{ path('chambre_res_edit', {'id': chambre_re.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

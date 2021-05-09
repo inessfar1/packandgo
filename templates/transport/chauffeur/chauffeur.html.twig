@@ -1,7 +1,129 @@
-{% extends './backend/dashboard.html.twig' %}
+{% extends 'dashboard.html.twig' %}
 
 {% block title %}{% endblock %}
 
-{% block content %}
-test
-{% endblock content %}
+{% block body %}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">LISTE DES CHAUFFEURS</h3>
+    </div>
+    <div class="card-body p-0">
+        <form class="w-search">
+            <div class="sidebar-search">
+
+                <div class="input-group custom-search-form">
+
+                    <input type="text" id="search" class="form-control pl-3" placeholder="Search here">
+                </div>
+                <!-- /input-group -->
+            </div>
+            <ul class="nav" id="side-menu">
+                <li>
+                    <a href="#"><span class="fa arrow"></span></a>
+                    <ul style="background-color: #0b0b0b" class="nav " id="entitiesNav">
+                    </ul>
+                </li>
+            </ul>
+
+
+
+        </form>
+        <br>
+        <br>
+        <br>
+            <table id="chauffeur" class="table table-striped">
+                <thead>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th>nom chauffeur</th>
+                    <th>prenom chauffeur</th>
+                    <th>Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for ch in chauffeur %}
+                    <tr>
+                        <td>{{ ch.idChauffeur }}</td>
+                        <td>{{ ch.nom }}</td>
+                        <td>{{ ch.prenom }}</td>
+                        <td>
+                            <a class="btn btn-block btn-info" href="{{ path('detail_chauffeur',{'idChauffeur':ch.idChauffeur}) }}" > detail</a>
+
+                        </td>
+                        <td>
+                            <a class="btn btn-block btn-success" href="{{ path('edit_chauffeur',{'idChauffeur':ch.idChauffeur}) }}" > modifier</a>
+                        </td>
+                        <td>
+                                <a class="btn btn-block btn-danger" href="{{ path('delete_chauffeur',{'idChauffeur':ch.idChauffeur}) }}" >supprimer </a>
+                        </td>
+
+                        </td>
+                    </tr>
+
+
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    <div class="navigation">
+        {{ knp_pagination_render(chauffeur) }}
+    </div>
+      {#   {% else %}
+            <div class="container">
+                <table>
+                    <thead>
+                    <th>aucun chauffeur trouvée</th>
+                    <th><a class="example_b" href="{{ path('add_chauffeur') }}">Ajouter un chauffeur</a></th>
+                    </thead>
+                </table>
+
+            </div>#}
+            <script src="{{ asset('JS/jquery.js') }}"></script>
+            <script>
+                jQuery(document).ready(function() {
+                    var searchRequest = null;
+                    $("#search").keyup(function() {
+                        var minlength = 1;
+                        var that = this;
+                        var value = $(this).val();
+                        var entitySelector = $("#entitiesNav").html('');
+                        if (value.length >= minlength ) {
+                            if (searchRequest != null)
+                                searchRequest.abort();
+                            searchRequest = $.ajax({
+                                type: "GET",
+                                url: "{{ path('ajaxsearch') }}",
+                                data: {
+                                    'q' : value
+                                },
+                                dataType: "text",
+                                success: function(msg){
+                                    //we need to check if the value is the same
+                                    if (value===$(that).val()) {
+                                        var result = JSON.parse(msg);
+                                        $.each(result, function(key, arr) {
+                                            $.each(arr, function(id, value) {
+                                                if (key === 'Chauffeur') {
+                                                    if (id !== 'error') {
+                                                        console.log(value);
+                                                        entitySelector.append('<li>' +
+                                                            '<h5><b>  '+value[0]+  ' '+value[1]+  ' </b></h5></a>')   ;
+                                                    } else {
+                                                        entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                                    }
+                                                }
+                                            });
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+            </script>
+
+    </div>
+{% endblock  %}

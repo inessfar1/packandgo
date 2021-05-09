@@ -44,8 +44,9 @@
                                         {% endif %}
                                     </th>
                                     <th>Description</th>
-                                    <th>Date</th>
+
                                     <th>Prix</th>
+
                                     <th>Agence</th>
 
                                     <th>Afficher</th>
@@ -74,15 +75,10 @@
     $( document ).ready(function() {
         var currentRequest = null;
         $("#search").keyup(function(e){
-            /* La variable value va prendre la valeur insérer dans le champ de texte
-            afin d’effectuer la recherche */
             var value = $(this).val();
             if(currentRequest != null) {
                 currentRequest.abort();
             }
-
-            /* Ajax est lancé lors du remplissage du champ texte dont l’id est
-            « search » pour faire la recherche */
             currentRequest = $.ajax({
 
                 url : "{{ path('plansearch') }}",
@@ -101,6 +97,7 @@
         });
     });
 </script>
+
 
 {% endblock %}
 

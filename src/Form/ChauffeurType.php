@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Chauffeur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,14 +13,13 @@ class ChauffeurType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('dateDN')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Chauffeur::class,
+            // Configure your form options here
         ]);
     }
 }

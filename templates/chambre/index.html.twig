@@ -1,0 +1,140 @@
+{% extends 'dashboard.html.twig' %}
+
+{% block title %} Liste des Chambres {% endblock %}
+{% block stylesheet %}
+<style>
+
+    #calendrier{
+        width: 80%;
+        margin:auto ;
+    }
+</style>
+
+{% endblock %}
+{% block body %}
+    <form class="w-search">
+        <div class="sidebar-search">
+
+            <div class="input-group custom-search-form">
+
+                <input type="text" id="search" class="form-control pl-3" placeholder="Search here">
+            </div>
+            <!-- /input-group -->
+        </div>
+        <ul class="nav" id="side-menu">
+            <li>
+                <a href="#"><span class="fa arrow"></span></a>
+                <ul class="nav " id="entitiesNav">
+                </ul>
+            </li>
+        </ul>
+
+
+
+    </form>
+        <script>
+
+
+
+            {
+               function a()
+               {
+                   window.onload = a ();
+                   let calendarElt = document.querySelector("#calendrier")
+                   let  calendar = new FullCalendar.calendar(calendarElt ,{
+                       initialView: 'dayGridMonth', load:'fr',headerToolbar:{
+                           start:'prev,next today',center:'title',end:'dayGridMonth, timeGridWeek'
+                       }
+                   })
+                   calendar.render()
+               }
+               }
+
+        </script>
+
+    <div id="calendrier">
+    </div>
+
+    <h1>Chambres</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Type</th>
+            <th>Vue</th>
+            <th>Duree</th>
+            <th>Prix</th>
+            <th>Image</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for chambre in chambres %}
+            <tr>
+                <td>{{ chambre.id }}</td>
+                <td>{{ chambre.type }}</td>
+                <td>{{ chambre.vue }}</td>
+                <td>{{ chambre.duree }}</td>
+                <td>{{ chambre.prix }}</td>
+                <td><img width="100" src="{{ asset('images/chambres/' ~ chambre.image) }}"></td>
+                <td>
+                    <a href="{{ path('chambre_show', {'id': chambre.id}) }}">show</a>
+                    <a href="{{ path('chambre_edit', {'id': chambre.id}) }}">edit</a>
+                    <a href="{{ path('chambre_list') }}">Imprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <script>
+        jQuery(document).ready(function() {
+            var searchRequest = null;
+            $("#search").keyup(function() {
+                var minlength = 1;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#entitiesNav").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('ajaxsearch') }}",
+                        data: {
+                            'q' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value===$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key === 'chambre') {
+                                            if (id !== 'error') {
+                                                console.log(value);
+                                                entitySelector.append('<li>' +
+                                                    'Type:<a href="https://127.0.0.1:8000/admin/chambre/show/'+id+'">' + '<h5><b>  '+value[0]+  '</b></h5></a>'+'<a href="https://127.0.0.1:8000/admin/chambre/show/'+id+'"><img src="https://127.0.0.1:8000/images/chambres/'+value[3]+'" height="90" width="90">  </a> </li>')   ;
+                                            } else {
+                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+
+{% endblock %}
+

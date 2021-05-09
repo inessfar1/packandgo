@@ -1,12 +1,9 @@
 {
-    "alcohol/iso4217": {
-        "version": "3.1.5"
-    },
     "bacon/bacon-qr-code": {
         "version": "2.0.3"
     },
-    "clue/stream-filter": {
-        "version": "v1.5.0"
+    "cmen/google-charts-bundle": {
+        "version": "4.0.0"
     },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
@@ -97,16 +94,31 @@
         "version": "2.1.25"
     },
     "endroid/qr-code": {
-        "version": "4.0.0"
+        "version": "4.0.3"
     },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.3"
+    },
+    "gregwar/captcha": {
+        "version": "v1.1.9"
+    },
+    "gregwar/captcha-bundle": {
+        "version": "v2.1.4"
+    },
+    "guzzlehttp/guzzle": {
+        "version": "7.3.0"
+    },
+    "guzzlehttp/promises": {
+        "version": "1.4.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.8.1"
     },
     "jms/metadata": {
         "version": "2.4.0"
     },
     "knplabs/knp-components": {
-        "version": "v3.0.1"
+        "version": "v3.0.2"
     },
     "knplabs/knp-paginator-bundle": {
         "version": "v5.4.2"
@@ -114,44 +126,26 @@
     "laminas/laminas-code": {
         "version": "3.4.1"
     },
+    "laminas/laminas-diactoros": {
+        "version": "2.5.0"
+    },
     "laminas/laminas-eventmanager": {
         "version": "3.3.0"
     },
     "laminas/laminas-zendframework-bridge": {
         "version": "1.2.0"
     },
-    "league/uri": {
-        "version": "6.4.0"
+    "lcobucci/clock": {
+        "version": "2.0.0"
     },
-    "league/uri-components": {
-        "version": "2.3.0"
-    },
-    "league/uri-interfaces": {
-        "version": "2.2.0"
+    "lcobucci/jwt": {
+        "version": "4.0.3"
     },
     "monolog/monolog": {
         "version": "1.26.0"
     },
     "nikic/php-parser": {
         "version": "v4.10.4"
-    },
-    "payum/core": {
-        "version": "1.6.1"
-    },
-    "payum/iso4217": {
-        "version": "1.0.1"
-    },
-    "payum/payum-bundle": {
-        "version": "2.4",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "2.4",
-            "ref": "79e716de6d703e2afa54008c0d535795f0781efb"
-        },
-        "files": [
-            "./config/packages/payum.yaml"
-        ]
     },
     "phenx/php-font-lib": {
         "version": "0.5.2"
@@ -161,12 +155,6 @@
     },
     "php": {
         "version": "7.3"
-    },
-    "php-http/message": {
-        "version": "1.11.0"
-    },
-    "php-http/message-factory": {
-        "version": "v1.0.2"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -183,6 +171,12 @@
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/http-client": {
+        "version": "1.0.1"
+    },
+    "psr/http-factory": {
+        "version": "1.0.1"
+    },
     "psr/http-message": {
         "version": "1.0.1"
     },
@@ -191,6 +185,9 @@
     },
     "psr/log": {
         "version": "1.1.3"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
     },
     "sabberworm/php-css-parser": {
         "version": "8.3.1"
@@ -208,10 +205,10 @@
         ]
     },
     "stripe/stripe-php": {
-        "version": "v7.75.0"
+        "version": "v7.76.0"
     },
     "swiftmailer/swiftmailer": {
-        "version": "v6.2.7"
+        "version": "v6.2.6"
     },
     "symfony/asset": {
         "version": "v4.4.19"
@@ -330,6 +327,15 @@
             "./src/Controller/.gitignore",
             "./src/Kernel.php"
         ]
+    },
+    "symfony/google-mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "f8fd4ddb9b477510f8f4bce2b9c054ab428c0120"
+        }
     },
     "symfony/http-client": {
         "version": "v4.4.19"
@@ -622,6 +628,15 @@
         "files": [
             "./config/packages/vich_uploader.yaml"
         ]
+    },
+    "vonage/client": {
+        "version": "2.4.0"
+    },
+    "vonage/client-core": {
+        "version": "2.8.0"
+    },
+    "vonage/nexmo-bridge": {
+        "version": "0.1.0"
     },
     "webmozart/assert": {
         "version": "1.9.1"

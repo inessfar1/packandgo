@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 
 class UtilisateurType extends AbstractType
 {
@@ -21,8 +22,9 @@ class UtilisateurType extends AbstractType
             ->add('username')
             ->add('password',PasswordType::class)
             ->add('verifpassword',PasswordType::class)
+            ->add('captcha', CaptchaType::class);
 
-        ;
+        
     }
 
     public function configureOptions(OptionsResolver $resolver)

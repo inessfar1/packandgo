@@ -18,6 +18,34 @@ class ReclamationRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Reclamation::class);
     }
+    public function findEntitiesByString($str)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT p 
+        FROM App:Reclamation p
+        WHERE p.object LIKE :str'
+
+            )->setParameter('str', '%'.$str.'%')->getResult();
+    }
+    /**
+     * @return Reclamation[]
+     */
+    public function triSujetASC(){
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.statut','ASC')
+            ->getQuery()
+            ->getResult();
+    }
+    /**
+     * @return Reclamation[]
+     */
+    public function triSujetDESC(){
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.statut','DESC')
+            ->getQuery()
+            ->getResult();
+    }
+    
 
     // /**
     //  * @return Reclamation[] Returns an array of Reclamation objects

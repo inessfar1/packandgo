@@ -6,7 +6,7 @@ use App\Repository\PlanRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -20,11 +20,13 @@ class Plan
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("plans")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255,nullable=true)
+     * @Groups("plans")
      */
     private $image;
 
@@ -50,49 +52,81 @@ class Plan
     {
         $this->imageFile = $imageFile;
         if($this>$imageFile instanceof  UploadedFile){
-            $this->update_at=new \DateTime('now');
         }
         return $this;
     }
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=6,max=30,minMessage="Ce champ doit contenir au moins 6 caractères",maxMessage="Ce champ doit contenir au plus 30 caractères")
+     * @Groups("plans")
      */
     private $sujet;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=10,max=254,minMessage="Ce champ doit contenir au moins 10 caractères",maxMessage="Ce champ doit contenir au plus 254 caractères")
+     * @Groups("plans")
      */
     private $description;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\GreaterThan("today")
+     * @Groups("plans")
      */
     private $date;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups("plans")
      */
     private $prix;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $update_at;
+
 
     /**
-     * @ORM\ManyToOne(targetEntity=Pays::class, inversedBy="plans")
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups("plans")
      */
-    private $pays;
+    private $rec;
+
+    public function getRec(): ?int
+    {
+        return $this->rec;
+    }
+
+    public function setRec(string $rec): self
+    {
+        $this->rec= $rec;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups("plans")
+     */
+    private $nbr;
+
+    public function getNbr(): ?int
+    {
+        return $this->nbr;
+    }
+
+    public function setNbr(string $nbr): self
+    {
+        $this->nbr= $nbr;
+
+        return $this;
+    }
 
     /**
      * @ORM\ManyToOne(targetEntity=Agence::class, inversedBy="plans")
+     * @Groups("plans")
      */
     private $agence;
 
-    /**
-     * @ORM\OneToOne(targetEntity=PlanRes::class, mappedBy="plan", cascade={"persist", "remove"})
-     */
-    private $planRes;
+  
 
     public function getId(): ?int
     {
@@ -159,29 +193,9 @@ class Plan
         return $this;
     }
 
-    public function getUpdateAt(): ?\DateTimeInterface
-    {
-        return $this->update_at;
-    }
 
-    public function setUpdateAt(?\DateTimeInterface $update_at): self
-    {
-        $this->update_at = $update_at;
 
-        return $this;
-    }
 
-    public function getPays(): ?Pays
-    {
-        return $this->pays;
-    }
-
-    public function setPays(?Pays $pays): self
-    {
-        $this->pays = $pays;
-
-        return $this;
-    }
 
     public function getAgence(): ?Agence
     {
@@ -194,37 +208,7 @@ class Plan
 
         return $this;
     }
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updated_at;
-    }
 
-    public function setUpdatedAt(\DateTimeInterface $updated_at): self
-    {
-        $this->updated_at = $updated_at;
 
-        return $this;
-    }
 
-    public function getPlanRes(): ?PlanRes
-    {
-        return $this->planRes;
-    }
-
-    public function setPlanRes(?PlanRes $planRes): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($planRes === null && $this->planRes !== null) {
-            $this->planRes->setPlan(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($planRes !== null && $planRes->getPlan() !== $this) {
-            $planRes->setPlan($this);
-        }
-
-        $this->planRes = $planRes;
-
-        return $this;
-    }
 }

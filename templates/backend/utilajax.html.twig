@@ -1,0 +1,32 @@
+
+{%  for utils in util %}
+    <tr>
+        <td><img width="200" height="200" src="{{ asset('images/aliments/' ~ utils.image) }}"></td>
+        <td>{{ utils.nom }}</td>
+        <td>{{ utils.prenom }}</td>
+        <td>{{ utils.email }}  </td>
+        <td>{{ utils.username}}</td>
+
+
+
+
+        <td>
+
+            <a class="btn btn-warning w-100" href="{{ path('admin_modification',{'id' : utils.id}) }}">modifier</a>
+
+
+            {% if utils.ActivationToken == null %}
+                <a class="btn btn-secondary w-100" href="{{ path('admin_desactivation',{'id' : utils.id}) }}">desactiver</a>
+            {% else %}
+                <a class="btn btn-success w-100" href="{{ path('admin_desactivation',{'id' : utils.id}) }}">activer</a>
+            {% endif %}
+
+
+            <form method="POST" style="display:inline-block" action="{{path('admin_suppression',{'id': utils.id})}}" onsubmit="return confirm('Voulez vous supprimer ?')">
+                <input type="hidden" name="_method" value="delete">
+                <input type="hidden" name="_token" value="{{ csrf_token('SUP'~ utils.id) }}">
+                <input type="submit" class="btn btn-danger w-100" value="supprimer">
+            </form>
+        </td>
+    </tr>
+{% endfor %}

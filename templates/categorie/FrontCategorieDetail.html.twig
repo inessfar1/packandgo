@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}profil{% endblock %}
+
+{% block body%}
+
+    <br>
+
+        <div class="col-md-3 col-sm-6">
+
+            <div class="single-package-item">
+
+                <div class="single-package-item-txt">
+                    <h3>{{ categorie.Title}} <span class="pull-right"></span></h3>
+                    <div class="packages-para">
+                        <p>
+											<span>
+												<i class="fa fa-envelope-o"></i> Description:
+											</span>
+                            <br>
+                            {{categorie.description }}
+                        </p>
+                        <p>
+											<span>
+											 <i class="fa fa-user"></i> Par:
+											</span>
+                             {{ categorie.utilisateur.username }}
+                        </p>
+                    </div><!--/.packages-para-->
+
+                    <div >
+                        {%if not app.user%}
+
+
+                            <button class="book-btn"><a href="{{ path ('login') }}">Login
+                                    <br> pour commenter
+                                </a></button>
+                        {% else %}
+                        {{ form_start(comment) }}
+                        <div   class="input-group">
+
+                            {{ form_widget(comment.text ) }}
+                        </div>
+                        <br>
+
+
+
+                        {{ form_widget(comment.add, { 'attr' : { 'class' : 'appsLand-btn subscribe-btn ' } } ) }}
+                            {% if islike %}
+
+                            <button class="appsLand-btn subscribe-btn"><a href="{{ path("DislikeC",{"id":categorie.id}) }}">DisLike({{categorie.likecategories|length}})
+
+                                </a></button>
+                                {% else %}
+                                    <button class="appsLand-btn subscribe-btn"><a href="{{ path("likeC",{"id":categorie.id}) }}">like({{categorie.likecategories|length}})
+
+                                        </a></button>
+{% endif %}
+
+                        {{ form_end(comment) }}
+                        {% endif %}
+
+                    </div>
+                    </div><!--/.about-btn-->
+                </div><!--/.single-package-item-txt-->
+            </div><!--/.single-package-item-->
+
+        </div><!--/.col-->
+    <div class="col-md-8 col-sm-8">
+        {% if categorie.comments | length > 0 %}
+        <img width="120px" height="80px" src="{{ asset('uploads/images/') }}{{categorie.id ~'.png'}}">
+        {% endif %}
+        <div class="single-package-item">
+
+            <div class="single-package-item-txt">
+
+
+                <div class="about-btn">
+ <br>
+                    <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>Comments</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for e in categorie.comments %}
+                        <tr >
+                            <th >
+                                <div class="post">
+
+                                    <div class="user-block">
+                        <span class="username">
+                          <a href="">{{e.utilisateur.username}}</a>
+                            <br>
+                          <a href="#" class="float-right btn-tool"></a>
+                        </span>
+                                        <span class="description">Shared -{{ e.date|date('H:i') }} | {{ e.date | date('d-m-Y')}}</span>
+                                    </div>
+                                    <!-- /.user-block -->
+                                    <p style="width: 1150px">
+                                        {{ e.text }}
+                                    </p>
+
+
+
+
+
+
+                                </div>
+
+
+
+                            </th>
+
+
+
+                        </tr>
+                        {% endfor %}
+
+
+                        </tbody>
+                    </table>
+
+                </div><!--/.about-btn-->
+            </div><!--/.single-package-item-txt-->
+        </div><!--/.single-package-item-->
+
+    </div>
+
+
+
+
+
+
+
+
+
+{% endblock %}

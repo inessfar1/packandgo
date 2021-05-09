@@ -6,7 +6,9 @@ use App\Entity\PlanRes;
 use App\Repository\PlanRepository;
 use App\Repository\PlanResRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
+
+//use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\Encoding\Encoding;
@@ -15,6 +17,10 @@ use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
 use Endroid\QrCode\Label\Font\NotoSans;
 use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\Writer\PngWriter;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Slim\Http\Request;
+use Slim\Http\Response;
+use Stripe\Stripe;
 
 class PlanResController extends AbstractController
 {
@@ -32,7 +38,7 @@ class PlanResController extends AbstractController
             ->size(300)
             ->margin(10)
             ->roundBlockSizeMode(new RoundBlockSizeModeMargin())
-            ->labelText('Scanner le ticket')
+            ->labelText($user.' plan '.$name)
             ->labelFont(new NotoSans(20))
             ->labelAlignment(new LabelAlignmentCenter())
             ->build();
@@ -92,14 +98,6 @@ class PlanResController extends AbstractController
         $this->addFlash('success','Votre réservation a été envoyée sur votre email');
 
         return $this->redirectToRoute('global');
-    }
-
-    /**
-     * @Route("/plan/create-checkout-session", name="checkout")
-     */
-    public function checkout()
-    {
-        \Stripe\Stripe::setApiKey('sk_test_51ITzQpDWjPU5uegJwMhDjZee2zrXPyMCTRlbEbLFll7yX13SInTSH2PK96oU3k4sIAojhFLv496LSBbORleThNR500f6QNoqIi');
     }
 
 

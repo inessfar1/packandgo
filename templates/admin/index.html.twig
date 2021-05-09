@@ -8,6 +8,25 @@
     {% if error %}
         <div class="alert alert-danger">le login et mdp ne sont pas bon.</div>
     {% endif %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('warning') %}
+        <div class="alert alert-warning" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('danger') %}
+        <div class="alert alert-danger" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+
+
+
     <form action="{{ path('login') }}" method="post">
         <div class="form-group">
             <label>Login :</label>
@@ -24,7 +43,18 @@
     <ul ><li><label>Vous n'avez pas un compte ?</label>
             <button class="book-btn"><a href="{{ path ('utilisateur_creation') }}">Inscription
                 </a></button>
-        </li></ul></div>
+        </li>
+        <div class="about-btn">
+            <button class="about-view packages-btn"><a href="{{ path ('app-forgotten-password') }}">mot de passe oublie
+                </a>
+
+
+            </button>
+        </div><!--/.about-btn-->
+
+    </ul>
+
+    </div>
 
 
 {% endblock %}

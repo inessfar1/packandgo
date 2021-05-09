@@ -1,0 +1,129 @@
+{% extends 'dashboard.html.twig' %}
+{% block title %}les offres{% endblock %}
+{% block body %}
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Les Offres</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        {% for message in app.flashes('success') %}
+                                            <div class="alert alert-success">
+                                                {{ message }}
+                                            </div>
+                                        {% endfor %}
+                                        <a class="btn btn-success" href="{{ path('AjoutOffre') }}" >Ajouter</a>
+                                        <form class="w-search">
+                                            <div class="sidebar-search">
+                                                <div class="input-group custom-search-form">
+                                                    <input type="text" id="search" class="form-control" placeholder="Search">
+                                                </div>
+                                                <!-- /input-group -->
+                                            </div>
+                                            <ul class="nav" id="side-menu">
+                                                <li>
+                                                    <a href="#"><span class="fa arrow"></span></a>
+                                                    <ul style="background-color: #0b0b0b" class="nav " id="entitiesNav">
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </form>
+                                        <thead class="text-center">
+                                        <tr>
+                                            <th>name</th>
+                                            <th>Description</th>
+                                            <th>
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col">
+                                                        price
+                                                    </div>
+                                                    <div class="col">
+                                                        <form action="{{ path('trie_croissant') }}" method="get" >
+                                                            <button class="btn btn-light" type="submit" ><i class="fas fa-arrow-circle-up"></i></button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col">
+                                                        <form action="{{ path('trie_decroissant') }}" method="get" >
+                                                            <button class="btn btn-light" type="submit" ><i class="fas fa-arrow-circle-down"></i></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <th>date debut de l'offre</th>
+                                            <th>date fin de l'offre</th>
+                                            <th>image</th>
+                                            <th>actions</th>
+                                        </tr>
+                                        </thead>
+                                            <tbody class="text-center" id="all">
+                                            {% include 'admin/admin_offre/Offreajax.html.twig' %}
+                                            </tbody>
+                                        <tbody id="search">
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+        </div>
+    </section>
+</div>
+
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+    <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <script
+            src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')}}">
+    </script>
+    <script>
+        $( document ).ready(function() {
+            var currentRequest = null;
+            $("#search").keyup(function(e){
+                /* La variable value va prendre la valeur insérer dans le champ de texte
+                afin d’effectuer la recherche */
+                var value = $(this).val();
+                if(currentRequest != null) {
+                    currentRequest.abort();
+                }
+
+                /* Ajax est lancé lors du remplissage du champ texte dont l’id est
+                « search » pour faire la recherche */
+                currentRequest = $.ajax({
+
+                    url : "{{ path('ajaxOffre') }}",
+                    type : 'GET',
+                    data: {
+                        'searchValue' : value
+                    },
+
+                    success : function(retour)
+                    {
+                        $('#all').html(retour);
+
+                    },
+                });
+                return false;
+            });
+        });
+    </script>
+{% endblock %}
+

@@ -1,0 +1,289 @@
+
+{% extends 'dashboard.html.twig' %}
+
+
+
+{% block body %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />
+
+    <script src="//code.jquery.com/jquery.js"></script>
+    {{ form_start(form,{attr:{'id':'form_chauffeur'}}) }}
+    <div class="container">
+        <div class="form-group">
+            <div class="form-group">
+                {{ form_label(form.dateDepart,"Date de depart:") }}
+                <div class="input-group date" id="dateDepart" data-target-input="nearest">
+                    {{ form_widget(form.dateDepart) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                    {{ form_label(form.dateArrive,"Date d' arrivée:") }}
+                    <div class="input-group date" id="dateDN" data-target-input="nearest">
+                        {{ form_widget(form.dateArrive) }}
+                    </div>
+                </div>
+        <div class="form-group">
+            {{ form_label(form.ptDepart,"Point de depart:") }}
+
+
+          <div class="field-group field-maps">
+            <div class="field-inline">
+                <label for="location">Place Location at Google Map</label>
+                <div class="field-button field-pin">
+                    <a href="#" id="drop" onclick="drop()">
+                        <i class="la la-lock"></i>
+                        Unlock Pin Location
+                    </a>
+                    <a href="#" id="clear" onclick="clearMarkers()">
+                        <?xml version="1.0" encoding="UTF-8"?>
+                        <i class="la la-lock-open"></i>
+                        Lock Pin Location
+                    </a>
+                </div>
+            </div>
+       <div class="field-map">
+                {{ form_widget(form.ptDepart,{attr: {class:'address-input', placeholder: 'Search Box'}}) }}
+                {{ form_widget(form.La_g) }}
+                {{ form_widget(form.La_i) }}
+                {{ form_widget(form.Ra_g) }}
+                {{ form_widget(form.Ra_i) }}
+                {{ form_widget(form.lat) }}
+                {{ form_widget(form.lng) }}
+                <div id="location-map"></div>   </div>
+
+                <div class="form-group">
+                    {{ form_label(form.ptArrive,"Point d'arrivée:" ) }}
+
+                    {{ form_widget(form.ptArrive,{attr: {class:'form-control'}}) }}
+                </div>
+                  <div class="form-group">
+                    {{ form_label(form.prix,"Prix:" ) }}
+
+                    {{ form_widget(form.prix,{attr: {class:'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.idChauffeur,"Chauffeur:" ) }}
+
+                    {{ form_widget(form.idChauffeur,{attr: {class:'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.idMoyTrans,"Type:" ) }}
+
+                    {{ form_widget(form.idMoyTrans,{attr: {class:'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.captcha,"Captcha:" ) }}
+
+                    {{ form_widget(form.captcha) }}
+                </div>
+
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" href="{{ path('add_trajet') }}" class="btn btn-primary">Submit</button>
+    </div>
+
+
+
+
+    {{ form_end(form) }}
+                {% endblock body %}
+{% block js %}
+
+<script>
+    $('.field-pin a').on('click', function (e) {
+        e.preventDefault();
+        $(this).fadeOut(0);
+        $('.field-pin a').not(this).fadeIn(0);
+    });
+    var neighborhoods = [
+        {lat: 52.511, lng: 13.447},
+    ];
+    var markers = [];
+    var map;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('location-map'), {
+          zoom: 13,
+          center: {lat: 52.511, lng: 13.447},
+          disableDefaultUI: true,
+          styles: [
+            {
+                "featureType": "landscape",
+                "elementType": "labels",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "transit",
+                "elementType": "labels",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "labels",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "labels",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "labels.icon",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "stylers": [
+                    {
+                        "hue": "#00aaff"
+                    },
+                    {
+                        "saturation": -100
+                    },
+                    {
+                        "gamma": 2.15
+                    },
+                    {
+                        "lightness": 12
+                    }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    },
+                    {
+                        "lightness": 24
+                    }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "lightness": 57
+                    }
+                ]
+            }
+        ]
+        });
+        var defaultBounds = new google.maps.LatLngBounds(
+          new google.maps.LatLng(-33.8902, 151.1759),
+          new google.maps.LatLng(-33.8474, 151.2631));
+
+        var input = document.getElementById('trajet_ptDepart');
+
+        var searchBox = new google.maps.places.SearchBox(input, {
+          bounds: defaultBounds
+        });
+
+        searchBox.addListener('places_changed', function() {
+            var places = searchBox.getPlaces();
+
+            if (places.length == 0) {
+                return;
+            }
+
+            // Clear out the old markers.
+            markers.forEach(function(marker) {
+                marker.setMap(null);
+            });
+            markers = [];
+
+            // For each place, get the icon, name and location.
+            var bounds = new google.maps.LatLngBounds();
+            places.forEach(function(place) {
+                if (!place.geometry) {
+                      console.log("Returned place contains no geometry");
+                      return;
+                }
+                var icon = {
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(25, 25)
+                };
+
+                // Create a marker for each place.
+                markers.push(new google.maps.Marker({
+                      map: map,
+                      icon: icon,
+                      title: place.name,
+                      position: place.geometry.location
+                }));
+
+                if (place.geometry.viewport) {
+                      // Only geocodes have viewport.
+                      bounds.union(place.geometry.viewport);
+                } else {
+                      bounds.extend(place.geometry.location);
+                }
+                // set input
+                $("#trajet_lat").val(place.geometry.location.lat());
+                $("#trajet_lng").val(place.geometry.location.lng());
+            });
+            map.fitBounds(bounds);
+
+            // set input
+            $("#trajet_La_g").val(bounds.La.g);
+            $("#trajet_La_i").val(bounds.La.i);
+            $("#trajet_Ra_g").val(bounds.Ra.g);
+            $("#trajet_Ra_i").val(bounds.Ra.i);
+        });
+    }
+
+    function drop() {
+         clearMarkers();
+        for (var i = 0; i < neighborhoods.length; i++) {
+          addMarkerWithTimeout(neighborhoods[i], i * 200);
+        }
+    }
+
+    function addMarkerWithTimeout(position, timeout) {
+        window.setTimeout(function() {
+          markers.push(new google.maps.Marker({
+            position: position,
+            map: map,
+            draggable: true,
+            animation: google.maps.Animation.DROP
+          }));
+        }, timeout);
+    }
+
+    function clearMarkers() {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(null);
+        }
+        markers = [];
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-2mhVoLX7oIOgRQ-6bxlJt4TF5k0xhWc&libraries=places&callback=initMap" async defer></script>
+{% endblock %}
