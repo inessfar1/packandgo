@@ -14,9 +14,6 @@ public class Agence {
     private int id;
     
     
-    int pays_id;
-    
-    
     private String logo;
 
     
@@ -35,9 +32,8 @@ public class Agence {
     public Agence() {
     }
 
-    public Agence(int id, int pays_id, String logo, String nom, String adresse, String email, int tel) {
+    public Agence(int id,  String logo, String nom, String adresse, String email, int tel) {
         this.id = id;
-        this.pays_id = pays_id;
         this.logo = logo;
         this.nom = nom;
         this.adresse = adresse;
@@ -54,14 +50,7 @@ public class Agence {
     }
     
     
-    public Agence(int pays_id, String logo, String nom, String adresse, String email, int tel) {
-        this.pays_id = pays_id;
-        this.logo = logo;
-        this.nom = nom;
-        this.adresse = adresse;
-        this.email = email;
-        this.tel = tel;
-    }
+    
 
    
     public int getId() {
@@ -80,13 +69,7 @@ public class Agence {
         this.logo = logo;
     }
 
-    public int getPays_id() {
-        return pays_id;
-    }
-
-    public void setPays_id(int pays_id) {
-        this.pays_id = pays_id;
-    }
+   
 
     public String getNom() {
         return nom;
@@ -122,10 +105,10 @@ public class Agence {
 
     @Override
     public String toString() {
-        return "Agence{" + "id=" + id + ",\n pays_id=" + pays_id + ",\n logo=" + logo + ",\n nom=" + nom + ",\n adresse=" + adresse + ",\n email=" + email + ",\n tel=" + tel + '}';
+    
+        return "Agence{" + "id=" + id +  ",\n logo=" + logo + ",\n nom=" + nom + ",\n adresse=" + adresse + ",\n email=" + email + ",\n tel=" + tel + '}';
     }
-
   
-
+    
  
 }

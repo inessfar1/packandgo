@@ -29,7 +29,7 @@ public class ServiceAgence {
     public boolean resultOK;
     private ConnectionRequest req;
 
-    private ServiceAgence() {
+    public ServiceAgence() {
          req = new ConnectionRequest();
     }
 
@@ -86,7 +86,7 @@ public class ServiceAgence {
     }
     
     public boolean addAgence(Agence t) {
-        String url = Statics.BASE_URL + "/agence/newJSON?logo="+t.getLogo()+"&nom="+t.getNom()+"&adresse="+t.getAdresse()+"&email="+t.getEmail()+"&tel="+t.getTel()+"&pays="+1+"";
+        String url = Statics.BASE_URL + "/agence/newJSON?logo="+t.getLogo()+"&nom="+t.getNom()+"&adresse="+t.getAdresse()+"&email="+t.getEmail()+"&tel="+t.getTel()+"";
         req.setUrl(url);// Insertion de l'URL de notre demande de connexion
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override

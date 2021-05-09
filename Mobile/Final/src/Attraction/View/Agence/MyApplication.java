@@ -14,6 +14,7 @@ import java.io.IOException;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.io.NetworkEvent;
 import com.codename1.ui.Button;
+import com.codename1.ui.Container;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.FlowLayout;
@@ -55,8 +56,15 @@ public class MyApplication {
             current.show();
             return;
         }
-       
-               new AgenceForm().show();
+            Form attraction =new Form("Attraction",BoxLayout.y());
+            Container ct =new Container(BoxLayout.y());
+            Button btAg =new Button ("Agence");
+            Button btPlan =new Button ("Plans");
+            btAg.addActionListener((evt)-> { new AgenceForm().show(); });
+            btPlan.addActionListener((evt)-> { new PlanForm().show(); });
+            ct.addAll(btAg,btPlan);
+            attraction.add(ct);
+            attraction.show();
         
     }
 

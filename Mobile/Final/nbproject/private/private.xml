@@ -6,11 +6,16 @@
         <group>
             <file>jar:file:/C:/Users/21628/Desktop/Mobile/Final/lib/CodenameOne_SRC.zip!/com/codename1/io/NetworkManager.java</file>
             <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/ListAgencesForm.java</file>
-            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/AddAgenceForm.java</file>
-            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/Services/ServiceAgence.java</file>
+            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/ListPlansForm.java</file>
             <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/MyApplication.java</file>
             <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/AgenceForm.java</file>
             <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/Utils/Statics.java</file>
+            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/PlanForm.java</file>
+            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/Entity/Plan.java</file>
+            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/AddPlanForm.java</file>
+            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/AddAgenceForm.java</file>
+            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/Services/ServicePlan.java</file>
+            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/Services/ServiceAgence.java</file>
             <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/Entity/Agence.java</file>
         </group>
     </open-files>
