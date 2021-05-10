@@ -7,6 +7,7 @@ package Attraction.View.Agence;
 
 
 import com.codename1.ui.Button;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BoxLayout;
@@ -18,7 +19,7 @@ public class PlanForm extends Form {
     aux interfaces suivantes pour pouvoir y revenir plus tard en utilisant
     la méthode showBack*/
     
-    public PlanForm() {
+    public PlanForm(Form previous) {
         current = this; //Récupération de l'interface(Form) en cours
         setTitle("Plan Home");
         setLayout(BoxLayout.y());
@@ -30,7 +31,7 @@ public class PlanForm extends Form {
         btnAddPlan.addActionListener(e -> new AddPlanForm(current).show());
         btnListPlans.addActionListener(e -> new ListPlansForm(current).show());
         addAll(btnAddPlan, btnListPlans);
-
+        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());    
     }
 
     

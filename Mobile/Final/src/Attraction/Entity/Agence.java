@@ -106,8 +106,10 @@ public class Agence {
     @Override
     public String toString() {
     
-        return "Agence{" + "id=" + id +  ",\n logo=" + logo + ",\n nom=" + nom + ",\n adresse=" + adresse + ",\n email=" + email + ",\n tel=" + tel + '}';
+        return "*******************\nlogo   =   " + logo + "\nnom   =   " + nom + "\nadresse   =   " + adresse + "\nemail   =   " + email + "\ntel   =   " + tel + "\n*******************\n\n\n\n";
     }
+    
+    
   
     
  

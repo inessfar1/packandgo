@@ -60,8 +60,8 @@ public class MyApplication {
             Container ct =new Container(BoxLayout.y());
             Button btAg =new Button ("Agence");
             Button btPlan =new Button ("Plans");
-            btAg.addActionListener((evt)-> { new AgenceForm().show(); });
-            btPlan.addActionListener((evt)-> { new PlanForm().show(); });
+            btAg.addActionListener((evt)-> { new AgenceForm(attraction).show(); });
+            btPlan.addActionListener((evt)-> { new PlanForm(attraction).show(); });
             ct.addAll(btAg,btPlan);
             attraction.add(ct);
             attraction.show();

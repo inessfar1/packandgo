@@ -7,15 +7,29 @@ package Attraction.View.Agence;
 
 import Attraction.Entity.Agence;
 import Attraction.Services.ServiceAgence;
+import com.codename1.components.InfiniteProgress;
+import com.codename1.components.ScaleImageLabel;
+import com.codename1.components.SpanLabel;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
+import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
+import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
+import com.codename1.ui.Label;
+import com.codename1.ui.Tabs;
 import com.codename1.ui.TextField;
+import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
+import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.LayeredLayout;
+import com.codename1.ui.plaf.Style;
+import com.codename1.ui.util.Resources;
 
 /**
  *
@@ -32,6 +46,10 @@ public class AddAgenceForm extends Form{
         setTitle("Add a new agence");
         setLayout(BoxLayout.y());
         
+        
+        
+        
+        
         TextField tfLogo = new TextField("","Logo");
         TextField tfNom= new TextField("", "Nom");
         TextField tfEmail = new TextField("","Email");
@@ -46,18 +64,18 @@ public class AddAgenceForm extends Form{
                     Dialog.show("Alert", "Remplir les champs", new Command("OK"));
                 else
                 {
-                   
-                        int tel = Integer.parseInt(tfTel.getText());
-                        Agence t = new Agence(tfLogo.getText(), tfNom.getText(), tfEmail.getText(), tfAdresse.getText(),tel);
-                        if( ServiceAgence.getInstance().addAgence(t))
-                            Dialog.show("Success","Connection accepted",new Command("OK"));
-                        else
-                            Dialog.show("ERROR", "Server error", new Command("OK"));
-                    
-                         
-                        
-                        
-                    
+                    InfiniteProgress ip = new InfiniteProgress();
+                    final Dialog iDialog = ip.showInfiniteBlocking();
+                    int tel = Integer.parseInt(tfTel.getText());
+                    Agence t = new Agence(tfLogo.getText(), tfNom.getText(), tfEmail.getText(), tfAdresse.getText(),tel);
+                    if(ServiceAgence.getInstance().addAgence(t)){
+                        iDialog.dispose();
+                        Dialog.show("Success","Connection accepted",new Command("OK"));
+                        previous.showBack();}
+                    else{
+                        iDialog.dispose();
+                        Dialog.show("ERROR", "Server error", new Command("OK"));
+                        }
                 }
                 
                 
@@ -69,6 +87,7 @@ public class AddAgenceForm extends Form{
                 , e-> previous.showBack()); // Revenir vers l'interface précédente
                 
     }
+    
     
     
 }

@@ -14,6 +14,7 @@ import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +31,7 @@ public class ServicePlan {
     public boolean resultOK;
     private ConnectionRequest req;
 
-    private ServicePlan() {
+    public ServicePlan() {
          req = new ConnectionRequest();
     }
 
@@ -45,35 +46,28 @@ public class ServicePlan {
             plans=new ArrayList<>();
             JSONParser j = new JSONParser();
             Map<String,Object> plansListJson = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
-            
-           
             List<Map<String,Object>> list = (List<Map<String,Object>>)plansListJson.get("root");
-            
-            
             for(Map<String,Object> obj : list){
-               
                 Plan t = new Plan();
                 float id = Float.parseFloat(obj.get("id").toString());
                 t.setId((int)id);
-                //t.setAgence_id(((int)Float.parseFloat(obj.get("agence_id").toString())));
                 t.setImage(obj.get("image").toString());
                 t.setSujet(obj.get("sujet").toString());
                 t.setDescription(obj.get("description").toString());
-                //t.setDate((Date) obj.get("date"));
+                String DateConverter = obj.get("date").toString().substring(obj.get("date").toString().indexOf("timestamp")+10,obj.get("date").toString().lastIndexOf("}"));
+                Date currentTime = new Date(Double.valueOf(DateConverter).longValue()*1000) ;
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                String dateString = formatter.format(currentTime);
+                t.setDate(dateString);
                 t.setPrix(Double.parseDouble(obj.get("prix").toString()));
                 plans.add(t);
             }
-            
-            
-        } catch (IOException ex) {
-            
-        }
-        
+            } catch (IOException ex) {}
         return plans;
     }
     
     public ArrayList<Plan> getAllPlans(){
-        String url = Statics.BASE_URL+"/plan/showJSON";
+        String url = Statics.BASE_URL+"/plan/allJSON";
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -89,21 +83,45 @@ public class ServicePlan {
     
     public boolean addPlan(Plan t) {
         String url = Statics.BASE_URL + "/plan/newJSON?agence="+t.getAgence_id()+"&image="+t.getImage()+"&sujet="+t.getSujet()+"&desc="+t.getDescription()+"&prix="+t.getPrix()+"";
-        req.setUrl(url);// Insertion de l'URL de notre demande de connexion
+        req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
-                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
-                req.removeResponseListener(this); //Supprimer cet actionListener
-                /* une fois que nous avons terminé de l'utiliser.
-                La ConnectionRequest req est unique pour tous les appels de 
-                n'importe quelle méthode du Service plan, donc si on ne supprime
-                pas l'ActionListener il sera enregistré et donc éxécuté même si 
-                la réponse reçue correspond à une autre URL(get par exemple)*/
-                
+                resultOK = req.getResponseCode() == 200; 
+                req.removeResponseListener(this); 
             }
         });
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
     }
+    
+    public boolean delPlan(Plan t) {
+        String url = Statics.BASE_URL + "/plan/delJSON?id="+t.getId()+"";
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; 
+                req.removeResponseListener(this); 
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
+    
+    public boolean editPlan(Plan t) {
+        String url = Statics.BASE_URL + "/plan/updateJSON?id="+t.getId()+"&sujet="+t.getSujet()+"&desc="+t.getDescription()+"&prix="+t.getPrix()+"";
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; 
+                req.removeResponseListener(this); 
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
+    
+    
 }

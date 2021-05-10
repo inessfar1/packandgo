@@ -5,7 +5,7 @@
  */
 package Attraction.Entity;
 
-import java.util.Date;
+
 
 /**
  *
@@ -17,7 +17,7 @@ public class Plan {
     String image;
     String sujet;
     String description;
-    Date date;
+    String date;
     Double prix;
     int rec;
     int nbr;
@@ -26,7 +26,7 @@ public class Plan {
     public Plan() {
     }
 
-    public Plan(int id, int agence_id, String image, String sujet, String description, Date date, Double prix, int rec, int nbr) {
+    public Plan(int id, int agence_id, String image, String sujet, String description, String date, Double prix, int rec, int nbr) {
         this.id = id;
         this.agence_id = agence_id;
         this.image = image;
@@ -38,7 +38,7 @@ public class Plan {
         this.nbr = nbr;
     }
 
-    public Plan(int agence_id, String image, String sujet, String description, Date date, Double prix, int rec, int nbr) {
+    public Plan(int agence_id, String image, String sujet, String description, String date, Double prix, int rec, int nbr) {
         this.agence_id = agence_id;
         this.image = image;
         this.sujet = sujet;
@@ -91,11 +91,11 @@ public class Plan {
         this.description = description;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -125,7 +125,7 @@ public class Plan {
 
     @Override
     public String toString() {
-        return "Plan{" + "id=" + id + ", agence_id=" + agence_id + ", image=" + image + ", sujet=" + sujet + ", description=" + description + ", date=" + date + ", prix=" + prix + ", rec=" + rec + ", nbr=" + nbr + '}';
+        return "*******************\nimage=" + image + "\nsujet   =   " + sujet + "\ndescription=" + description + "\ndate   =   " + date + "\nprix   =   " + prix + "\n*******************\n\n\n\n\n";
     }
     
     

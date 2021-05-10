@@ -54,28 +54,18 @@ public class AddPlanForm extends Form{
                 if ((tfLogo.getText().length()==0)||(tfNom.getText().length()==0)||(tfEmail.getText().length()==0)||(tfAdresse.getText().length()==0))
                     Dialog.show("Alert", "Remplir les champs", new Command("OK"));
                 else
-                {
-                   
-                      
+                {       
                         Plan t = new Plan();
                         t.setImage(tfLogo.getText());
                         t.setSujet(tfNom.getText());
                         t.setDescription(tfEmail.getText());
                         t.setPrix(Double.parseDouble(tfAdresse.getText()));
                         t.setAgence_id(cb.getSelectedItem().getId());
-                        
                         if( ServicePlan.getInstance().addPlan(t))
                             Dialog.show("Success","Connection accepted",new Command("OK"));
                         else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
-                    
-                         
-                        
-                        
-                    
                 }
-                
-                
             }
         });
         

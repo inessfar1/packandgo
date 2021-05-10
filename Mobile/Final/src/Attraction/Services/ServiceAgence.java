@@ -44,34 +44,24 @@ public class ServiceAgence {
             agences=new ArrayList<>();
             JSONParser j = new JSONParser();
             Map<String,Object> agencesListJson = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
-            
-           
             List<Map<String,Object>> list = (List<Map<String,Object>>)agencesListJson.get("root");
-            
-            
             for(Map<String,Object> obj : list){
-               
-                Agence t = new Agence();
+               Agence t = new Agence();
                 float id = Float.parseFloat(obj.get("id").toString());
                 t.setId((int)id);
                 t.setTel(((int)Float.parseFloat(obj.get("tel").toString())));
                 t.setLogo(obj.get("logo").toString());
-                 t.setNom(obj.get("nom").toString());
-                  t.setAdresse(obj.get("adresse").toString());
-                   t.setEmail(obj.get("email").toString());
-                   agences.add(t);
+                t.setNom(obj.get("nom").toString());
+                t.setAdresse(obj.get("adresse").toString());
+                t.setEmail(obj.get("email").toString());
+                agences.add(t);
             }
-            
-            
-        } catch (IOException ex) {
-            
-        }
-        
+        } catch (IOException ex) {}
         return agences;
     }
     
     public ArrayList<Agence> getAllAgences(){
-        String url = Statics.BASE_URL+"/agence/showJSON";
+        String url = Statics.BASE_URL+"/agence/allJSON";
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -87,18 +77,40 @@ public class ServiceAgence {
     
     public boolean addAgence(Agence t) {
         String url = Statics.BASE_URL + "/agence/newJSON?logo="+t.getLogo()+"&nom="+t.getNom()+"&adresse="+t.getAdresse()+"&email="+t.getEmail()+"&tel="+t.getTel()+"";
-        req.setUrl(url);// Insertion de l'URL de notre demande de connexion
+        req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
-                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
-                req.removeResponseListener(this); //Supprimer cet actionListener
-                /* une fois que nous avons terminé de l'utiliser.
-                La ConnectionRequest req est unique pour tous les appels de 
-                n'importe quelle méthode du Service agence, donc si on ne supprime
-                pas l'ActionListener il sera enregistré et donc éxécuté même si 
-                la réponse reçue correspond à une autre URL(get par exemple)*/
-                
+                resultOK = req.getResponseCode() == 200; 
+                req.removeResponseListener(this); 
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
+    
+    public boolean delAgence(Agence t) {
+        String url = Statics.BASE_URL + "/agence/delJSON?id="+t.getId()+"";
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; 
+                req.removeResponseListener(this); 
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
+    
+    public boolean editAgence(Agence t) {
+        String url = Statics.BASE_URL + "/agence/updateJSON?id="+t.getId()+"&nom="+t.getNom()+"&adresse="+t.getAdresse()+"&email="+t.getEmail()+"&tel="+t.getTel()+"";
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; 
+                req.removeResponseListener(this); 
             }
         });
         NetworkManager.getInstance().addToQueueAndWait(req);
