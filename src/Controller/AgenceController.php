@@ -9,13 +9,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-
+use Symfony\Component\Validator\Constraints\Json;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AgenceController extends AbstractController
 {
@@ -100,43 +100,40 @@ class AgenceController extends AbstractController
         return $this->redirectToRoute('agence_index');
     }
 
-    /**
-     * @Route("/admin/agence/showJSON", name="agence_indexJSON", methods={"GET"})
-     * @param AgenceRepository $agenceRepository
-     * @return Response
-     */
-    public function indexJSON(AgenceRepository $agenceRepository, SerializerInterface $serializer): Response
-    {
-        $agences=$agenceRepository->findAll();
 
-        $json= $serializer->serialize($agences,'json',['groups'=>'agences']);
-        return new Response($json);
+    /**
+     * @Route("/admin/agence/newJSON", name="agence_newJSON")
+     * @Method("POST")
+     */
+
+    public function newJSON(Request $request)
+    {
+        $agence = new Agence();
+        $logo = $request->query->get("logo");
+        $nom = $request->query->get("nom");
+        $adresse = $request->query->get("adresse");
+        $email = $request->query->get("email");
+        $tel = $request->query->get("tel");
+        $em = $this->getDoctrine()->getManager();
+
+
+        $agence->setLogo($logo);
+        $agence->setNom($nom);
+        $agence->setEmail($email);
+        $agence->setAdresse($adresse);
+        $agence->setTel($tel);
+        $em->persist($agence);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($agence);
+        return new JsonResponse($formatted);
+
     }
 
 
 
-    /**
-     * @Route("/admin/agence/newJSON", name="agence_newJSON" )
-     */
-    public function newJSON(Request $request, NormalizerInterface $normalizer): Response
-    {
-
-        $agence= new Agence();
-        $agence->setNom($request->get('nom'));
-
-        $agence->setEmail($request->get('email'));
-        $agence->setTel($request->get('tel'));
-        $agence->setAdresse($request->get('adresse'));
-        $agence->setLogo($request->get('logo'));
-        $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($agence);
-            $entityManager->flush();
-        $jsonContent =$normalizer->normalize($agence,'json',['groups'=>'agences']);
-        return new Response(json_encode($jsonContent));
 
 
-
-    }
 
     /**
      * @Route("/admin/agence/delJSON", name="agence_delJSON")
@@ -187,6 +184,47 @@ class AgenceController extends AbstractController
     }
 
 
+
+
+
+    /**
+     * @Route("/admin/agence/allJSON", name="agence_allJSON")
+     */
+    public function allJSON(NormalizerInterface $normalizer)
+    {
+
+        $agence = $this->getDoctrine()->getManager()->getRepository(Agence::class)->findAll();
+
+        $jsonContent =$normalizer->normalize($agence,'json',['groups'=>'agences']);
+        return new Response(json_encode($jsonContent));
+
+        return new JsonResponse($jsonContent);
+
+    }
+
+
+
+    /**
+     * @Route("/admin/agence/detailJSON", name="agence_detailJSON")
+     * @Method("GET")
+     */
+
+
+    public function detailJSON(Request $request)
+    {
+        $id = $request->get("id");
+
+        $em = $this->getDoctrine()->getManager();
+        $agence = $this->getDoctrine()->getManager()->getRepository(Agence::class)->find($id);
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getNom();
+        });
+        $serializer = new Serializer([$normalizer], [$encoder]);
+        $formatted = $serializer->normalize($agence);
+        return new JsonResponse($formatted);
+    }
 
 
 }

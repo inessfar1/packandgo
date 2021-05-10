@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Agence;
 use App\Entity\Plan;
 use App\Form\PlanType;
 use App\Repository\AgenceRepository;
@@ -13,13 +14,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-
+use Symfony\Component\Validator\Constraints\Json;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PlanController extends AbstractController
 {
@@ -189,37 +190,50 @@ class PlanController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("/admin/plan/showJSON", name="plan_indexJSON", methods={"GET"})
+     * @Route("/admin/plan/allJSON", name="plan_allJSON")
      */
-    public function indexJSON(PlanRepository $planRepository, SerializerInterface $serializer ): Response
+    public function allJSON(NormalizerInterface $normalizer)
     {
-        $plans = $planRepository->findAll();
-        $json= $serializer->serialize($plans,'json',['groups'=>'plans']);
-        return new Response($json);
+
+        $plan = $this->getDoctrine()->getManager()->getRepository(Plan::class)->findAll();
+
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getAgence();
+        });
+        $serializer = new Serializer([$normalizer], [$encoder]);
+        $formatted = $serializer->normalize($plan);
+        return new JsonResponse($formatted);
+
+        return new JsonResponse($jsonContent);
+
     }
 
+
+
     /**
-     * @Route("/admin/plan/newJSON", name="plan_newJSON" )
+     * @Route("/admin/plan/detailJSON", name="plan_detailJSON")
+     * @Method("GET")
      */
-    public function newJSON(Request $request, NormalizerInterface $normalizer,AgenceRepository $repository): Response
+
+
+    public function detailJSON(Request $request)
     {
-        $ag= $repository->find($request->get('agence'));
-        $plan= new Plan();
-        $plan->setImage($request->get('image'));
-        $plan->setSujet($request->get('sujet'));
-        $plan->setDescription($request->get('desc'));
-        $plan->setAgence($ag);
+        $id = $request->get("id");
 
-        $plan->setPrix($request->get('prix'));
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($plan);
-        $entityManager->flush();
-        $jsonContent =$normalizer->normalize($plan,'json',['groups'=>'plans']);
-        return new Response(json_encode($jsonContent));
-
-
-
+        $em = $this->getDoctrine()->getManager();
+        $plan = $this->getDoctrine()->getManager()->getRepository(Plan::class)->find($id);
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getAgence();
+        });
+        $serializer = new Serializer([$normalizer], [$encoder]);
+        $formatted = $serializer->normalize($plan);
+        return new JsonResponse($formatted);
     }
 
 
@@ -251,7 +265,7 @@ class PlanController extends AbstractController
      * @Route("/admin/plan/updateJSON", name="plan_updateJSON")
      * @Method("PUT")
      */
-    public function updateJSON(Request $request) {
+    public function updateJSON(Request $request,NormalizerInterface $normalizer) {
         $em = $this->getDoctrine()->getManager();
         $plan = $this->getDoctrine()->getManager()
             ->getRepository(Plan::class)
@@ -261,13 +275,52 @@ class PlanController extends AbstractController
         $plan->setDescription($request->get("desc"));
         $plan->setPrix($request->get("prix"));
 
-
         $em->persist($plan);
         $em->flush();
-       
-        return new JsonResponse("Plan a ete modifiee avec success.");
+
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getAgence();
+        });
+        $serializer = new Serializer([$normalizer], [$encoder]);
+        $formatted = $serializer->normalize($plan);
+        return new JsonResponse($formatted);
+    }
+
+
+
+    /**
+     * @Route("/admin/plan/newJSON", name="agence_newJSON")
+     * @Method("POST")
+     */
+
+    public function newJSON(Request $request, AgenceRepository $repository)
+    {
+        $ag= $repository->find($request->get('agence'));
+        $plan= new Plan();
+        $date = new \DateTime('now');
+        $plan->setImage($request->get('image'));
+        $plan->setSujet($request->get('sujet'));
+        $plan->setDescription($request->get('desc'));
+        $plan->setAgence($ag);
+        $plan->setDate($date);
+        $plan->setPrix($request->get('prix'));
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($plan);
+        $em->flush();
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getAgence();
+        });
+        $serializer = new Serializer([$normalizer], [$encoder]);
+        $formatted = $serializer->normalize($plan);
+        return new JsonResponse($formatted);
 
     }
+
+
 
 
 }
