@@ -214,27 +214,6 @@ class PlanController extends AbstractController
 
 
 
-    /**
-     * @Route("/admin/plan/detailJSON", name="plan_detailJSON")
-     * @Method("GET")
-     */
-
-
-    public function detailJSON(Request $request)
-    {
-        $id = $request->get("id");
-
-        $em = $this->getDoctrine()->getManager();
-        $plan = $this->getDoctrine()->getManager()->getRepository(Plan::class)->find($id);
-        $encoder = new JsonEncoder();
-        $normalizer = new ObjectNormalizer();
-        $normalizer->setCircularReferenceHandler(function ($object) {
-            return $object->getAgence();
-        });
-        $serializer = new Serializer([$normalizer], [$encoder]);
-        $formatted = $serializer->normalize($plan);
-        return new JsonResponse($formatted);
-    }
 
 
     /**
@@ -291,7 +270,7 @@ class PlanController extends AbstractController
 
 
     /**
-     * @Route("/admin/plan/newJSON", name="agence_newJSON")
+     * @Route("/admin/plan/newJSON", name="plan_newJSON")
      * @Method("POST")
      */
 
@@ -320,7 +299,32 @@ class PlanController extends AbstractController
 
     }
 
+    /**
+     * @Route("/admin/plan/recJSON", name="plan_recJSON")
+     * @Method("PUT")
+     */
+    public function recJSON(Request $request,NormalizerInterface $normalizer) {
+        $em = $this->getDoctrine()->getManager();
+        $plan = $this->getDoctrine()->getManager()
+            ->getRepository(Plan::class)
+            ->find($request->get("id"));
+        $rec = $plan->getRec();
+        if ($rec<2)
+        $plan->setRec($rec+1);
+        else {$plan->setRec($rec+1); $plan->setNbr(0) ;}
 
+        $em->persist($plan);
+        $em->flush();
+
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getAgence();
+        });
+        $serializer = new Serializer([$normalizer], [$encoder]);
+        $formatted = $serializer->normalize($plan);
+        return new JsonResponse($formatted);
+    }
 
 
 }

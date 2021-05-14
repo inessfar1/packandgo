@@ -28,10 +28,11 @@ public class AgenceForm extends Form {
         add(new Label("Choose an option"));
         Button btnAddAgence = new Button("Ajouter Agence");
         Button btnListAgences = new Button("Afficher Agence");
-
+        Button btnSearchAgences = new Button("Rechercher Agence");    
         btnAddAgence.addActionListener(e -> new AddAgenceForm(current).show());
         btnListAgences.addActionListener(e -> new ListAgencesForm(current).show());
-        addAll(btnAddAgence, btnListAgences);
+        btnSearchAgences.addActionListener(e -> new Search(current).show());
+        addAll(btnAddAgence, btnListAgences,btnSearchAgences);
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());   
     }
 

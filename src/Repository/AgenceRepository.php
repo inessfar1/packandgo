@@ -19,6 +19,18 @@ class AgenceRepository extends ServiceEntityRepository
         parent::__construct($registry, Agence::class);
     }
 
+    /**
+     * @return Agence[]
+     */
+    public function findPlanBySujet($nom){
+        return $this->createQueryBuilder('agence')
+            ->andWhere('agence.nom LIKE :nom')
+            ->setParameter('nom', '%'.$nom.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
+
     // /**
     //  * @return Agence[] Returns an array of Agence objects
     //  */

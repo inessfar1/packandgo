@@ -33,12 +33,12 @@ public class EditPlanForm extends Form{
         Quelque soit l'interface faisant appel à AddPlan, on peut y revenir
         en utilisant le bouton back
         */
-        setTitle("modifier plan");
+        setTitle("modifier plan "+t.getSujet()+"");
         setLayout(BoxLayout.y());
         
-        TextField tfNom= new TextField("", "Sujet");
-        TextField tfEmail = new TextField("","Description");
-        TextField tfAdresse= new TextField("", "Prix");
+        TextField tfNom= new TextField(t.getSujet());
+        TextField tfEmail = new TextField(t.getDescription());
+        TextField tfAdresse= new TextField(t.getPrix().toString());
         Button btnValider = new Button("Modifier");
         
         btnValider.addActionListener(new ActionListener() {

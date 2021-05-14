@@ -12,6 +12,7 @@ import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
+
 import com.codename1.ui.events.ActionListener;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -60,7 +61,8 @@ public class ServicePlan {
                 String dateString = formatter.format(currentTime);
                 t.setDate(dateString);
                 t.setPrix(Double.parseDouble(obj.get("prix").toString()));
-                plans.add(t);
+                float nbr = Float.parseFloat(obj.get("nbr").toString());
+                if (nbr>0) plans.add(t);
             }
             } catch (IOException ex) {}
         return plans;
@@ -122,6 +124,42 @@ public class ServicePlan {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
     }
+    
+    
+    public boolean recPlan(Plan t) {
+        String url = Statics.BASE_URL + "/plan/recJSON?id="+t.getId()+"";
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; 
+                req.removeResponseListener(this); 
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
+    
+    public boolean resPlan(Plan t,int user) {
+        String url = Statics.BASE_URL + "/plan/resJSON?id="+t.getId()+"&user="+user+"";
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; 
+                req.removeResponseListener(this); 
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
+    
+   
+    
+    
+    
+    
+    
     
     
 }

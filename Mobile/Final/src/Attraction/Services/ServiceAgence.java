@@ -116,4 +116,27 @@ public class ServiceAgence {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
     }
+    
+    
+     public ArrayList<Agence> getAgences(String search){
+        String url = Statics.BASE_URL+"/agence/search?search="+search+"";
+        req.setUrl(url);
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                agences = parseAgences(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return agences;
+    }
+    
+    
+    
+    
+    
+    
+    
 }

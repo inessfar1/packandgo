@@ -30,17 +30,17 @@ public class EditAgenceForm extends Form{
         Quelque soit l'interface faisant appel à AddAgence, on peut y revenir
         en utilisant le bouton back
         */
-        setTitle("Modifier agence");
+        setTitle("Modifier agence "+t.getNom()+"");
         setLayout(BoxLayout.y());
         
         
         
         
         
-        TextField tfNom= new TextField("", "Nom");
-        TextField tfEmail = new TextField("","Email");
-        TextField tfAdresse= new TextField("", "Adresse");
-        TextField tfTel = new TextField("","Tel");
+        TextField tfNom= new TextField(t.getNom());
+        TextField tfEmail = new TextField(t.getEmail());
+        TextField tfAdresse= new TextField(t.getAdresse());
+        TextField tfTel = new TextField(t.getTel());
         Button btnValider = new Button("Modifier");
         
         btnValider.addActionListener(new ActionListener() {

@@ -125,7 +125,7 @@ public class Plan {
 
     @Override
     public String toString() {
-        return "*******************\nimage=" + image + "\nsujet   =   " + sujet + "\ndescription=" + description + "\ndate   =   " + date + "\nprix   =   " + prix + "\n*******************\n\n\n\n\n";
+        return sujet;
     }
     
     

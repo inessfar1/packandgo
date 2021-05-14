@@ -204,27 +204,23 @@ class AgenceController extends AbstractController
 
 
 
+
     /**
-     * @Route("/admin/agence/detailJSON", name="agence_detailJSON")
-     * @Method("GET")
+     * @Route("/admin/agence/search", name="agencecsearch")
      */
-
-
-    public function detailJSON(Request $request)
+    public function searchAgence(Request $request,NormalizerInterface $normalizer)
     {
-        $id = $request->get("id");
+        $repository = $this->getDoctrine()->getRepository(Agence::class);
+        $requestString=$request->get('search');
 
-        $em = $this->getDoctrine()->getManager();
-        $agence = $this->getDoctrine()->getManager()->getRepository(Agence::class)->find($id);
-        $encoder = new JsonEncoder();
-        $normalizer = new ObjectNormalizer();
-        $normalizer->setCircularReferenceHandler(function ($object) {
-            return $object->getNom();
-        });
-        $serializer = new Serializer([$normalizer], [$encoder]);
-        $formatted = $serializer->normalize($agence);
-        return new JsonResponse($formatted);
+        $agence = $repository->findPlanBySujet($requestString);
+
+
+        $jsonContent =$normalizer->normalize($agence,'json',['groups'=>'agences']);
+        return new Response(json_encode($jsonContent));
+
+        return new JsonResponse($jsonContent);
+
     }
-
 
 }

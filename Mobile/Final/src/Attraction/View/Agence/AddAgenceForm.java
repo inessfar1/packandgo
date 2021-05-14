@@ -7,6 +7,7 @@ package Attraction.View.Agence;
 
 import Attraction.Entity.Agence;
 import Attraction.Services.ServiceAgence;
+import com.codename1.components.ImageViewer;
 import com.codename1.components.InfiniteProgress;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
@@ -29,6 +30,7 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 
 /**
@@ -46,10 +48,7 @@ public class AddAgenceForm extends Form{
         setTitle("Add a new agence");
         setLayout(BoxLayout.y());
         
-        
-        
-        
-        
+      
         TextField tfLogo = new TextField("","Logo");
         TextField tfNom= new TextField("", "Nom");
         TextField tfEmail = new TextField("","Email");

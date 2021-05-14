@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\PlanRes;
 use App\Repository\PlanRepository;
 use App\Repository\PlanResRepository;
+use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 //use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +22,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Stripe\Stripe;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class PlanResController extends AbstractController
 {
@@ -101,7 +105,30 @@ class PlanResController extends AbstractController
     }
 
 
-
+    /**
+     * @Route("/admin/plan/resJSON", name="plan_resJSON" )
+     */
+    public function addJSON(\Symfony\Component\HttpFoundation\Request $request, PlanRepository $plan,UtilisateurRepository $utilisateur){
+        $planRes=new PlanRes();
+        $user=$utilisateur->find($request->get('user'));
+        $planRes->setUser($user);
+        $p=$plan->find($request->get('id'));
+        $planRes->setPlan($p);
+        $p->getNbr($p->getNbr()-1);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($planRes);
+        $entityManager->flush();
+        $entityManager->persist($p);
+        $entityManager->flush();
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getSujet();
+        });
+        $serializer = new Serializer([$normalizer], [$encoder]);
+        $formatted = $serializer->normalize($planRes);
+        return new JsonResponse($formatted);
+    }
 
 
 

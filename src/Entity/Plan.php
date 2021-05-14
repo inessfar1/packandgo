@@ -88,7 +88,7 @@ class Plan
      * @ORM\Column(type="integer", nullable=true)
      * @Groups("plans")
      */
-    private $rec;
+    private $rec=0;
 
     public function getRec(): ?int
     {
@@ -106,7 +106,7 @@ class Plan
      * @ORM\Column(type="integer", nullable=true)
      * @Groups("plans")
      */
-    private $nbr;
+    private $nbr=5;
 
     public function getNbr(): ?int
     {

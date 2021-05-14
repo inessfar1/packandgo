@@ -27,10 +27,12 @@ public class PlanForm extends Form {
         add(new Label("Choose an option"));
         Button btnAddPlan = new Button("Ajouter Plan");
         Button btnListPlans = new Button("Afficher Plan");
+        Button btnActionPlans = new Button("Actions Plan");
 
         btnAddPlan.addActionListener(e -> new AddPlanForm(current).show());
         btnListPlans.addActionListener(e -> new ListPlansForm(current).show());
-        addAll(btnAddPlan, btnListPlans);
+        btnActionPlans.addActionListener(e -> new ActionPlan(current).show());
+        addAll(btnAddPlan, btnListPlans,btnActionPlans);
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());    
     }
 

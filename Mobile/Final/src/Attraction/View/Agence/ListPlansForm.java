@@ -5,20 +5,26 @@
  */
 package Attraction.View.Agence;
 
-import Attraction.Entity.Agence;
+
 import Attraction.Entity.Plan;
-import Attraction.Services.ServiceAgence;
 import Attraction.Services.ServicePlan;
+import com.codename1.components.InfiniteProgress;
+import com.codename1.components.MultiButton;
 import com.codename1.components.SpanLabel;
 import com.codename1.ui.Button;
 import com.codename1.ui.ComboBox;
 import com.codename1.ui.Command;
 import com.codename1.ui.Dialog;
+import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -27,57 +33,46 @@ import java.util.ArrayList;
 public class ListPlansForm extends Form{
 Form current;
     public ListPlansForm(Form previous) {
-        current=this;
-        setTitle("List plans");
-        
-        SpanLabel sp = new SpanLabel();
-        sp.setText(ServicePlan.getInstance().getAllPlans().toString());
-        add(sp);
-        ComboBox<Plan> cb= new ComboBox();
-        ServicePlan AGG = new ServicePlan();
-        ArrayList<Plan> list = AGG.getAllPlans();
-        for(int i = 0 ; i < list.size(); i++){
-            cb.addItem(list.get(i));
-        }
-        add(cb);
-        Button btnModifier = new Button("Modifier");
-        Button btnSupprimer = new Button("Supprimer");
-        btnSupprimer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                if (cb.getSelectedItem()==null)
-                    Dialog.show("Alert", "Selectionner un plan pour modifier", new Command("OK"));
-                else
-                {
-                   if(ServicePlan.getInstance().delPlan(cb.getSelectedItem())){
-                        Dialog.show("Success","Plan a ete supprimer",new Command("OK"));
-                        previous.showBack();}
-                    else{
-                        Dialog.show("ERROR", "Erreur", new Command("OK"));
+        current = this;
+      ServicePlan sp = new ServicePlan();
+      add(new InfiniteProgress());
+                Display.getInstance().scheduleBackgroundTask(()-> {
+                    
+                    Display.getInstance().callSerially(() -> {
+                        removeAll();
+                        List<Plan> listerec = sp.getAllPlans();
+                        for(Plan p : listerec)
+                        {
+                            MultiButton m = new MultiButton();
+                            m.setTextLine1("Sujet: "+p.getSujet());
+                            m.setTextLine2("Prix: "+p.getPrix());
+                            m.setTextLine3("Date: "+p.getDate());
+                            m.setTextLine4("Description : "+p.getDescription());
+                            add(m);
+                            
+                             m.addPointerReleasedListener(new ActionListener() {
+                                    @Override
+                                    public void actionPerformed(ActionEvent evt) {
+                                        if (Dialog.show("Confirmation", "Que voulez vous faire ?", "Supprimer", "Modifier")) {
+                                            
+                                                if( ServicePlan.getInstance().delPlan(p)){
+                                                    {
+                                                       Dialog.show("Success","Le plan "+p.getSujet()+" a été supprimé avec succées",new Command("OK"));
+                                                       previous.showBack();
+                                                    }
+                                        }
+                                    }
+                                        else{ 
+                                               
+                                                 EditPlanForm t = new EditPlanForm(current,p);
+                                                 t.show();
+                                        }
+                                    }
+                                });
                         }
-                }
-                
-                
-            }
-        });
-        
-         btnModifier.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                if (cb.getSelectedItem()==null)
-                    Dialog.show("Alert", "Selectionner un plan à modifier", new Command("OK"));
-                else
-                {
-                    Plan a =  cb.getSelectedItem();
-                    EditPlanForm t = new EditPlanForm(current,a);
-                   t.show();
-                }
-                
-                
-            }
-        });
-       
-        addAll(btnModifier,btnSupprimer);
-        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
-    }
+                     revalidate() ;   
+                    });
+                });
+       getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
+    }  
 }
