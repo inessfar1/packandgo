@@ -104,7 +104,7 @@ public class ServiceAgence {
     }
     
     public boolean editAgence(Agence t) {
-        String url = Statics.BASE_URL + "/agence/updateJSON?id="+t.getId()+"&nom="+t.getNom()+"&adresse="+t.getAdresse()+"&email="+t.getEmail()+"&tel="+t.getTel()+"";
+        String url = Statics.BASE_URL + "/agence/updateJSON?id="+t.getId()+"&logo="+t.getLogo()+"&nom="+t.getNom()+"&adresse="+t.getAdresse()+"&email="+t.getEmail()+"&tel="+t.getTel()+"";
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override

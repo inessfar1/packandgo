@@ -10,9 +10,11 @@ import com.codename1.ui.Command;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
 import com.codename1.ui.TextField;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
+import java.io.IOException;
 
 /**
  *
@@ -24,6 +26,12 @@ public class Search extends Form {
             current=this;
         TextField search = new TextField("","Rechercher une agence");
         Button btnRechercher = new Button("Rechercher");
+           try {
+                                Image ban = Image.createImage("file://C:\\Users\\21628\\Desktop\\Mobile\\Final\\src\\Attraction\\Images\\banner.jpg").scaledHeight(1000);
+                                add(ban);
+                            } catch (IOException ex) {
+
+                            }
         btnRechercher.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {

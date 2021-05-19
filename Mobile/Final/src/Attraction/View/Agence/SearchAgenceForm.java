@@ -17,9 +17,11 @@ import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
 import com.codename1.ui.TextField;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +39,12 @@ public class SearchAgenceForm extends Form{
                     
                     Display.getInstance().callSerially(() -> {
                         removeAll();
+                           try {
+                                Image ban = Image.createImage("file://C:\\Users\\21628\\Desktop\\Mobile\\Final\\src\\Attraction\\Images\\banner.jpg").scaledHeight(1000);
+                                add(ban);
+                            } catch (IOException ex) {
+
+                            }
                         List<Agence> listerec = sp.getAgences(search);
                         for(Agence p : listerec)
                         {

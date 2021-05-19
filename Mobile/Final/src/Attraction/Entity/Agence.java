@@ -106,7 +106,7 @@ public class Agence {
     @Override
     public String toString() {
     
-        return "*******************\nlogo   =   " + logo + "\nnom   =   " + nom + "\nadresse   =   " + adresse + "\nemail   =   " + email + "\ntel   =   " + tel + "\n*******************\n\n\n\n";
+        return nom;
     }
     
     

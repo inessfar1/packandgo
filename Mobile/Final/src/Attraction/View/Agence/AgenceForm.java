@@ -9,9 +9,11 @@ package Attraction.View.Agence;
 import com.codename1.ui.Button;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.util.Resources;
+import java.io.IOException;
 
 public class AgenceForm extends Form {
 
@@ -24,6 +26,12 @@ public class AgenceForm extends Form {
         current = this; //Récupération de l'interface(Form) en cours
         setTitle("Agence Home");
         setLayout(BoxLayout.y());
+           try {
+                                Image ban = Image.createImage("file://C:\\Users\\21628\\Desktop\\Mobile\\Final\\src\\Attraction\\Images\\banner.jpg").scaledHeight(1000);
+                                add(ban);
+                            } catch (IOException ex) {
+
+                            }
 
         add(new Label("Choose an option"));
         Button btnAddAgence = new Button("Ajouter Agence");

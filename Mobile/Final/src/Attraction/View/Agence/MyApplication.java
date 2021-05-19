@@ -15,6 +15,7 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.io.NetworkEvent;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.Image;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.FlowLayout;
@@ -57,15 +58,23 @@ public class MyApplication {
             return;
         }
             Form attraction =new Form("Attraction",BoxLayout.y());
+           
             Container ct =new Container(BoxLayout.y());
+               try {
+                                Image ban = Image.createImage("file://C:\\Users\\21628\\Desktop\\Mobile\\Final\\src\\Attraction\\Images\\banner.jpg").scaledHeight(1000);
+                                ct.add(ban);
+                            } catch (IOException ex) {
+
+                            }
             Button btAg =new Button ("Agence");
             Button btPlan =new Button ("Plans");
             btAg.addActionListener((evt)-> { new AgenceForm(attraction).show(); });
             btPlan.addActionListener((evt)-> { new PlanForm(attraction).show(); });
             ct.addAll(btAg,btPlan);
             attraction.add(ct);
-            attraction.show();
-        
+            //attraction.show();
+            Form ttt= new HomeFront(current);
+            ttt.show();
     }
 
     public void stop() {

@@ -9,8 +9,10 @@ package Attraction.View.Agence;
 import com.codename1.ui.Button;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BoxLayout;
+import java.io.IOException;
 
 public class PlanForm extends Form {
 
@@ -23,16 +25,20 @@ public class PlanForm extends Form {
         current = this; //Récupération de l'interface(Form) en cours
         setTitle("Plan Home");
         setLayout(BoxLayout.y());
+           try {
+                                Image ban = Image.createImage("file://C:\\Users\\21628\\Desktop\\Mobile\\Final\\src\\Attraction\\Images\\banner.jpg").scaledHeight(1000);
+                                add(ban);
+                            } catch (IOException ex) {
+
+                            }
 
         add(new Label("Choose an option"));
         Button btnAddPlan = new Button("Ajouter Plan");
         Button btnListPlans = new Button("Afficher Plan");
-        Button btnActionPlans = new Button("Actions Plan");
 
         btnAddPlan.addActionListener(e -> new AddPlanForm(current).show());
         btnListPlans.addActionListener(e -> new ListPlansForm(current).show());
-        btnActionPlans.addActionListener(e -> new ActionPlan(current).show());
-        addAll(btnAddPlan, btnListPlans,btnActionPlans);
+        addAll(btnAddPlan, btnListPlans);
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());    
     }
 

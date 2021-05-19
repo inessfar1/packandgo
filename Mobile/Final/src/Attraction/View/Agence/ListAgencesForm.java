@@ -18,10 +18,12 @@ import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
 import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,10 +40,22 @@ public class ListAgencesForm extends Form{
                 Display.getInstance().scheduleBackgroundTask(()-> {
                     
                     Display.getInstance().callSerially(() -> {
+                           try {
+                                Image ban = Image.createImage("file://C:\\Users\\21628\\Desktop\\Mobile\\Final\\src\\Attraction\\Images\\banner.jpg").scaledHeight(1000);
+                                add(ban);
+                            } catch (IOException ex) {
+
+                            }
                         removeAll();
                         List<Agence> listerec = sp.getAllAgences();
                         for(Agence p : listerec)
                         {
+                            try {
+                                Image imagee = Image.createImage("file://C:\\Users\\21628\\Desktop\\final web\\koko444\\pi\\public\\images\\logos\\"+p.getLogo()+"").scaledHeight(350);
+                                add(imagee);
+                            } catch (IOException ex) {
+
+                            }
                             MultiButton m = new MultiButton();
                             m.setTextLine1("Nom: "+p.getNom());
                             m.setTextLine2("Email: "+p.getEmail());
@@ -73,5 +87,19 @@ public class ListAgencesForm extends Form{
                     });
                 });
        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
-    }
+       
+       
+       
+    
+                        }
+
 }
+       
+       
+       
+       
+       
+       
+       
+    
+

@@ -18,6 +18,7 @@ import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import java.io.IOException;
@@ -35,14 +36,27 @@ Form current;
     public ListPlansForm(Form previous) {
         current = this;
       ServicePlan sp = new ServicePlan();
+      
       add(new InfiniteProgress());
                 Display.getInstance().scheduleBackgroundTask(()-> {
                     
                     Display.getInstance().callSerially(() -> {
                         removeAll();
+                           try {
+                                Image ban = Image.createImage("file://C:\\Users\\21628\\Desktop\\Mobile\\Final\\src\\Attraction\\Images\\banner.jpg").scaledHeight(1000);
+                                add(ban);
+                            } catch (IOException ex) {
+
+                            }
                         List<Plan> listerec = sp.getAllPlans();
                         for(Plan p : listerec)
                         {
+                            try {
+                                Image imagee = Image.createImage("file://C:\\Users\\21628\\Desktop\\final web\\koko444\\pi\\public\\images\\logos\\"+p.getImage()+"").scaledHeight(350);
+                                add(imagee);
+                            } catch (IOException ex) {
+
+                            }
                             MultiButton m = new MultiButton();
                             m.setTextLine1("Sujet: "+p.getSujet());
                             m.setTextLine2("Prix: "+p.getPrix());

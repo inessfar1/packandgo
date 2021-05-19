@@ -4,14 +4,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/Entity/Plan.java</file>
-            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/EditPlanForm.java</file>
-            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/EditAgenceForm.java</file>
+            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/HomeBack.java</file>
+            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/AddPlanForm.java</file>
+            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/HomeFront.java</file>
             <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/ListAgencesForm.java</file>
+            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/Search.java</file>
             <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/Services/ServicePlan.java</file>
-            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/ListPlansForm.java</file>
-            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/ActionPlan.java</file>
+            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/Services/ServiceAgence.java</file>
             <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/PlanForm.java</file>
+            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/AgenceForm.java</file>
+            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/MyApplication.java</file>
+            <file>file:/C:/Users/21628/Desktop/Mobile/Final/src/Attraction/View/Agence/SearchAgenceForm.java</file>
         </group>
     </open-files>
 </project-private>

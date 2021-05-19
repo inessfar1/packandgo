@@ -112,7 +112,7 @@ public class ServicePlan {
     }
     
     public boolean editPlan(Plan t) {
-        String url = Statics.BASE_URL + "/plan/updateJSON?id="+t.getId()+"&sujet="+t.getSujet()+"&desc="+t.getDescription()+"&prix="+t.getPrix()+"";
+        String url = Statics.BASE_URL + "/plan/updateJSON?id="+t.getId()+"&image="+t.getImage()+"&sujet="+t.getSujet()+"&desc="+t.getDescription()+"&prix="+t.getPrix()+"&agence="+t.getAgence_id()+"";
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
