@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.packandgo.controller.AfficherTrajetFrontController">
+   <children>
+      <Label alignment="CENTER" layoutX="199.0" layoutY="8.0" prefHeight="49.0" prefWidth="253.0" text="Les Trajets">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <ScrollPane fx:id="scroll" layoutY="152.0" prefHeight="416.0" prefWidth="730.0">
+         <content>
+            <VBox fx:id="actualitecontainer" prefHeight="399.0" prefWidth="715.0" />
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

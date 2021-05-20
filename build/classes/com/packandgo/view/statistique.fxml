@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.packandgo.view.StatistiqueController">
+   <children>
+      <Label fx:id="caption" layoutX="327.0" layoutY="61.0" prefHeight="21.0" prefWidth="346.0" text="Nombre Like Trajet">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Label>
+      <PieChart fx:id="piechart" layoutX="91.0" layoutY="107.0" prefHeight="513.0" prefWidth="804.0" />
+   </children>
+</AnchorPane>
